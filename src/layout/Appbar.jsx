@@ -1,49 +1,273 @@
-import React from "react";
-import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import clsx from "clsx";
+import {
+  makeStyles,
+  AppBar,
+  Toolbar,
+  InputBase,
+  List,
+  ListItem,
+  ListItemIcon,
+  Link,
+  ListItemText,
+  Drawer,
+  Typography,
+  Divider,
+} from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 import logo from "../assets/logo.png";
+import AppbarLink from "./AppBarLinks";
+import WorkIcon from "@material-ui/icons/Work";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import HomeIcon from "@material-ui/icons/Home";
+import TouchAppIcon from "@material-ui/icons/TouchApp";
+import GetAppIcon from "@material-ui/icons/GetApp";
+import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
+import BuildIcon from "@material-ui/icons/Build";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import AddIcon from "@material-ui/icons/Add";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
 
-function ElevationScroll(props) {
-  const { children, window } = props;
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-    target: window ? window() : undefined,
-  });
+const drawerWidth = 210;
 
-  return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
-  });
-}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: "#fff",
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    backgroundColor: "#fff",
+  },
+  rightContent: {
+    marginRight: "0px",
+    margin: "auto",
+    display: "flex",
+  },
+  search: {
+    position: "relative",
+    float: "right",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: "rgba(255,0,0, 1)",
+    // "&:hover": {
+    //   backgroundColor: fade("rgba(255,0,0)", 0.9),
+    // },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto",
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    color: "#ffffff",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    color: "rgba(255,255,255, 1)",
+    fontWeight: "bold",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "25ch",
+      },
+    },
+  },
+  drawer: {
+    width: drawerWidth,
 
-ElevationScroll.propTypes = {
-  children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
+    flexShrink: 0,
+    whiteSpace: "nowrap",
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    top: "65px",
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    top: "65px",
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: "hidden",
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing(7) + 1,
+    },
+  },
+  link: {
+    textDecoration: "none",
+    color: "#000000",
+  },
+  list: {
+    overflow: "hidden",
+    backgroundColor: "rgb(255,255,255)",
+    paddingTop: "0px",
+  },
+  typography: {
+    padding: theme.spacing(2),
+    fontWeight: "bold",
+    color: theme.palette.secondary.main,
+  },
+}));
 
-export default function Appbar(props) {
+const sidebarTopList = [
+  {
+    link: "/theory",
+    key: "Theory",
+    icon: <LocalLibraryIcon />,
+    index: 0,
+  },
+  {
+    link: "/practical",
+    key: "Practical",
+    icon: <BuildIcon />,
+    index: 1,
+  },
+  {
+    link: "/blogs",
+    key: "Blogs",
+    icon: <LibraryBooksIcon />,
+    index: 2,
+  },
+  {
+    link: "/contributors",
+    key: "Contributors",
+    icon: <GroupAddIcon />,
+    index: 4,
+  },
+  {
+    link: "/downloads",
+    key: "Downloads",
+    icon: <GetAppIcon />,
+    index: 4,
+  },
+  {
+    link: "/subscribe",
+    key: "Subscribe",
+    icon: <BookmarkIcon />,
+    index: 4,
+  },
+];
+
+export default function SearchAppBar(props) {
+  const classes = useStyles();
+  const { courseArea, courseSubArea } = useSelector((state) => state.platform);
+  const [open, setOpen] = useState(true);
+  let history = useHistory();
+  const handleDrawer = () => {
+    setOpen(!open);
+  };
+  const drawer = (
+    <div>
+      <Typography className={classes.typography} align="center">
+        {courseSubArea["displayName"]}
+      </Typography>
+      <Divider />
+      <List className={classes.list}>
+        {sidebarTopList.map((item) => (
+          <Link to={item.link} className={classes.link} key={item.key}>
+            <ListItem
+              button
+              key={item.key}
+              // className={classes.isSelected}
+              className={
+                history.location.pathname === item.link
+                  ? classes.isSelected
+                  : ""
+              }
+            >
+              <ListItemIcon
+                // className={classes.isSelectedListItem}
+                className={
+                  history.location.pathname === item.link
+                    ? classes.isSelectedListItem
+                    : ""
+                }
+              >
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText primary={item.key} />
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+      {/* <div className={classes.chevron}>
+        <IconButton onClick={handleDrawer}>
+          {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+        </IconButton>
+      </div> */}
+    </div>
+  );
+
   return (
-    <>
-      <ElevationScroll {...props}>
-        <AppBar style={{ backgroundColor: "white" }}>
-          <Toolbar>
-            {/* <Typography variant="h6">Logo</Typography> */}
-            <img src={logo} alt="logo" style={{ height: "20px" }} />
-          </Toolbar>
-        </AppBar>
-      </ElevationScroll>
-      <Toolbar />
-      {/* <Container><Box my={2}>Content</Box></Container> */}
-    </>
+    <div className={classes.root}>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <img src={logo} alt="logo" style={{ height: "20px" }} />
+          <div className={classes.rightContent}>
+            <div>
+              <AppbarLink />
+            </div>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </div>
+          </div>
+        </Toolbar>
+      </AppBar>
+      {courseArea ? (
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            }),
+          }}
+        >
+          {drawer}
+        </Drawer>
+      ) : (
+        ""
+      )}
+    </div>
   );
 }

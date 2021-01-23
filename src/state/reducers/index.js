@@ -1,10 +1,8 @@
-import requestReducer from "./requestReducer";
-import authenticationReducer from "./authenticationReducer";
+import platformReducer from "./platformReducer";
 import { combineReducers } from "redux";
 
 const reducer = combineReducers({
-  request: requestReducer,
-  authentication: authenticationReducer,
+  platform: platformReducer,
 });
 const rootReducer = (state, action) => {
   if (action.type === "LOGOUT") {
