@@ -1,11 +1,15 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Route, Redirect, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+const courseAreaList = ["core", "adv"];
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => ({
     isAuthenticated: true,
   }));
+  let history = useHistory();
+
   return (
     <Route
       {...rest}

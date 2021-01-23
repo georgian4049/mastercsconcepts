@@ -136,7 +136,7 @@ export default function MenuListComposition({ title, list, name }) {
                   >
                     {list.map((item) => (
                       <Link
-                        to={item.link}
+                        to={`/${name}/${item.name}/theory`}
                         className={classes.link}
                         key={item.key}
                       >

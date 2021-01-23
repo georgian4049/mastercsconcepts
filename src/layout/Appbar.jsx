@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import clsx from "clsx";
 import {
   makeStyles,
@@ -10,25 +10,21 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  Link,
   ListItemText,
   Drawer,
   Typography,
   Divider,
+  CssBaseline,
+  Tooltip,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import logo from "../assets/logo.png";
 import AppbarLink from "./AppBarLinks";
-import WorkIcon from "@material-ui/icons/Work";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import HomeIcon from "@material-ui/icons/Home";
-import TouchAppIcon from "@material-ui/icons/TouchApp";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BuildIcon from "@material-ui/icons/Build";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import AddIcon from "@material-ui/icons/Add";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 
 const drawerWidth = 210;
@@ -119,10 +115,6 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(7) + 1,
     },
   },
-  link: {
-    textDecoration: "none",
-    color: "#000000",
-  },
   list: {
     overflow: "hidden",
     backgroundColor: "rgb(255,255,255)",
@@ -131,43 +123,62 @@ const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
     fontWeight: "bold",
+    // WebkitHyphens: "auto",
+    // wordBreak: "breakWord",
+    // overflowWrap: "breakWord",
+    // wordWrap: "breakWord",
     color: theme.palette.secondary.main,
   },
+  link: {
+    textDecoration: "none",
+    color: "#000000",
+  },
+  isSelected: {
+    borderRight: "2px solid #F26522",
+    borderColor: "#F26522",
+    // "&:hover": {
+    //   color: "#000000",
+    //   backgroundColor: "#F26522",
+    // },
+  },
+  // isSelectedListItem: {
+  //   color: "white",
+  // },
 }));
 
 const sidebarTopList = [
   {
-    link: "/theory",
+    link: "theory",
     key: "Theory",
     icon: <LocalLibraryIcon />,
     index: 0,
   },
   {
-    link: "/practical",
+    link: "practical",
     key: "Practical",
     icon: <BuildIcon />,
     index: 1,
   },
   {
-    link: "/blogs",
+    link: "blogs",
     key: "Blogs",
     icon: <LibraryBooksIcon />,
     index: 2,
   },
   {
-    link: "/contributors",
+    link: "contributors",
     key: "Contributors",
     icon: <GroupAddIcon />,
     index: 4,
   },
   {
-    link: "/downloads",
+    link: "downloads",
     key: "Downloads",
     icon: <GetAppIcon />,
     index: 4,
   },
   {
-    link: "/subscribe",
+    link: "subscribe",
     key: "Subscribe",
     icon: <BookmarkIcon />,
     index: 4,
@@ -179,32 +190,40 @@ export default function SearchAppBar(props) {
   const { courseArea, courseSubArea } = useSelector((state) => state.platform);
   const [open, setOpen] = useState(true);
   let history = useHistory();
+  console.log(history.location.pathname);
   const handleDrawer = () => {
     setOpen(!open);
   };
   const drawer = (
     <div>
-      <Typography className={classes.typography} align="center">
-        {courseSubArea["displayName"]}
-      </Typography>
+      <Tooltip title={courseSubArea["displayName"]}>
+        <Typography className={classes.typography} align="center" noWrap>
+          {courseSubArea["displayName"]}
+        </Typography>
+      </Tooltip>
+
       <Divider />
       <List className={classes.list}>
         {sidebarTopList.map((item) => (
-          <Link to={item.link} className={classes.link} key={item.key}>
+          <Link
+            to={`/${courseArea}/${courseSubArea.name}/${item.link}`}
+            className={classes.link}
+            key={item.key}
+          >
             <ListItem
               button
               key={item.key}
-              // className={classes.isSelected}
               className={
-                history.location.pathname === item.link
+                history.location.pathname ===
+                `/${courseArea}/${courseSubArea.name}/${item.link}`
                   ? classes.isSelected
                   : ""
               }
             >
               <ListItemIcon
-                // className={classes.isSelectedListItem}
                 className={
-                  history.location.pathname === item.link
+                  history.location.pathname ===
+                  `/${courseArea}/${courseSubArea.name}/${item.link}`
                     ? classes.isSelectedListItem
                     : ""
                 }
@@ -226,6 +245,7 @@ export default function SearchAppBar(props) {
 
   return (
     <div className={classes.root}>
+      <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <img src={logo} alt="logo" style={{ height: "20px" }} />
