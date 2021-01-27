@@ -1,7 +1,8 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useRouteMatch } from "react-router-dom";
 import AppBar from "./AppBar";
 import { makeStyles } from "@material-ui/core/styles";
+import Theory from "../container/theory";
 // import SelfService from "../container/selfService/SelfService";
 // import Home from "../container/Home";
 // import UpdateProfile from "../container/update/UpdateProfile";
@@ -28,18 +29,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Layout() {
   const classes = useStyles();
-
+  const { url, path } = useRouteMatch();
   return (
     <div>
+      <AppBar />
       <Route exact path="/login" render={() => <Redirect to="/login" />} />
-      <Route path="/" component={AppBar} />
+      {/* <Route path="/" component={AppBar} /> */}
 
       <div className={classes.root}>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route exact path="/theory" component={AppBar}></Route>
-            <Route exact path="/practical" component={AppBar}></Route>
+            <Route path={`/${path}/theory`} component={Theory}></Route>
+            <Route exact path="/core/practical" component={AppBar}></Route>
             <Route exact path="/blogs" component={AppBar}></Route>
             <Route exact path="/contirubutors" component={AppBar}></Route>
             <Route exact path="/subscribe" component={AppBar}></Route>

@@ -123,10 +123,6 @@ const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
     fontWeight: "bold",
-    // WebkitHyphens: "auto",
-    // wordBreak: "breakWord",
-    // overflowWrap: "breakWord",
-    // wordWrap: "breakWord",
     color: theme.palette.secondary.main,
   },
   link: {
