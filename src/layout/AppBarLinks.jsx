@@ -4,6 +4,7 @@ import Divider from "@material-ui/core/Divider";
 import Paper from "@material-ui/core/Paper";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Popover from "../components/common/Popover";
+import { courseList } from "../utils/mock";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,18 +30,6 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
     },
   },
 }))(ToggleButtonGroup);
-
-const courseList = {
-  core: [
-    { name: "OS", displayName: "Operating System" },
-    { name: "DS", displayName: "Data Sructures" },
-    { name: "DAA", displayName: "Design and Analysis of Algorithms" },
-  ],
-  adv: [
-    { name: "ML", displayName: "Machine Learning" },
-    { name: "AI", displayName: "Artificial Intelligence" },
-  ],
-};
 
 export default function CustomizedDividers() {
   const classes = useStyles();

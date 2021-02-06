@@ -53,44 +53,39 @@ const useStyles = makeStyles((theme) => ({
   reApply: { color: "#000000" },
   notApplicable: { color: "#000000" },
 }));
-export default function Cards({ items, handleChat }) {
+export default function Cards({ items }) {
   const classes = useStyles();
   const {
     // eslint-disable-next-line
-    name,
     title,
-    status,
-    processStartedOn,
-    processCompletedOn,
-    assignee,
+    publishedOn,
+    imgUrl,
+    description,
   } = items;
 
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <div className={classes.header}>
-          <Typography className={classes.title} gutterBottom>
-            {title}
-          </Typography>
+          <Typography className={classes.title}>{title}</Typography>
           <div className={classes.chip}>
-            <Chip
+            {/* <Chip
               label={CamelCaseToString(status)}
               className={classes[status]}
-            />
+            /> */}
+            <img src={imgUrl} alt={title} />
           </div>
         </div>
         <br />
+        <Typography variant="body2">{description}</Typography>
         <Typography variant="body2">
-          {`Process Started on :- ${processStartedOn}\n`}
+          {`Published on :- ${publishedOn}`}
         </Typography>
-        <Typography variant="body2">
-          {`Process Completed on :- ${processCompletedOn}`}
-        </Typography>
-        <Typography variant="body2">{`Assigned To :- ${assignee}`}</Typography>
+        {/* <Typography variant="body2">{`Assigned To :- ${assignee}`}</Typography> */}
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="Upload">
-          <ChatIcon onClick={handleChat} />
+          {/* <ChatIcon onClick={handleChat} /> */}
         </IconButton>
       </CardActions>
     </Card>

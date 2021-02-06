@@ -1,51 +1,89 @@
 import React from "react";
 import { Route, Switch, Redirect, useRouteMatch } from "react-router-dom";
 import AppBar from "./AppBar";
+import Sidebar from "./Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
 import Theory from "../container/theory";
-// import SelfService from "../container/selfService/SelfService";
-// import Home from "../container/Home";
-// import UpdateProfile from "../container/update/UpdateProfile";
-// import Jobs from "../container/jobs";
-// import Downloads from "../container/downloads";
-// import Qliq from "../container/qliq/Qliq";
 
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     display: "flex",
+//     width: "100%",
+//     marginLeft: "0px",
+//   },
+//   // necessary for content to be below app bar
+//   toolbar: theme.mixins.toolbar,
+//   content: {
+//     backgroundColor: "#f9f9f9",
+//     maxWidth: "1470px", //or 1180
+//     minWidth: " 200px",
+//     // margin: theme.spacing(1),
+//     padding: theme.spacing(2),
+//   },
+// }));
+
+// export default function Layout() {
+//   const classes = useStyles();
+//   const { url, path } = useRouteMatch();
+//   return (
+//     <div>
+//       <AppBar />
+//       <Route exact path="/login" render={() => <Redirect to="/login" />} />
+//       {/* <Route path="/" component={AppBar} /> */}
+
+//       <div className={classes.root}>
+//         <main className={classes.content}>
+//           <div className={classes.toolbar} />
+//           <Switch>
+//             <Route path={`/adv/ml/theory`} component={Theory}></Route>
+//             {/* <Route exact path="/core/practical" component={AppBar}></Route>
+//             <Route exact path="/blogs" component={AppBar}></Route>
+//             <Route exact path="/contirubutors" component={AppBar}></Route>
+//             <Route exact path="/subscribe" component={AppBar}></Route>
+//             <Route exact path="/downloads" component={AppBar}></Route> */}
+//           </Switch>
+//         </main>
+//       </div>
+//     </div>
+//   );
+// }
 const useStyles = makeStyles((theme) => ({
   root: {
-    // display: "flex",
+    display: "flex",
     width: "100%",
     marginLeft: "0px",
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
-  // content: {
-  //   backgroundColor: "#f9f9f9",
-  //   maxWidth: "1470px", //or 1180
-  //   minWidth: " 200px",
-  //   // margin: theme.spacing(1),
-  //   padding: theme.spacing(2),
-  // },
+  content: {
+    flexGrow: 1,
+    backgroundColor: "#f9f9f9",
+    maxWidth: "1470px", //or 1180
+    minWidth: " 200px",
+    margin: theme.spacing(1),
+  },
 }));
 
 export default function Layout() {
   const classes = useStyles();
-  const { url, path } = useRouteMatch();
-  return (
-    <div>
-      <AppBar />
-      <Route exact path="/login" render={() => <Redirect to="/login" />} />
-      {/* <Route path="/" component={AppBar} /> */}
 
+  return (
+    <div style={{ display: "Flex" }}>
+      <Route exact path="/" render={() => <Redirect to="/login" />} />
+      <Route path="/" component={AppBar} />
       <div className={classes.root}>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route path={`/${path}/theory`} component={Theory}></Route>
-            <Route exact path="/core/practical" component={AppBar}></Route>
-            <Route exact path="/blogs" component={AppBar}></Route>
-            <Route exact path="/contirubutors" component={AppBar}></Route>
-            <Route exact path="/subscribe" component={AppBar}></Route>
-            <Route exact path="/downloads" component={AppBar}></Route>
+            <Route path="/" component={Sidebar} />
+            <Route path={`/theory`} component={Theory}></Route>
+            {/* <Route exact path="/old-requests" component={OldRequests}></Route>
+            <Route exact path="/mail" component={Mail}></Route>
+            <Route
+              exact
+              path="/notifications"
+              component={Notifications}
+            ></Route> */}
           </Switch>
         </main>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -57,14 +57,14 @@ export default function Login() {
   let history = useHistory();
   const { register, handleSubmit } = useForm();
   const { isAuthenticated } = useSelector((state) => ({
-    isAuthenticated: state.authentication.isAuthenticated,
+    isAuthenticated: true,
   }));
-  const userDetails = useSelector((state) => state.authentication.user);
+  // const userDetails = useSelector((state) => state.authentication.user);
 
-  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
+  // const [loginForm, setLoginForm] = useState({ email: "", password: "" });
 
   const handleChange = (prop) => (event) => {
-    setLoginForm({ ...loginForm, [prop]: event.target.value });
+    // setLoginForm({ ...loginForm, [prop]: event.target.value });
   };
 
   const onSubmit = (data) => {
@@ -72,13 +72,13 @@ export default function Login() {
     history.replace("/home");
   };
 
-  if (isAuthenticated) {
-    if (userDetails.role === "client") {
-      history.replace("/new-request");
-    } else {
-      history.replace("/pending-requests");
-    }
-  }
+  // if (isAuthenticated) {
+  //   if (userDetails.role === "client") {
+  //     history.replace("/new-request");
+  //   } else {
+  //     history.replace("/pending-requests");
+  //   }
+  // }
   return (
     <div className={classes.root}>
       <Grid container className={classes.gridContainer}>
@@ -143,7 +143,7 @@ export default function Login() {
                 className={classes.submit}
                 disableElevation
                 onClick={onSubmit}
-                disabled={!(loginForm.email && loginForm.password)}
+                // disabled={!(loginForm.email && loginForm.password)}
               >
                 Login
               </Button>

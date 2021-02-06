@@ -1,4 +1,4 @@
-import { PLATFORM } from "../actions/types";
+import { PLATFORM, MULTIPLE_VALUES } from "../actions/types";
 
 const initialState = {
   courseArea: "",
@@ -18,6 +18,11 @@ export default function platformReducer(state = initialState, action) {
         courseSubArea: action.payload,
       };
     case PLATFORM.SET_COURSE_DETAILS:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case MULTIPLE_VALUES:
       return {
         ...state,
         ...action.payload,

@@ -188,7 +188,6 @@ export default function SearchAppBar(props) {
   const { courseArea, courseSubArea } = useSelector((state) => state.platform);
   const [open, setOpen] = useState(true);
   let history = useHistory();
-  console.log(history.location.pathname);
   const handleDrawer = () => {
     setOpen(!open);
   };
@@ -244,30 +243,7 @@ export default function SearchAppBar(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <img src={logo} alt="logo" style={{ height: "20px" }} />
-          <div className={classes.rightContent}>
-            <div>
-              <AppbarLink />
-            </div>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
-          </div>
-        </Toolbar>
-      </AppBar>
-      {/* {courseArea ? (
+      {courseArea && courseSubArea ? (
         <Drawer
           variant="permanent"
           className={clsx(classes.drawer, {
@@ -286,7 +262,7 @@ export default function SearchAppBar(props) {
       ) : (
         ""
       )}
-      <Theory /> */}
+      {/* <Theory /> */}
     </div>
   );
 }

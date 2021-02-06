@@ -155,3 +155,26 @@ export const ClearanceData = [
     assignee: "Ramesh R.",
   },
 ];
+
+export const data = [
+  {
+    cardInfo: {
+      title: "Matplotlib",
+      imgUrl: "",
+      description: "Basics of Matplotlib. It is divided in 3 parts",
+      publishedOn: "27 Jan 2021",
+    },
+  },
+];
+
+export const courseList = {
+  core: [
+    { name: "OS", displayName: "Operating System" },
+    { name: "DS", displayName: "Data Sructures" },
+    { name: "DAA", displayName: "Design and Analysis of Algorithms" },
+  ],
+  adv: [
+    { name: "ML", displayName: "Machine Learning" },
+    { name: "AI", displayName: "Artificial Intelligence" },
+  ],
+};
