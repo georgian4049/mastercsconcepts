@@ -84,17 +84,13 @@ export default function Login() {
       <Grid container className={classes.gridContainer}>
         <Hidden smDown>
           <Grid item md={8} lg={8} cl={8} className={classes.gridImage}>
-            <img
-              // src={illustration}
-              alt="CSINOUT"
-              className={classes.image}
-            />
+            <img alt="mastercsconcepts" className={classes.image} />
           </Grid>
         </Hidden>
         <Grid item xs={12} md={4} lg={4} xl={4}>
           <div className={classes.paper}>
             <Typography component="h1" variant="h5" className={classes.stack}>
-              Altimetrik Alumini Portal
+              MASTERCSCONCEPTS
             </Typography>
             <Typography
               component="h1"
