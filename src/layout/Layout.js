@@ -4,6 +4,7 @@ import AppBar from "./AppBar";
 import Sidebar from "./Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
 import Theory from "../container/theory";
+import Body from "../container/Body";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#fff",
     maxWidth: "1470px", //or 1180
     minWidth: " 200px",
     margin: theme.spacing(1),
@@ -29,19 +30,15 @@ export default function Layout() {
     <div style={{ display: "Flex" }}>
       <Route exact path="/" render={() => <Redirect to="/login" />} />
       <Route path="/" component={AppBar} />
+      <Route path="/" component={Sidebar} />
       <div className={classes.root}>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route path="/" component={Sidebar} />
-            <Route path={`/theory`} component={Theory}></Route>
-            {/* <Route exact path="/old-requests" component={OldRequests}></Route>
-            <Route exact path="/mail" component={Mail}></Route>
             <Route
-              exact
-              path="/notifications"
-              component={Notifications}
-            ></Route> */}
+              path={`/:courseArea/:courseSubArea/:navSelected`}
+              component={Body}
+            />
           </Switch>
         </main>
       </div>

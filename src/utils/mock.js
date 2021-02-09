@@ -156,7 +156,7 @@ export const ClearanceData = [
   },
 ];
 
-export const data = {
+export const theoryData = {
   core: {},
   adv: {
     ML: [
