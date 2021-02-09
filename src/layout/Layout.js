@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import AppBar from "./AppBar.jsx";
-import Sidebar from "./Sidebar.jsx";
+// import AppBar from "./AppBar.jsx";
+import Sidebar from "./Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
-import Body from "../container/Body.jsx";
+import Body from "../container/Body";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +28,7 @@ export default function Layout() {
   return (
     <div style={{ display: "Flex" }}>
       <Route exact path="/" render={() => <Redirect to="/login" />} />
-      <Route path="/" component={AppBar} />
+      {/* <Route path="/" component={AppBar} /> */}
       <Route path="/" component={Sidebar} />
       <div className={classes.root}>
         <main className={classes.content}>
