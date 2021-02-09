@@ -156,16 +156,21 @@ export const ClearanceData = [
   },
 ];
 
-export const data = [
-  {
-    cardInfo: {
-      title: "Matplotlib",
-      imgUrl: "",
-      description: "Basics of Matplotlib. It is divided in 3 parts",
-      publishedOn: "27 Jan 2021",
-    },
+export const data = {
+  core: {},
+  adv: {
+    ML: [
+      {
+        cardInfo: {
+          title: "Matplotlib",
+          imgUrl: "",
+          description: "Basics of Matplotlib. It is divided in 3 parts",
+          publishedOn: "27 Jan 2021",
+        },
+      },
+    ],
   },
-];
+};
 
 export const courseList = {
   core: [

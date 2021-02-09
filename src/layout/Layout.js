@@ -5,48 +5,6 @@ import Sidebar from "./Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
 import Theory from "../container/theory";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: "flex",
-//     width: "100%",
-//     marginLeft: "0px",
-//   },
-//   // necessary for content to be below app bar
-//   toolbar: theme.mixins.toolbar,
-//   content: {
-//     backgroundColor: "#f9f9f9",
-//     maxWidth: "1470px", //or 1180
-//     minWidth: " 200px",
-//     // margin: theme.spacing(1),
-//     padding: theme.spacing(2),
-//   },
-// }));
-
-// export default function Layout() {
-//   const classes = useStyles();
-//   const { url, path } = useRouteMatch();
-//   return (
-//     <div>
-//       <AppBar />
-//       <Route exact path="/login" render={() => <Redirect to="/login" />} />
-//       {/* <Route path="/" component={AppBar} /> */}
-
-//       <div className={classes.root}>
-//         <main className={classes.content}>
-//           <div className={classes.toolbar} />
-//           <Switch>
-//             <Route path={`/adv/ml/theory`} component={Theory}></Route>
-//             {/* <Route exact path="/core/practical" component={AppBar}></Route>
-//             <Route exact path="/blogs" component={AppBar}></Route>
-//             <Route exact path="/contirubutors" component={AppBar}></Route>
-//             <Route exact path="/subscribe" component={AppBar}></Route>
-//             <Route exact path="/downloads" component={AppBar}></Route> */}
-//           </Switch>
-//         </main>
-//       </div>
-//     </div>
-//   );
-// }
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
