@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import AppBar from "./AppBar";
-import Sidebar from "./Sidebar";
+import AppBar from "./AppBar.jsx";
+import Sidebar from "./Sidebar.jsx";
 import { makeStyles } from "@material-ui/core/styles";
-import Body from "../container/Body";
+import Body from "../container/Body.jsx";
 
 const useStyles = makeStyles((theme) => ({
   root: {
