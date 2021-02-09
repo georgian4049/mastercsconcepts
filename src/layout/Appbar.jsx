@@ -26,7 +26,6 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BuildIcon from "@material-ui/icons/Build";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import Theory from "../container/theory";
 
 const drawerWidth = 210;
 
