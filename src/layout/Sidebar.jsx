@@ -4,9 +4,6 @@ import { useHistory, Link } from "react-router-dom";
 import clsx from "clsx";
 import {
   makeStyles,
-  AppBar,
-  Toolbar,
-  InputBase,
   List,
   ListItem,
   ListItemIcon,
@@ -17,16 +14,12 @@ import {
   CssBaseline,
   Tooltip,
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import logo from "../assets/logo.png";
-import AppbarLink from "./AppBarLinks";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BuildIcon from "@material-ui/icons/Build";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import Theory from "../container/theory";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 
 const drawerWidth = 210;
 
@@ -167,30 +160,27 @@ const sidebarTopList = [
     link: "contributors",
     key: "Contributors",
     icon: <GroupAddIcon />,
-    index: 4,
+    index: 3,
   },
   {
-    link: "downloads",
-    key: "Downloads",
-    icon: <GetAppIcon />,
-    index: 4,
-  },
-  {
-    link: "subscribe",
-    key: "Subscribe",
-    icon: <BookmarkIcon />,
+    link: "research-papers",
+    key: "Research Papers",
+    icon: <MenuBookIcon />,
     index: 4,
   },
 ];
 
 export default function SearchAppBar(props) {
   const classes = useStyles();
-  const { courseArea, courseSubArea } = useSelector((state) => state.platform);
+  const { courseArea, courseSubArea, sideBarOption } = useSelector(
+    (state) => state.platform
+  );
   const [open, setOpen] = useState(true);
   let history = useHistory();
   const handleDrawer = () => {
     setOpen(!open);
   };
+
   const drawer = (
     <div>
       <Tooltip title={courseSubArea["displayName"]}>
@@ -211,16 +201,14 @@ export default function SearchAppBar(props) {
               button
               key={item.key}
               className={
-                history.location.pathname ===
-                `/${courseArea}/${courseSubArea.name}/${item.link}`
+                history.location.pathname.split("/")[3] === item.link
                   ? classes.isSelected
                   : ""
               }
             >
               <ListItemIcon
                 className={
-                  history.location.pathname ===
-                  `/${courseArea}/${courseSubArea.name}/${item.link}`
+                  history.location.pathname.split("/")[3] === item.link
                     ? classes.isSelectedListItem
                     : ""
                 }

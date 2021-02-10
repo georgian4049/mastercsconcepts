@@ -12,20 +12,20 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const courseDetails = history.location.pathname.split("/");
+    const currentUrl = history.location.pathname.split("/");
     if (
-      courseList[courseDetails[1]] &&
-      courseList[courseDetails[1]].find((i) => i.name === courseDetails[2])
+      courseList[currentUrl[1]] &&
+      courseList[currentUrl[1]].find((i) => i.name === currentUrl[2])
     ) {
-      const index = courseList[courseDetails[1]].findIndex(
-        (i) => i.name === courseDetails[2]
+      const index = courseList[currentUrl[1]].findIndex(
+        (i) => i.name === currentUrl[2]
       );
       dispatch({
         type: MULTIPLE_VALUES,
         payload: {
-          courseArea: courseDetails[1],
-          courseSubArea: courseList[courseDetails[1]][index],
-          sideBarOption: courseDetails[3],
+          courseArea: currentUrl[1],
+          courseSubArea: courseList[currentUrl[1]][index],
+          sideBarOption: currentUrl[3],
         },
       });
     }

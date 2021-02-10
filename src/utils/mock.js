@@ -1,177 +1,3 @@
-export const feedbackForm = [
-  {
-    id: 1,
-    title: "What is your primary reason to leave? ",
-    options: [
-      {
-        question: "Job Profile",
-        value: "",
-      },
-      {
-        question: "Compensation",
-        value: "",
-      },
-      {
-        question: "Appraisal Process",
-        value: "",
-      },
-      {
-        question:
-          "Work Environment (e.g. culture, basic infrastructure, workload, etc.) ",
-        value: "",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "What is your primary reason to leave? ",
-    options: [
-      {
-        question: "Job Profile",
-        value: "",
-      },
-      {
-        question: "Compensation",
-        value: "",
-      },
-      {
-        question: "Appraisal Process",
-        value: "",
-      },
-      {
-        question:
-          "Work Environment (e.g. culture, basic infrastructure, workload, etc.) ",
-        value: "",
-      },
-    ],
-  },
-];
-
-export const selfServiceWithdrawlForms = [
-  {
-    name: "pfClaimForm",
-    title: "PF Claim Form",
-    status: "inReview",
-    processStartedOn: "26/11/2020",
-    processCompletedOn: "-",
-    downloadLink: "#",
-  },
-  {
-    name: "10c",
-    title: "Form 10-c",
-    status: "submitted",
-    processStartedOn: "26/11/2020",
-    processCompletedOn: "27/11/2020",
-    downloadLink: "#",
-  },
-  {
-    name: "jointDeclarationForm",
-    title: "Joint Declaration Form",
-    status: "reApply",
-    processStartedOn: "26/11/2020",
-    processCompletedOn: "27/11/2020",
-    downloadLink: "#",
-  },
-  {
-    name: "form15G",
-    title: "Form 15-G",
-    status: "inReview",
-    processStartedOn: "26/11/2020",
-    processCompletedOn: "-",
-    downloadLink: "#",
-  },
-  {
-    name: "form15H",
-    title: "Form 15-H",
-    status: "notApplicable",
-    processStartedOn: "-",
-    processCompletedOn: "-",
-    downloadLink: "#",
-  },
-];
-
-export const DownloadableItems = [
-  {
-    name: "relieving",
-    title: "Relieving/Experience Letter",
-    status: "available",
-    processStartedOn: "26/11/2020",
-    processCompletedOn: "15/12/2020",
-    downloadLink: "#",
-  },
-  {
-    name: "form16",
-    title: "Form 16",
-    status: "inProgress",
-    processStartedOn: "26/11/2020",
-    processCompletedOn: "-",
-    downloadLink: "#",
-  },
-];
-
-export const jobTitle = [
-  {
-    name: "softwareDeveloper",
-    displayName: "Software Developer",
-  },
-  {
-    name: "projectManager",
-    displayName: "Project Manager",
-  },
-  {
-    name: "productArchitect",
-    displayName: "ProductArchitect",
-  },
-
-  {
-    name: "uiDeveloper",
-    displayName: "UI Developer",
-  },
-];
-
-export const ClearanceData = [
-  {
-    name: "finance",
-    title: "Finance",
-    processStartedOn: "27/11/2020",
-    processFinishedOn: "-",
-    status: "pending",
-    assignee: "Mathews S.",
-  },
-  {
-    name: "IT",
-    title: "IT",
-    processStartedOn: "27/11/2020",
-    processFinishedOn: "-",
-    status: "pending",
-    assignee: "Ajay R.",
-  },
-  {
-    name: "admin",
-    title: "Admin",
-    processStartedOn: "27/11/2020",
-    processFinishedOn: "15/12/2020",
-    status: "approved",
-    assignee: "Ramesh R.",
-  },
-];
-
-export const theoryData = {
-  core: {},
-  adv: {
-    ML: [
-      {
-        cardInfo: {
-          title: "Matplotlib",
-          imgUrl: "",
-          description: "Basics of Matplotlib. It is divided in 3 parts",
-          publishedOn: "27 Jan 2021",
-        },
-      },
-    ],
-  },
-};
-
 export const courseList = {
   core: [
     { name: "OS", displayName: "Operating System" },
@@ -182,4 +8,89 @@ export const courseList = {
     { name: "ML", displayName: "Machine Learning" },
     { name: "AI", displayName: "Artificial Intelligence" },
   ],
+};
+
+export const theoryData = {
+  core: {},
+  adv: {
+    ML: {
+      theory: [
+        {
+          cardInfo: {
+            id: "1",
+            title: "Python Pandas",
+            imgUrl:
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/1200px-Pandas_logo.svg.png",
+            description: "Basics of Pandas",
+            publishedOn: "27 Jan 2021",
+            data: {
+              title: "Python Pandas:- Part 1",
+              author: "Ayush Shekhar",
+              date: "Feb 10, 2021",
+              content: [
+                {
+                  type: "h5",
+                  content: "Key Contents:-",
+                },
+                {
+                  type: "olnumber",
+                  content: [
+                    "3 W’s of Pandas (What/ Why/ Where)",
+                    "Installing Pandas",
+                    "Data Structures (Data Frame, Series)- Basic",
+                    "Important Questions",
+                  ],
+                },
+                {
+                  type: "img",
+                  src:
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/1200px-Pandas_logo.svg.png",
+                  caption: "pandas",
+                  alt: "pandas",
+                },
+                {
+                  type: "h5",
+                  content: "3 W’s of Pandas:-",
+                },
+                {
+                  type: "h6",
+                  content: "What is Pandas?",
+                },
+                {
+                  type: "p",
+                  content: [
+                    {
+                      type: "text",
+                      fontWeight: "normal",
+                      content: "Pandas is an",
+                    },
+                    {
+                      type: "text",
+                      fontWeight: "bold",
+                      content: "open source,",
+                    },
+                    {
+                      type: "link",
+                      url:
+                        "https://en.wikipedia.org/wiki/BSD_licenses#:~:text=BSD%20licenses%20are%20a%20family,and%20distribution%20of%20covered%20software.&text=The%20original%20BSD%20license%20was,a%20Unix%2Dlike%20operating%20system.",
+                      content: "BSD-licensed",
+                    },
+                    {
+                      type: "text",
+                      fontweight: "normal",
+                      content:
+                        "library which provides easy to use data structures, data analysis, data manipulation tools for the python programming language. It’s built on top of two core libraries of Python — matplotlib (used for data visualization) and NumPy (used for mathematical Operations). Pandas is like excel of Python. Data Frame is analogous to a table and Series is analogous to rows and columns.",
+                    },
+                  ],
+                },
+                // {
+                //   type: "p",
+                // },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  },
 };

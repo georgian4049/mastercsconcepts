@@ -1,1 +1,3 @@
-export const CLOUD_ENGG_API = "http://localhost:5000/api/";
+export const IMAGE_PATH = window._env_
+  ? window._env_.IMAGE_PATH
+  : process.env.IMAGE_PATH;

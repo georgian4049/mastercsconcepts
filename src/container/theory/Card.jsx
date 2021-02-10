@@ -1,12 +1,11 @@
-import React from "react";
-import { makeStyles, Chip } from "@material-ui/core";
+import { Link, useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import ChatIcon from "@material-ui/icons/Chat";
-import { CamelCaseToString } from "../../functions/function";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,22 +14,15 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   header: {
+    height: "30px",
     display: "flex",
     "&>*": {
       margin: theme.spacing(0.5),
     },
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
   title: {
     fontSize: 14,
     fontWeight: "bold",
-  },
-  pos: {
-    marginBottom: 12,
   },
   chip: {
     marginLeft: "auto",
@@ -38,20 +30,10 @@ const useStyles = makeStyles((theme) => ({
       color: "#fff",
     },
   },
-  inReview: {
-    backgroundColor: "#0460a9",
+  link: {
+    textDecoration: "none",
+    color: "#000000",
   },
-  pending: {
-    backgroundColor: "#0460a9",
-  },
-  rejected: {
-    backgroundColor: "#ff3d00",
-  },
-  approved: {
-    backgroundColor: "#4caf50",
-  },
-  reApply: { color: "#000000" },
-  notApplicable: { color: "#000000" },
 }));
 export default function Cards({ items }) {
   const classes = useStyles();
@@ -61,31 +43,39 @@ export default function Cards({ items }) {
     publishedOn,
     imgUrl,
     description,
+    id,
   } = items;
 
+  const history = useHistory();
+
+  // const handleCardClick = () => {};
   return (
     <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <div className={classes.header}>
-          <Typography className={classes.title}>{title}</Typography>
-          <div className={classes.chip}>
-            {/* <Chip
-              label={CamelCaseToString(status)}
-              className={classes[status]}
-            /> */}
-            <img src={imgUrl} alt={title} />
+      <Link to={`${history.location.pathname}/${id}`} className={classes.link}>
+        <CardContent>
+          <div className={classes.header}>
+            <Typography className={classes.title}>{title}</Typography>
+            <div className={classes.chip}>
+              <img
+                style={{ width: "100px", height: "30px" }}
+                // src={require(`../../assets/topic/matplotlib.svg`)}
+                src={imgUrl}
+                alt={title}
+              />
+              {/* <Avatar alt="Remy Sharp" src={matplotlib} /> */}
+            </div>
           </div>
-        </div>
-        <br />
-        <Typography variant="body2">{description}</Typography>
-        <Typography variant="body2">
-          {`Published on :- ${publishedOn}`}
-        </Typography>
-        {/* <Typography variant="body2">{`Assigned To :- ${assignee}`}</Typography> */}
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="Upload">
-          {/* <ChatIcon onClick={handleChat} /> */}
+          <br />
+          <Typography variant="body2">{description}</Typography>
+          <Typography variant="body2">
+            {`Published on :- ${publishedOn}`}
+          </Typography>
+          {/* <Typography variant="body2">{`Assigned To :- ${assignee}`}</Typography> */}
+        </CardContent>
+      </Link>
+      <CardActions>
+        <IconButton aria-label="Upload" size="small">
+          <FavoriteIcon />
         </IconButton>
       </CardActions>
     </Card>

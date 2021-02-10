@@ -185,10 +185,10 @@ export default function SearchAppBar(props) {
   const { courseArea, courseSubArea } = useSelector((state) => state.platform);
   const [open, setOpen] = useState(true);
   let history = useHistory();
-  console.log(history.location.pathname);
   const handleDrawer = () => {
     setOpen(!open);
   };
+
   const drawer = (
     <div>
       <Tooltip title={courseSubArea["displayName"]}>

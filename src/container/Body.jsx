@@ -1,9 +1,12 @@
 import React from "react";
 import Theory from "./theory";
 
+const possibleRoutes = ["theory"];
+
 const Body = ({ match }) => {
-  const { navSelected } = match.params;
-  return <div>{navSelected === "theory" ? <Theory /> : ""}</div>;
+  const { routeSelected, courseArea, courseSubArea } = match.params;
+
+  return <div>{routeSelected === "theory" ? <Theory /> : ""}</div>;
 };
 
 export default Body;

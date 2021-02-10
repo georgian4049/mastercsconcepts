@@ -3,6 +3,7 @@ import { PLATFORM, MULTIPLE_VALUES } from "../actions/types";
 const initialState = {
   courseArea: "",
   courseSubArea: "",
+  topicId: "",
 };
 
 export default function platformReducer(state = initialState, action) {
