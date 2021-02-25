@@ -18,6 +18,7 @@ export const theoryData = {
         {
           cardInfo: {
             id: "1",
+            rating: 5,
             title: "Python Pandas",
             imgUrl:
               "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/1200px-Pandas_logo.svg.png",
@@ -41,13 +42,13 @@ export const theoryData = {
                     "Important Questions",
                   ],
                 },
-                {
-                  type: "img",
-                  src:
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/1200px-Pandas_logo.svg.png",
-                  caption: "pandas",
-                  alt: "pandas",
-                },
+                // {
+                //   type: "img",
+                //   src:
+                //     "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/1200px-Pandas_logo.svg.png",
+                //   caption: "pandas",
+                //   alt: "pandas",
+                // },
                 {
                   type: "h5",
                   content: "3 W’s of Pandas:-",
@@ -83,9 +84,59 @@ export const theoryData = {
                     },
                   ],
                 },
-                // {
-                //   type: "p",
-                // },
+                {
+                  type: "h6",
+                  content: "Why Pandas?",
+                },
+                {
+                  type: "p",
+                  content: [
+                    {
+                      type: "text",
+                      fontWeight: "normal",
+                      content:
+                        "As Pandas is built on top of other Python libraries, and some part of it is implemented in C, which makes it really smarter and faster while execution . In short you can say it’s “fast, flexible, and expressive data structures designed to make working with “relational” or “labeled” data both easy and intuitive.”(mentioned in Pandas docs). With the help of these features you can save some of your time of computation and invest it in analyzing data and building models.",
+                    },
+                  ],
+                },
+                //Simple para starts
+                {
+                  type: "h6",
+                  content: "Where Pandas?",
+                },
+                {
+                  type: "p",
+                  content: [
+                    {
+                      type: "text",
+                      fontWeight: "normal",
+                      content:
+                        "You can use Pandas almost everywhere where you are dealing with data. If you are working on a project where you are going to visualize data, analyze it and perform some operations with it, you will most probably love to use Pandas.",
+                    },
+                  ],
+                },
+                //Simple para ends
+                {
+                  type: "h5",
+                  content: "Installation:-",
+                },
+                {
+                  type: "h6",
+                  content:
+                    "Note:- Officially it is supported by, Python 3.6.1 and above.",
+                },
+                {
+                  type: "p",
+                  content: [
+                    {
+                      type: "text",
+                      fontWeight: "normal",
+                      content:
+                        "There are multiple ways to install and use Pandas. The easiest and most recommended way to install pandas is to install it as part of the Anaconda distribution, a cross platform distribution for data analysis and scientific computing. Another widely used way to install Pandas is to create a virtual environment and install Pandas in it.",
+                    },
+                  ],
+                },
+                //ends
               ],
             },
           },

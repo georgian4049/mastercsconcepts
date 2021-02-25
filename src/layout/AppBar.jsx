@@ -243,12 +243,13 @@ export default function SearchAppBar(props) {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <img src={logo} alt="logo" style={{ height: "20px" }} />
+          <img src={logo} alt="mastercsconcepts" style={{ height: "20px" }} />
+          <Typography>Dev Mode</Typography>
           <div className={classes.rightContent}>
             <div>
               <AppbarLink />
             </div>
-            <div className={classes.search}>
+            {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -260,7 +261,7 @@ export default function SearchAppBar(props) {
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
-            </div>
+            </div> */}
           </div>
         </Toolbar>
       </AppBar>

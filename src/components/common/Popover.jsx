@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuListComposition({ title, list, name }) {
+export default function Popover({ title, list, name }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const { courseArea, courseSubArea } = useSelector((state) => state.platform);

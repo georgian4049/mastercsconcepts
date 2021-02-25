@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     maxWidth: "1470px", //or 1180
     minWidth: " 200px",
+    marginTop: theme.spacing(0),
     margin: theme.spacing(1),
   },
 }));
@@ -28,7 +29,7 @@ export default function Layout() {
   const classes = useStyles();
 
   return (
-    <div style={{ display: "Flex" }}>
+    <div style={{ display: "flex" }}>
       <Route exact path="/" render={() => <Redirect to="/login" />} />
       <Route path="/" component={AppBar} />
       <Route path="/" component={Sidebar} />

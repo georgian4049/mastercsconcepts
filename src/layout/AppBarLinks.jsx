@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Popover from "../components/common/Popover";
 import { courseList } from "../utils/mock";
+import { Chip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,7 +54,6 @@ export default function CustomizedDividers() {
           exclusive
           onChange={handleAlignment}
           style={{ color: "black" }}
-          aria-label="text alignment"
         >
           <Popover
             title="Core Computer Science"
@@ -73,6 +73,7 @@ export default function CustomizedDividers() {
             handleChange={handleCourseType}
           />
         </StyledToggleButtonGroup>
+        <Chip label="Dev Mode" color="secondary" />
       </Paper>
     </div>
   );
