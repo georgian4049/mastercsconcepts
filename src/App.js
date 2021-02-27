@@ -9,7 +9,6 @@ import { CssBaseline } from "@material-ui/core";
 import Login from "./pages/Login";
 import Layout from "./layout/Layout";
 // import Editor from "./container/editor";
-import Editor from "./components/common/Editor";
 
 const theme = createMuiTheme({
   props: {

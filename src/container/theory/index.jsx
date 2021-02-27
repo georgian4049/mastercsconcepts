@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import Card from "./Card";
 import { theoryData } from "../../utils/mock";
-import Editor from "../../components/common/Editor";
+import TextEditor from "../../components/common/TextEditor";
 
 function CardIndex() {
   const { courseArea, courseSubArea } = useSelector((state) => state.platform);
@@ -20,7 +20,7 @@ function CardIndex() {
             </Grid>
           ))}
       </Grid>
-      <Editor />
+      <TextEditor />
     </>
   );
 }
