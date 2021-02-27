@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Body from "../container/Body";
 import WrongPage from "../container/WrongPage";
 import TopicContent from "../container/theory/TopicContent";
+import NewContent from "../components/common/NewContent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,9 +45,15 @@ export default function Layout() {
             />
             <Route
               exact
-              path={`/:courseArea/:courseSubArea/:routeSelected/:topicId`}
+              path={`/:courseArea/:courseSubArea/:routeSelected/new-content`}
+              component={NewContent}
+            />
+            <Route
+              exact
+              path={`/:courseArea/:courseSubArea/:routeSelected/topicId/:topicId`}
               component={TopicContent}
             />
+
             {/* <Route path="/" component={WrongPage} /> */}
           </Switch>
         </main>

@@ -53,7 +53,10 @@ export default function Cards({ items }) {
   // const handleCardClick = () => {};
   return (
     <Card className={classes.root} variant="outlined">
-      <Link to={`${history.location.pathname}/${id}`} className={classes.link}>
+      <Link
+        to={`${history.location.pathname}/topicId/${id}`}
+        className={classes.link}
+      >
         <CardContent>
           <div className={classes.header}>
             <Typography className={classes.title}>{title}</Typography>
