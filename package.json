@@ -12,15 +12,23 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
+    "babel-polyfill": "^6.26.0",
     "date-fns": "^2.16.1",
+    "dompurify": "^2.2.6",
+    "draft-convert": "^2.1.10",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
+    "draftjs-to-markdown": "^0.6.0",
     "gh-pages": "^3.1.0",
     "highcharts": "^8.2.0",
     "highcharts-3d": "^0.1.7",
     "highcharts-react-official": "^3.0.0",
+    "html-to-draftjs": "^1.5.0",
     "jsonwebtoken": "^8.5.1",
     "material-table": "^1.69.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-draft-wysiwyg": "^1.14.5",
     "react-hook-form": "^6.11.4",
     "react-iframe": "^1.8.0",
     "react-redux": "^7.2.2",
@@ -39,10 +47,17 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
