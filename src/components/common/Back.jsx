@@ -1,4 +1,3 @@
-import { forwardRef, useRef, useImperativeHandle } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, makeStyles } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -31,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 const ContentContainer = ({ children }) => {
   const classes = useStyles();
   const history = useHistory();
-  const childRef = useRef();
   return (
     <div className={classes.root}>
       <div className={classes.header}>
@@ -46,10 +44,6 @@ const ContentContainer = ({ children }) => {
             BACK
           </Button>
         </div>
-        <div className={classes.content}>
-          <div style={{ height: "70%" }}>{children}</div>
-        </div>
-        {/* <div className={classes.content}>{children}</div> */}
       </div>
     </div>
   );

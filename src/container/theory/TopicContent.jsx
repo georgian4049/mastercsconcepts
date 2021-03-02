@@ -34,8 +34,8 @@ const TopicContent = (state) => {
   useEffect(() => {
     console.log(history.location.pathname);
     const path = history.location.pathname.split("/");
-    if (theoryData[path[1]]?.[path[2]]?.[path[4]]) {
-      const { cardInfo } = theoryData[path[1]][path[2]][path[4]].find(
+    if (theoryData[path[1]]?.[path[2]]?.[path[3]]) {
+      const { cardInfo } = theoryData[path[1]][path[2]][path[3]].find(
         (i) => i.cardInfo.id === path[5]
       );
       setContent(cardInfo);

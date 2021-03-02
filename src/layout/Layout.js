@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: "#fff",
+    height: "100vh",
     maxWidth: "1470px", //or 1180
     minWidth: " 200px",
     marginTop: theme.spacing(0),

@@ -23,7 +23,7 @@ const theme = createMuiTheme({
     secondary: {
       main: "#F26522",
     },
-    background: "#fff",
+    backgroundColor: "#fff",
   },
   typography: {
     fontFamily: "Open Sans",
@@ -37,12 +37,10 @@ const theme = createMuiTheme({
     },
     h3: {
       fontSize: "3.429rem",
-
       lineHeight: "4rem",
     },
     h4: {
       fontSize: "2.429rem",
-
       lineHeight: "2.571rem",
     },
     h5: {
