@@ -28,6 +28,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           sideBarOption: currentUrl[3],
         },
       });
+    } else {
+      // history.replace("/wrong-page");
     }
   }, []);
 

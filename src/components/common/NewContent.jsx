@@ -69,7 +69,6 @@ const TopicContent = (state) => {
       </div>
 
       <div className={classes.articleContent}>
-        {/* <div style={{ marginTop: "10px" }}> */}
         <TextEditor />
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { login } from "../state/actions/authentication";
 
 function Copyright() {
   return (
@@ -52,9 +53,10 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   let history = useHistory();
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const { isAuthenticated } = useSelector((state) => ({
-    isAuthenticated: true,
+    isAuthenticated: state.authentication.isAuthenticated,
   }));
   // const userDetails = useSelector((state) => state.authentication.user);
 
@@ -67,17 +69,15 @@ export default function SignIn() {
 
   const onSubmit = (data) => {
     data.preventDefault();
-    history.replace("/home");
+    dispatch(login(loginForm));
   };
 
-  //  if (isAuthenticated) {
-  //    if (userDetails.role === "client") {
-  //      history.replace("/new-request");
-  //    } else {
-  //      history.replace("/pending-requests");
-  //    }
-  //  }
-
+  if (isAuthenticated) {
+    history.replace("/home");
+  } else {
+    console.log("Couldn't login");
+    //  history.replace("/pending-requests");
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

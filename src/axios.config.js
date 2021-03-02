@@ -1,8 +1,8 @@
 import axios from "axios";
-import { CLOUD_ENGG_API } from "./config";
+import { MASTER_CS_CONCEPT_API_URL } from "./config";
 
 const serverInstance = axios.create({
-  baseURL: CLOUD_ENGG_API,
+  baseURL: MASTER_CS_CONCEPT_API_URL,
   timeout: 10000,
 });
 

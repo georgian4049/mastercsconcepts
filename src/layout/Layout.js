@@ -4,9 +4,9 @@ import AppBar from "./AppBar";
 import Sidebar from "./Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
 import Body from "../container/Body";
-import WrongPage from "../container/WrongPage";
 import TopicContent from "../container/theory/TopicContent";
 import NewContent from "../components/common/NewContent";
+import WrongPage from "./WrongPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +39,7 @@ export default function Layout() {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
+            <Route exact path={`/wrong-page`} component={WrongPage} />
             <Route
               exact
               path={`/:courseArea/:courseSubArea/:routeSelected`}
@@ -54,8 +55,13 @@ export default function Layout() {
               path={`/:courseArea/:courseSubArea/:routeSelected/topicId/:topicId`}
               component={TopicContent}
             />
+            {/* <Route
+              exact
+              path={`/:courseArea/:courseSubArea/:routeSelected/topicId/:topicId`}
+              component={TopicContent}
+            /> */}
 
-            {/* <Route path="/" component={WrongPage} /> */}
+            <Route path="/" component={WrongPage} />
           </Switch>
         </main>
       </div>
