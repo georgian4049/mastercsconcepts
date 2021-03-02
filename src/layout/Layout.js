@@ -7,6 +7,7 @@ import Body from "../container/Body";
 import TopicContent from "../container/theory/TopicContent";
 import NewContent from "../components/common/NewContent";
 import WrongPage from "./WrongPage";
+import HomePage from "../container/home";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: "#fff",
     height: "100vh",
-    maxWidth: "1470px", //or 1180
+    maxWidth: "100%", //or 1180
     minWidth: " 200px",
     marginTop: theme.spacing(0),
     margin: theme.spacing(1),
@@ -40,6 +41,7 @@ export default function Layout() {
           <div className={classes.toolbar} />
           <Switch>
             <Route exact path={`/wrong-page`} component={WrongPage} />
+            <Route exact path={`/home`} component={HomePage} />
             <Route
               exact
               path={`/:courseArea/:courseSubArea/:routeSelected`}

@@ -1,5 +1,5 @@
 import { LOGOUT, LOGIN_SUCCESS, MESSAGE } from "./types";
-import { getAuthentication } from "../../api/authentication";
+import { postContent } from "../../api/content";
 // import Message from "../../utils/message";
 
 export function logout() {
@@ -8,21 +8,21 @@ export function logout() {
   };
 }
 
-export function login(body) {
+export function postContents(body) {
   return async function (dispatch) {
     try {
-      const { data } = await getAuthentication(body);
+      const { data } = await postContent(body);
       console.log(data);
       dispatch({
-        type: LOGIN_SUCCESS,
-        payload: data,
+        type: MESSAGE.SUCCESS,
+        payload: data.message,
       });
     } catch (error) {
       console.log(error);
       if (error.response?.status === 400) {
         dispatch({
-          type: MESSAGE.WRONG_LOGIN_CREDENTIALS,
-          payload: "Invalid Credential",
+          type: MESSAGE.ERROR,
+          payload: "Couldn't Post due to Conflict",
         });
       } else {
         dispatch({

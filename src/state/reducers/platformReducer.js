@@ -28,6 +28,11 @@ export default function platformReducer(state = initialState, action) {
         ...state,
         ...action.payload,
       };
+    case PLATFORM.MATERIAL_CATEGORY:
+      return {
+        ...state,
+        materialCategory: action.payload,
+      };
     default:
       return state;
   }

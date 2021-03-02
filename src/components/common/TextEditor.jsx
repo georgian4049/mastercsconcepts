@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import Dialog from "./Dialog";
 import Message from "../../utils/message";
+import { postContents } from "../../state/actions/content";
 
 import "../css/Editor.css";
 import {
@@ -135,12 +137,20 @@ const ActionButtons = ({ handleSave, handlePublish }) => {
 };
 
 const tags = ["Machine Learning", "Pandas", "Matplotlib"];
+
 const TextEditor = ({ data, edit }) => {
   const [errors, setErrors] = useState({
     title: false,
     tags: false,
     content: false,
   });
+  const { materialCategory, courseArea, courseSubArea } = useSelector(
+    (state) => state.platform
+  );
+  const { username, name } = useSelector((state) => state.authentication);
+
+  const dispatch = useDispatch();
+
   const [state, setState] = useState({
     courseArea: "",
     courseSubArea: "",
@@ -197,7 +207,7 @@ const TextEditor = ({ data, edit }) => {
     if (!state.title) {
       setErrors({ ...errors, title: true });
     }
-    if (state.tags.length === 0) {
+    if (state.tags?.length === 0) {
       setErrors({ ...errors, tags: true });
     }
     if (!state.content) {
@@ -206,7 +216,7 @@ const TextEditor = ({ data, edit }) => {
     if (state.title) {
       setErrors({ ...errors, title: false });
     }
-    if (state.tags.length > 0) {
+    if (state.tags?.length > 0) {
       setErrors({ ...errors, tags: false });
     }
     if (state.content) {
@@ -222,8 +232,16 @@ const TextEditor = ({ data, edit }) => {
   };
 
   const handlePublish = () => {
-    if (checkIfMandatoryValuesExist) {
-      alert("a");
+    if (checkIfMandatoryValuesExist()) {
+      dispatch(
+        postContents({
+          ...state,
+          authorUsername: username,
+          courseArea: courseArea,
+          courseSubArea: courseSubArea["name"],
+          materialCategory: materialCategory,
+        })
+      );
     }
   };
 

@@ -172,7 +172,7 @@ const sidebarTopList = [
 
 export default function SearchAppBar(props) {
   const classes = useStyles();
-  const { courseArea, courseSubArea, sideBarOption } = useSelector(
+  const { courseArea, courseSubArea, materialCategory } = useSelector(
     (state) => state.platform
   );
   const [open, setOpen] = useState(true);
