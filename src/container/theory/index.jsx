@@ -1,23 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import Card from "./Card";
-import { theoryData } from "../../utils/mock";
-import TextEditor from "../../components/common/TextEditor";
-import AddContent from "./AddConent";
 import AddContentCard from "./AddContentCard";
-import ContentContainer from "../../components/common/ContentContainer";
 
 function CardIndex() {
-  const { courseArea, courseSubArea } = useSelector((state) => state.platform);
+  const { courseArea, courseSubArea, materialCategory } = useSelector(
+    (state) => state.platform
+  );
+  const content = useSelector((state) => state.content);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    if (
+      content &&
+      content[courseArea]?.[courseSubArea["name"]]?.[materialCategory]
+    ) {
+      setData(content[courseArea][courseSubArea["name"]][materialCategory]);
+    }
+  }, [content, courseArea, courseSubArea, materialCategory]);
+
   const [state, setState] = useState({
     addContent: false,
   });
   const handleChange = (name, val) => {
     setState({ ...state, [name]: val });
   };
-
   return (
     <>
       <Grid container spacing={1}>
@@ -28,14 +35,13 @@ function CardIndex() {
             val={state.addContent}
           />
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          {theoryData &&
-            theoryData[courseArea] &&
-            theoryData[courseArea][courseSubArea.name] &&
-            theoryData[courseArea][courseSubArea.name]["theory"].map((i) => (
-              <Card items={i["cardInfo"]} key={i["cardInfo"]["id"]} />
-            ))}
-        </Grid>
+
+        {data &&
+          data.map((i) => (
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Card data={i} />
+            </Grid>
+          ))}
       </Grid>
     </>
   );

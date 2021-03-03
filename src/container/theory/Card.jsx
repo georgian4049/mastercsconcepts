@@ -37,16 +37,16 @@ const useStyles = makeStyles((theme) => ({
     color: "#000000",
   },
 }));
-export default function Cards({ items }) {
+export default function Cards({ data }) {
   const classes = useStyles();
   const {
     // eslint-disable-next-line
     title,
     publishedOn,
-    imgUrl,
-    description,
-    id,
-  } = items;
+    // imgUrl,
+    // description,
+    _id,
+  } = data;
 
   const history = useHistory();
 
@@ -54,7 +54,7 @@ export default function Cards({ items }) {
   return (
     <Card className={classes.root} variant="outlined">
       <Link
-        to={`${history.location.pathname}/topicId/${id}`}
+        to={`${history.location.pathname}/topicId/${_id}`}
         className={classes.link}
       >
         <CardContent>
@@ -64,14 +64,14 @@ export default function Cards({ items }) {
               <img
                 style={{ width: "100px", height: "30px" }}
                 // src={require(`../../assets/topic/matplotlib.svg`)}
-                src={imgUrl}
+                // src={imgUrl}
                 alt={title}
               />
               {/* <Avatar alt="Remy Sharp" src={matplotlib} /> */}
             </div>
           </div>
           <br />
-          <Typography variant="body2">{description}</Typography>
+          <Typography variant="body2">{"description"}</Typography>
           <Typography variant="body2">
             {`Published on :- ${publishedOn}`}
           </Typography>

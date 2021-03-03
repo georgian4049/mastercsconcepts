@@ -8,6 +8,7 @@ import TopicContent from "../container/theory/TopicContent";
 import NewContent from "../components/common/NewContent";
 import WrongPage from "./WrongPage";
 import HomePage from "../container/home";
+import Display from "../components/common/Display";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,24 +45,19 @@ export default function Layout() {
             <Route exact path={`/home`} component={HomePage} />
             <Route
               exact
-              path={`/:courseArea/:courseSubArea/:routeSelected`}
+              path={`/:courseArea/:courseSubArea/:materialCategory`}
               component={Body}
             />
             <Route
               exact
-              path={`/:courseArea/:courseSubArea/:routeSelected/new-content`}
+              path={`/:courseArea/:courseSubArea/:materialCategory/new-content`}
               component={NewContent}
             />
             <Route
               exact
-              path={`/:courseArea/:courseSubArea/:routeSelected/topicId/:topicId`}
-              component={TopicContent}
+              path={`/:courseArea/:courseSubArea/:materialCategory/topicId/:topicId`}
+              component={Display}
             />
-            {/* <Route
-              exact
-              path={`/:courseArea/:courseSubArea/:routeSelected/topicId/:topicId`}
-              component={TopicContent}
-            /> */}
 
             <Route path="/" component={WrongPage} />
           </Switch>

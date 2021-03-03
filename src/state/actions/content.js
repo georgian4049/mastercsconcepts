@@ -1,5 +1,5 @@
-import { LOGOUT, LOGIN_SUCCESS, MESSAGE } from "./types";
-import { postContent } from "../../api/content";
+import { LOGOUT, LOGIN_SUCCESS, MESSAGE, GET_CONTENT } from "./types";
+import { postContent, getContent } from "../../api/content";
 // import Message from "../../utils/message";
 
 export function logout() {
@@ -16,6 +16,45 @@ export function postContents(body) {
       dispatch({
         type: MESSAGE.SUCCESS,
         payload: data.message,
+      });
+    } catch (error) {
+      console.log(error);
+      if (error.response?.status === 400) {
+        dispatch({
+          type: MESSAGE.ERROR,
+          payload: "Couldn't Post due to Conflict",
+        });
+      } else {
+        dispatch({
+          type: MESSAGE.ERROR,
+          payload: "Server Error! Please try again later",
+        });
+      }
+    }
+  };
+}
+
+export function getContents(courseArea, courseSubArea, materialCategory) {
+  return async function (dispatch) {
+    try {
+      const { data } = await getContent(
+        courseArea,
+        courseSubArea,
+        materialCategory
+      );
+      dispatch({
+        type: GET_CONTENT,
+        // payload: {
+        //   [courseArea]: {
+        //     [courseSubArea]: { [materialCategory]: data.data },
+        //   },
+        // },
+        payload: {
+          courseArea: courseArea,
+          courseSubArea: courseSubArea,
+          materialCategory: materialCategory,
+          data: data.data,
+        },
       });
     } catch (error) {
       console.log(error);

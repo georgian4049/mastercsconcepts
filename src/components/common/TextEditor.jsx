@@ -162,9 +162,9 @@ const TextEditor = ({ data, edit }) => {
     view: 0,
     like: 0,
     minRead: 0,
-    content: EditorState.createEmpty(),
+    content: {},
   });
-  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
     if (edit) {
@@ -186,7 +186,7 @@ const TextEditor = ({ data, edit }) => {
   };
 
   const onEditorStateChange = (editorState) => {
-    setState({ ...state, content: editorState });
+    setEditorState(editorState);
   };
 
   const handleMetaComponent = (name, value) => {
@@ -240,6 +240,7 @@ const TextEditor = ({ data, edit }) => {
           courseArea: courseArea,
           courseSubArea: courseSubArea["name"],
           materialCategory: materialCategory,
+          content: convertToRaw(editorState.getCurrentContent()),
         })
       );
     }
@@ -252,7 +253,7 @@ const TextEditor = ({ data, edit }) => {
         wrapperClassName="rdw-storybook-wrapper"
         editorClassName="rdw-storybook-editor"
         placeholder="Add your content here!! :)"
-        editorState={state.content}
+        editorState={editorState}
         hashtag={{
           separator: " ",
           trigger: "#",

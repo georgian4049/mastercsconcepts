@@ -9,6 +9,7 @@ import { CssBaseline } from "@material-ui/core";
 import Login from "./pages/Login";
 import Layout from "./layout/Layout";
 import Notification from "./components/common/Notification";
+import ErrorBoundary from "./container/ErrorBoundary";
 
 const theme = createMuiTheme({
   props: {
@@ -87,8 +88,10 @@ function App() {
         <CssBaseline />
         <BrowserRouter>
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <PrivateRoute path="/" component={Layout} />
+            <ErrorBoundary>
+              <Route exact path="/login" component={Login} />
+              <PrivateRoute path="/" component={Layout} />
+            </ErrorBoundary>
           </Switch>
           <Notification />
         </BrowserRouter>
