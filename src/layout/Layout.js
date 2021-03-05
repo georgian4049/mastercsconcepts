@@ -8,7 +8,7 @@ import TopicContent from "../container/theory/TopicContent";
 import NewContent from "../components/common/NewContent";
 import WrongPage from "./WrongPage";
 import HomePage from "../container/home";
-import Display from "../components/common/Display";
+import DisplayNew from "../components/common/DisplayNew";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: "#fff",
-    height: "100vh",
+    height: "100%",
+    minHeight: "100vh",
     maxWidth: "100%", //or 1180
     minWidth: " 200px",
     marginTop: theme.spacing(0),
@@ -56,7 +57,7 @@ export default function Layout() {
             <Route
               exact
               path={`/:courseArea/:courseSubArea/:materialCategory/topicId/:topicId`}
-              component={Display}
+              component={DisplayNew}
             />
 
             <Route path="/" component={WrongPage} />

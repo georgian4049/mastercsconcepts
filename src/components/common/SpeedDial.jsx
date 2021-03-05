@@ -6,42 +6,29 @@ import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
 import SubtitlesIcon from "@material-ui/icons/Subtitles";
 import DescriptionIcon from "@material-ui/icons/Description";
 import SubjectSharpIcon from "@material-ui/icons/SubjectSharp";
+import MenuIcon from "@material-ui/icons/Menu";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
+import SaveOutlinedIcon from "@material-ui/icons/SaveOutlined";
+import PublishOutlinedIcon from "@material-ui/icons/PublishOutlined";
 
 const actions = [
-  { icon: <SubtitlesIcon />, name: "Subtitles" },
-  { icon: <DescriptionIcon />, name: "Description" },
-  { icon: <SubjectSharpIcon />, name: "SubjectSharp" },
+  { icon: <PublishOutlinedIcon />, name: "Publish" },
+  { icon: <SaveOutlinedIcon />, name: "Save" },
+  { icon: <CancelOutlinedIcon />, name: "Cancel " },
 ];
 
 const useStyles = makeStyles((theme) => ({
-  //   root: {
-  //     transform: "translateZ(0px)",
-  //     flexGrow: 1,
-  //   },
-  //   exampleWrapper: {
-  //     position: "relative",
-  //     marginTop: theme.spacing(3),
-  //     height: 380,
-  //   },
-  //   radioGroup: {
-  //     margin: theme.spacing(1, 0),
-  //   },
   speedDial: {
     position: "absolute",
-    // "&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft": {
-    //   //   bottom: theme.spacing(2),
-    //   //   right: theme.spacing(2),
-    // },
-    // "&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight": {
-    //   top: theme.spacing(2),
-    //   left: theme.spacing(2),
-    // },
+    top: theme.spacing(0),
+    right: theme.spacing(2),
   },
 }));
 
 const SpeedDialComponent = ({ optionSelected }) => {
   const classes = useStyles();
-  const [direction, setDirection] = useState("right");
+  const [direction, setDirection] = useState("left");
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
 
@@ -67,10 +54,10 @@ const SpeedDialComponent = ({ optionSelected }) => {
   return (
     <div>
       <SpeedDial
-        ariaLabel="SpeedDial"
+        ariaLabel="Option"
         className={classes.speedDial}
         hidden={hidden}
-        icon={<SpeedDialIcon color="secondary" />}
+        icon={<MoreVertIcon fontSize="large" />}
         onClose={handleClose}
         onOpen={handleOpen}
         open={open}

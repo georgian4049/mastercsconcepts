@@ -1,20 +1,9 @@
 import { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import {
-  Button,
-  makeStyles,
-  TextField,
-  Grid,
-  FormControl,
-  Input,
-  InputLabel,
-  InputAdornment,
-} from "@material-ui/core";
-import clsx from "clsx";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import { useHistory } from "react-router-dom";
+import { Button, makeStyles, Typography } from "@material-ui/core";
 import { theoryData } from "../../utils/mock";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import TextEditor from "./TextEditor";
+import NewEditor from "./NewEditor";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -31,29 +20,16 @@ const useStyles = makeStyles((theme) => ({
     zIndex: "1",
   },
   articleContent: {
-    width: "100%",
+    maxWidth: "100%",
     position: "relative",
     top: "50px",
     padding: "15px",
   },
 }));
 
-const tags = ["Machine Learning", "Pandas", "Matplotlib"];
-
-const TopicContent = (state) => {
+const TopicContent = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [content, setContent] = useState("");
-  useEffect(() => {
-    console.log(history.location.pathname);
-    const path = history.location.pathname.split("/");
-    if (theoryData[path[1]]?.[path[2]]?.[path[3]]) {
-      const { cardInfo } = theoryData["adv"]["ML"]["theory"].find(
-        (i) => i.cardInfo.id === "1"
-      );
-      setContent(cardInfo);
-    }
-  }, []);
   return (
     <div>
       <div className={classes.header}>
@@ -67,9 +43,13 @@ const TopicContent = (state) => {
           BACK
         </Button>
       </div>
-
       <div className={classes.articleContent}>
-        <TextEditor />
+        <Typography variant="h5" align="center">
+          Add your contents Here...
+        </Typography>
+        <br />
+
+        <NewEditor />
       </div>
     </div>
   );

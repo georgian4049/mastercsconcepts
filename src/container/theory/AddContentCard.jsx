@@ -7,7 +7,7 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import AddIcon from "@material-ui/icons/Add";
+import EditIcon from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +45,7 @@ export default function Cards({ handleChange, name, val }) {
               size="large"
               onClick={() => handleChange(name, !val)}
             >
-              <AddIcon style={{ height: 90, width: 90 }} />
+              <EditIcon style={{ height: 90, width: 90 }} />
             </IconButton>
           </Tooltip>
         </CardActions>

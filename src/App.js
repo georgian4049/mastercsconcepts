@@ -88,10 +88,8 @@ function App() {
         <CssBaseline />
         <BrowserRouter>
           <Switch>
-            <ErrorBoundary>
-              <Route exact path="/login" component={Login} />
-              <PrivateRoute path="/" component={Layout} />
-            </ErrorBoundary>
+            <Route exact path="/login" component={Login} />
+            <PrivateRoute path="/" component={Layout} />
           </Switch>
           <Notification />
         </BrowserRouter>
