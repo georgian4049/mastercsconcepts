@@ -4,7 +4,6 @@ import AppBar from "./AppBar";
 import Sidebar from "./Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
 import Body from "../container/Body";
-import TopicContent from "../container/theory/TopicContent";
 import NewContent from "../components/common/NewContent";
 import WrongPage from "./WrongPage";
 import HomePage from "../container/home";

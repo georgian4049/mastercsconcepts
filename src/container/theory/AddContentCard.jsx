@@ -1,4 +1,5 @@
 import { useHistory, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   makeStyles,
   Card,
@@ -6,7 +7,6 @@ import {
   IconButton,
   Tooltip,
 } from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import EditIcon from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,24 +32,42 @@ const useStyles = makeStyles((theme) => ({
 export default function Cards({ handleChange, name, val }) {
   const classes = useStyles();
   const history = useHistory();
+  const { isAuthenticated } = useSelector((state) => state.authentication);
   return (
-    <Card className={classes.root} variant="outlined">
-      <Link
-        to={`${history.location.pathname}/new-content`}
-        className={classes.link}
-      >
-        <CardActions className={classes.button}>
-          <Tooltip title="Add Content" aria-label="add">
-            <IconButton
-              aria-label="Upload"
-              size="large"
-              onClick={() => handleChange(name, !val)}
-            >
-              <EditIcon style={{ height: 90, width: 90 }} />
-            </IconButton>
+    <>
+      {isAuthenticated ? (
+        <Card className={classes.root} variant="outlined">
+          <Link
+            to={`${history.location.pathname}/new-content`}
+            className={classes.link}
+          >
+            <CardActions className={classes.button}>
+              <Tooltip title={"Add Content"}>
+                <IconButton
+                  aria-label="Upload"
+                  size="medium"
+                  disabled={!isAuthenticated}
+                  onClick={() => handleChange(name, !val)}
+                >
+                  <EditIcon style={{ height: 90, width: 90 }} />
+                </IconButton>
+              </Tooltip>
+            </CardActions>
+          </Link>
+        </Card>
+      ) : (
+        <span>
+          <Tooltip title="Please Login to Add Contents">
+            <Card className={classes.root} variant="outlined">
+              <CardActions className={classes.button}>
+                <IconButton aria-label="Upload" size="medium" disabled>
+                  <EditIcon style={{ height: 90, width: 90 }} />
+                </IconButton>
+              </CardActions>
+            </Card>
           </Tooltip>
-        </CardActions>
-      </Link>
-    </Card>
+        </span>
+      )}
+    </>
   );
 }

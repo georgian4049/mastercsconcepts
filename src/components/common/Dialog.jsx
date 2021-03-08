@@ -22,30 +22,34 @@ export default function AlertDialogSlide({
   const [open, setOpen] = React.useState(shouldOpen);
 
   const handleClose = (buttonType) => {
+    setOpen(false);
+    handleButtonClicked("none");
+  };
+  const handleDialog = (buttonType) => {
     handleButtonClicked(buttonType);
   };
 
   return (
     <div>
       <Dialog
-        open={shouldOpen}
+        open={shouldOpen || false}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{messageBody1}</DialogTitle>
+        <DialogTitle style={{ fontWeight: "800" }}>{messageBody1}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
+          <DialogContentText style={{ fontWeight: "500" }}>
             {messageBody2}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose("left")} color="primary">
+          <Button onClick={() => handleDialog("left")} color="primary">
             {leftButtonText}
           </Button>
-          <Button onClick={() => handleClose("right")} color="primary">
+          <Button onClick={() => handleDialog("right")} color="primary">
             {rightButtonText}
           </Button>
         </DialogActions>

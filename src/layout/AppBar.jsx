@@ -1,29 +1,27 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+// import { useState } from "react";
+// import { useSelector } from "react-redux";
+// import { useHistory, Link } from "react-router-dom";
 import {
   makeStyles,
   AppBar,
   Toolbar,
-  InputBase,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
+  // List,
+  // ListItem,
+  // ListItemIcon,
+  // ListItemText,
   Typography,
-  Divider,
+  // Divider,
   CssBaseline,
-  Tooltip,
+  // Tooltip,
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
 import logo from "../assets/logo.png";
 import AppbarLink from "./AppBarLinks";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
-import BuildIcon from "@material-ui/icons/Build";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
+// import GetAppIcon from "@material-ui/icons/GetApp";
+// import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
+// import BookmarkIcon from "@material-ui/icons/Bookmark";
+// import BuildIcon from "@material-ui/icons/Build";
+// import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+// import GroupAddIcon from "@material-ui/icons/GroupAdd";
 
 const drawerWidth = 210;
 
@@ -141,102 +139,102 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-const sidebarTopList = [
-  {
-    link: "theory",
-    key: "Theory",
-    icon: <LocalLibraryIcon />,
-    index: 0,
-  },
-  {
-    link: "practical",
-    key: "Practical",
-    icon: <BuildIcon />,
-    index: 1,
-  },
-  {
-    link: "blogs",
-    key: "Blogs",
-    icon: <LibraryBooksIcon />,
-    index: 2,
-  },
-  {
-    link: "contributors",
-    key: "Contributors",
-    icon: <GroupAddIcon />,
-    index: 4,
-  },
-  {
-    link: "downloads",
-    key: "Downloads",
-    icon: <GetAppIcon />,
-    index: 4,
-  },
-  {
-    link: "subscribe",
-    key: "Subscribe",
-    icon: <BookmarkIcon />,
-    index: 4,
-  },
-];
+// const sidebarTopList = [
+//   {
+//     link: "theory",
+//     key: "Theory",
+//     icon: <LocalLibraryIcon />,
+//     index: 0,
+//   },
+//   {
+//     link: "practical",
+//     key: "Practical",
+//     icon: <BuildIcon />,
+//     index: 1,
+//   },
+//   {
+//     link: "blogs",
+//     key: "Blogs",
+//     icon: <LibraryBooksIcon />,
+//     index: 2,
+//   },
+//   {
+//     link: "contributors",
+//     key: "Contributors",
+//     icon: <GroupAddIcon />,
+//     index: 4,
+//   },
+//   {
+//     link: "downloads",
+//     key: "Downloads",
+//     icon: <GetAppIcon />,
+//     index: 4,
+//   },
+//   {
+//     link: "subscribe",
+//     key: "Subscribe",
+//     icon: <BookmarkIcon />,
+//     index: 4,
+//   },
+// ];
 
 export default function SearchAppBar(props) {
   const classes = useStyles();
-  const { courseArea, courseSubArea } = useSelector((state) => state.platform);
-  const [open, setOpen] = useState(true);
-  let history = useHistory();
-  const handleDrawer = () => {
-    setOpen(!open);
-  };
+  // const { courseArea, courseSubArea } = useSelector((state) => state.platform);
+  // const [open, setOpen] = useState(true);
+  // let history = useHistory();
+  // const handleDrawer = () => {
+  //   setOpen(!open);
+  // };
 
-  const drawer = (
-    <div>
-      <Tooltip title={courseSubArea["displayName"]}>
-        <Typography className={classes.typography} align="center" noWrap>
-          {courseSubArea["displayName"]}
-        </Typography>
-      </Tooltip>
+  // const drawer = (
+  //   <div>
+  //     <Tooltip title={courseSubArea["displayName"]}>
+  //       <Typography className={classes.typography} align="center" noWrap>
+  //         {courseSubArea["displayName"]}
+  //       </Typography>
+  //     </Tooltip>
 
-      <Divider />
-      <List className={classes.list}>
-        {sidebarTopList.map((item) => (
-          <Link
-            to={`/${courseArea}/${courseSubArea.name}/${item.link}`}
-            className={classes.link}
-            key={item.key}
-          >
-            <ListItem
-              button
-              key={item.key}
-              className={
-                history.location.pathname ===
-                `/${courseArea}/${courseSubArea.name}/${item.link}`
-                  ? classes.isSelected
-                  : ""
-              }
-            >
-              <ListItemIcon
-                className={
-                  history.location.pathname ===
-                  `/${courseArea}/${courseSubArea.name}/${item.link}`
-                    ? classes.isSelectedListItem
-                    : ""
-                }
-              >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.key} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      {/* <div className={classes.chevron}>
-        <IconButton onClick={handleDrawer}>
-          {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-        </IconButton>
-      </div> */}
-    </div>
-  );
+  //     <Divider />
+  //     <List className={classes.list}>
+  //       {sidebarTopList.map((item) => (
+  //         <Link
+  //           to={`/${courseArea}/${courseSubArea.name}/${item.link}`}
+  //           className={classes.link}
+  //           key={item.key}
+  //         >
+  //           <ListItem
+  //             button
+  //             key={item.key}
+  //             className={
+  //               history.location.pathname ===
+  //               `/${courseArea}/${courseSubArea.name}/${item.link}`
+  //                 ? classes.isSelected
+  //                 : ""
+  //             }
+  //           >
+  //             <ListItemIcon
+  //               className={
+  //                 history.location.pathname ===
+  //                 `/${courseArea}/${courseSubArea.name}/${item.link}`
+  //                   ? classes.isSelectedListItem
+  //                   : ""
+  //               }
+  //             >
+  //               {item.icon}
+  //             </ListItemIcon>
+  //             <ListItemText primary={item.key} />
+  //           </ListItem>
+  //         </Link>
+  //       ))}
+  //     </List>
+  //     {/* <div className={classes.chevron}>
+  //       <IconButton onClick={handleDrawer}>
+  //         {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+  //       </IconButton>
+  //     </div> */}
+  //   </div>
+  // );
 
   return (
     <div className={classes.root}>

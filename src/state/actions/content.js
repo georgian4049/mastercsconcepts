@@ -1,4 +1,4 @@
-import { LOGOUT, LOGIN_SUCCESS, MESSAGE, GET_CONTENT } from "./types";
+import { LOGOUT, MESSAGE, GET_CONTENT } from "./types";
 import { postContent, getContent } from "../../api/content";
 // import Message from "../../utils/message";
 

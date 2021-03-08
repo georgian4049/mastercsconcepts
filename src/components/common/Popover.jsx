@@ -100,7 +100,7 @@ export default function Popover({ title, list, name }) {
           aria-controls={open ? "menu-list-grow" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
-          color={name === courseArea ? "secondary" : ""}
+          color={name === courseArea ? "secondary" : "inherit"}
           endIcon={
             name === courseArea && open ? (
               <KeyboardArrowUpIcon />

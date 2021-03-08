@@ -14,7 +14,6 @@ import {
   CssBaseline,
   Tooltip,
 } from "@material-ui/core";
-import GetAppIcon from "@material-ui/icons/GetApp";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import BuildIcon from "@material-ui/icons/Build";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
@@ -28,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
     backgroundColor: "#fff",
-    zIndex: 0,
+    zIndex: 1,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -173,14 +172,13 @@ const sidebarTopList = [
 
 export default function SearchAppBar(props) {
   const classes = useStyles();
-  const { courseArea, courseSubArea, materialCategory } = useSelector(
-    (state) => state.platform
-  );
+  const { courseArea, courseSubArea } = useSelector((state) => state.platform);
+
   const [open, setOpen] = useState(true);
   let history = useHistory();
-  const handleDrawer = () => {
-    setOpen(!open);
-  };
+  // const handleDrawer = () => {
+  //   setOpen(!open);
+  // };
 
   const drawer = (
     <div>

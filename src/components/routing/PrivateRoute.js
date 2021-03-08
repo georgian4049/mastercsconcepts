@@ -3,8 +3,7 @@ import { Route, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { MULTIPLE_VALUES } from "../../state/actions/types";
 import { courseList } from "../../utils/mock";
-import jwt from "jsonwebtoken";
-import { LOGIN_SUCCESS } from "../../state/actions/types";
+import { refresh } from "../../state/actions/authentication";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => ({
@@ -14,27 +13,17 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   let history = useHistory();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   intialCall();
-  // }, []);
-  // const intialCall = () => {
-  //   const token = localStorage.getItem("token") || null;
-  //   if (
-  //     token !== null &&
-  //     token !== undefined &&
-  //     jwt.decode(token).exp < Date.now() / 1000
-  //   ) {
-  //     const username = localStorage.getItem("username");
-  //     const name = localStorage.getItem("name");
-  //     //need to work on Refresh token
-  //     dispatch({
-  //       type: LOGIN_SUCCESS,
-  //       payload: { token, username, name },
-  //     });
-  //   } else {
-  //     history.replace("/login");
-  //   }
-  // };
+  useEffect(() => {
+    intialCall();
+  }, []);
+  const intialCall = () => {
+    const token = localStorage.getItem("token") || null;
+    if (token) {
+      dispatch(refresh({ token }));
+    } else {
+      history.replace("/login");
+    }
+  };
 
   useEffect(() => {
     const currentUrl = history.location.pathname.split("/");
@@ -56,6 +45,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     } else {
       // history.replace("/wrong-page");
     }
+    /*eslint-disable-next-line*/
   }, []);
 
   return (

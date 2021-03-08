@@ -23,6 +23,7 @@ const Body = ({ match }) => {
     } else {
       dispatch(getContents(courseArea, courseSubArea, materialCategory));
     }
+    /*eslint-disable-next-line*/
   }, [materialCategory, courseArea, courseSubArea]);
 
   return <div>{materialCategory === "theory" ? <Theory /> : ""}</div>;

@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, makeStyles, Typography } from "@material-ui/core";
-import { theoryData } from "../../utils/mock";
+import { Button, makeStyles, TextField, InputBase } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import NewEditor from "./NewEditor";
 
@@ -27,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TopicContent = () => {
+const NewContent = () => {
   const classes = useStyles();
   const history = useHistory();
   return (
@@ -44,9 +42,6 @@ const TopicContent = () => {
         </Button>
       </div>
       <div className={classes.articleContent}>
-        <Typography variant="h5" align="center">
-          Add your contents Here...
-        </Typography>
         <br />
 
         <NewEditor />
@@ -55,4 +50,4 @@ const TopicContent = () => {
   );
 };
 
-export default TopicContent;
+export default NewContent;

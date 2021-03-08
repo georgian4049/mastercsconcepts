@@ -16,6 +16,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
 import { login } from "../state/actions/authentication";
+import clsx from "clsx";
+import IconButton from "@material-ui/core/IconButton";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControl from "@material-ui/core/FormControl";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 function Copyright() {
   return (
@@ -48,6 +56,12 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  margin: {
+    marginTop: theme.spacing(1),
+  },
+  textField: {
+    width: "50ch",
+  },
 }));
 
 export default function SignIn() {
@@ -58,14 +72,21 @@ export default function SignIn() {
   const { isAuthenticated } = useSelector((state) => ({
     isAuthenticated: state.authentication.isAuthenticated,
   }));
-  // const userDetails = useSelector((state) => state.authentication.user);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
 
   const handleChange = (event) => {
     setLoginForm({ ...loginForm, [event.target.name]: event.target.value });
   };
-  console.log(loginForm);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const onSubmit = (data) => {
     data.preventDefault();
@@ -91,14 +112,15 @@ export default function SignIn() {
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="none"
             required
             fullWidth
             id="email"
             label="Email Address"
             name="email"
+            value={loginForm.email}
             onChange={handleChange}
-            autoComplete="email"
+            // autoComplete="email"
             autoFocus
             inputRef={register({
               required: true,
@@ -106,7 +128,7 @@ export default function SignIn() {
               min: 5,
             })}
           />
-          <TextField
+          {/* <TextField
             variant="outlined"
             margin="normal"
             required
@@ -117,7 +139,41 @@ export default function SignIn() {
             id="password"
             onChange={handleChange}
             autoComplete="current-password"
-          />
+          /> */}
+          <FormControl
+            className={clsx(classes.margin, classes.textField)}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="outlined-adornment-password">
+              Password
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              fullWidth
+              margin="none"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              value={loginForm.password}
+              onChange={handleChange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {loginForm.showPassword ? (
+                      <Visibility />
+                    ) : (
+                      <VisibilityOff />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={70}
+            />
+          </FormControl>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

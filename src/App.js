@@ -9,7 +9,6 @@ import { CssBaseline } from "@material-ui/core";
 import Login from "./pages/Login";
 import Layout from "./layout/Layout";
 import Notification from "./components/common/Notification";
-import ErrorBoundary from "./container/ErrorBoundary";
 
 const theme = createMuiTheme({
   props: {
@@ -28,6 +27,8 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: "Open Sans",
+    fontWeightBold: "800",
+    fontWeightMedium: "600",
     h1: {
       fontSize: "6.857rem",
       lineHeight: "8rem",

@@ -94,6 +94,14 @@ export default function notificationReducer(state = initialState, action) {
           severity: "",
         },
       };
+    case MESSAGE.NORMAL:
+      return {
+        ...state,
+        notification: {
+          message: action.payload,
+          severity: "info",
+        },
+      };
 
     default:
       return state;

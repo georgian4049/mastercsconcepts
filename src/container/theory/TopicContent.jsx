@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Button, makeStyles, Typography } from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
 import { theoryData } from "../../utils/mock";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
@@ -40,6 +39,7 @@ const TopicContent = (state) => {
       );
       setContent(cardInfo);
     }
+    /*eslint-disable-next-line*/
   }, []);
   return (
     <div>
