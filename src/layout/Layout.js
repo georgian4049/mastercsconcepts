@@ -8,6 +8,7 @@ import NewContent from "../components/common/NewContent";
 import WrongPage from "./WrongPage";
 import HomePage from "../container/home";
 import DisplayNew from "../components/common/DisplayNew";
+import Logout from "./Logout";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +42,7 @@ export default function Layout() {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
+            <Route exact path="/logout" component={Logout} />
             <Route exact path={`/wrong-page`} component={WrongPage} />
             <Route exact path={`/home`} component={HomePage} />
             <Route
