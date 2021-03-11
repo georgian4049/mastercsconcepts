@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 275,
     minWidth: 275,
     margin: theme.spacing(1),
+    border: `1px solid ${theme.palette.primary.secondary}`,
   },
   header: {
     display: "flex",

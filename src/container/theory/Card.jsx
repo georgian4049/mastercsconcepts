@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 275,
     minWidth: 275,
     margin: theme.spacing(1),
+    border: `1px solid  green`,
+    borderRadius: "10px",
   },
   header: {
     height: "30px",
@@ -73,11 +75,11 @@ export default function Cards({ data }) {
           {/* <Typography variant="body2">{`Assigned To :- ${assignee}`}</Typography> */}
         </CardContent>
       </Link>
-      <CardActions>
+      {/* <CardActions>
         <IconButton aria-label="Upload" size="small">
           <FavoriteIcon />
         </IconButton>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }

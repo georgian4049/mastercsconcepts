@@ -13,9 +13,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
-import { login } from "../../state/actions/authentication";
+import { registerUser } from "../../api/authentication";
 import { Divider } from "@material-ui/core";
 import { refresh } from "../../state/actions/authentication";
+import Regex from "../../utils/Regex";
+import { MESSAGE } from "../../state/actions/types";
 
 function Copyright() {
   return (
@@ -32,7 +34,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -60,10 +62,12 @@ export default function SignIn() {
   const classes = useStyles();
   let history = useHistory();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const { isAuthenticated } = useSelector((state) => ({
     isAuthenticated: state.authentication.isAuthenticated,
   }));
+
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [registerForm, setRegisterForm] = useState({
     firstName: "",
@@ -71,19 +75,82 @@ export default function SignIn() {
     email: "",
     username: "",
     password: "",
-    confirmPassword: "",
+  });
+  const [error, setError] = useState({
+    firstName: false,
+    lastName: false,
+    email: false,
+    username: false,
+    password: false,
+    confirmPassword: false,
+  });
+
+  const [errorMessage, setErrorMessage] = useState({
+    firstName: "Invalid First Name",
+    lastName: "Invalid Last Name",
+    email: "Invalid Email",
+    username: "Invalid Username",
+    password:
+      "Password should be more than 6 charecters and must include atleast 1 special character, 1 number, 1 small and 1 caps alphabets",
+    confirmPassword: "Values doesn't match with password",
   });
 
   const handleChange = (event) => {
+    if (!checkValidity(event.target.name, event.target.value)) {
+      setError({ ...error, [event.target.name]: true });
+    } else {
+      setError({ ...error, [event.target.name]: false });
+    }
     setRegisterForm({
       ...registerForm,
       [event.target.name]: event.target.value,
     });
   };
 
+  const checkValidity = (name, value) => {
+    if (name === "firstName" || name === "lastName" || name === "username") {
+      if (!Regex.specialCharCheck.test(value) && !Regex.validName.test(value))
+        return false;
+      return true;
+    } else if (name === "email") {
+      if (!Regex.validEmail.test(value)) return false;
+      return true;
+    } else if (name === "password") {
+      if (!Regex.validPassword.test(value)) return false;
+      return true;
+    }
+  };
+  const handleBlur = (event) => {
+    if (!event.target.value) {
+      setError({ ...error, [event.target.name]: true });
+    }
+  };
+  const handleConfirmPassword = (val) => {
+    setConfirmPassword(val);
+    if (val !== registerForm["password"]) {
+      setError({ ...error, confirmPassword: true });
+    } else {
+      setError({ ...error, confirmPassword: false });
+    }
+  };
+
   const onSubmit = (data) => {
     data.preventDefault();
-    dispatch(login(registerForm));
+    let errors = false;
+
+    Object.keys(error).map((x) => {
+      if (error[x]) {
+        errors = true;
+      }
+    });
+    if (errors) {
+      dispatch({
+        type: MESSAGE.ERROR,
+        payload: "Please fill the form correctly",
+      });
+    } else {
+      register();
+    }
   };
 
   useEffect(() => {
@@ -103,12 +170,35 @@ export default function SignIn() {
     console.log("Couldn't login");
   }
 
-  //   if (isAuthenticated) {
-  //     history.replace("/home");
-  //   } else {
-  //     console.log("Couldn't Register");
-  //     //  history.replace("/pending-requests");
-  //   }
+  async function register() {
+    try {
+      const { data } = await registerUser(registerForm);
+      dispatch({
+        type: MESSAGE.SUCCESS,
+        payload: "Registered Successfully! Please Login",
+      });
+      history.replace("/login");
+    } catch (error) {
+      console.log(error);
+      if (error.response?.status === 400) {
+        dispatch({
+          type: MESSAGE.WRONG_LOGIN_CREDENTIALS,
+          payload: "This email address is already registered with us",
+        });
+      } else if (error.response?.status === 401) {
+        dispatch({
+          type: MESSAGE.WRONG_LOGIN_CREDENTIALS,
+          payload: "Username Taken",
+        });
+      } else {
+        dispatch({
+          type: MESSAGE.ERROR,
+          payload: "Server Error! Please try again later",
+        });
+      }
+    }
+  }
+
   return (
     <>
       {isAuthenticated ? (
@@ -134,8 +224,11 @@ export default function SignIn() {
                     id="firstName"
                     label="First Name"
                     name="firstName"
+                    helperText={error["firstName"] && errorMessage["firstName"]}
                     value={registerForm.firstName}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={error["firstName"]}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6}>
@@ -147,8 +240,11 @@ export default function SignIn() {
                     id="lastName"
                     label="Last Name"
                     name="lastName"
+                    helperText={error["lastName"] && errorMessage["lastName"]}
                     value={registerForm.lastName}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={error["lastName"]}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
@@ -157,11 +253,15 @@ export default function SignIn() {
                     margin="none"
                     required
                     fullWidth
+                    type="email"
                     id="email"
                     label="Email Address"
                     name="email"
+                    helperText={error["email"] && errorMessage["email"]}
                     value={registerForm.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={error["email"]}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
@@ -173,8 +273,11 @@ export default function SignIn() {
                     id="username"
                     label="Username"
                     name="username"
+                    helperText={error["username"] && errorMessage["username"]}
                     value={registerForm.username}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={error["username"]}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
@@ -183,11 +286,15 @@ export default function SignIn() {
                     margin="none"
                     required
                     fullWidth
+                    type="password"
                     id="password"
                     label="Password"
                     name="password"
+                    helperText={error["password"] && errorMessage["password"]}
                     value={registerForm.password}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={error["password"]}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
@@ -196,11 +303,18 @@ export default function SignIn() {
                     margin="none"
                     required
                     fullWidth
+                    type="password"
                     id="confirmPassword"
                     label="Confirm Password"
                     name="confirmPassword"
-                    value={registerForm.confirmPassword}
-                    onChange={handleChange}
+                    helperText={
+                      error["confirmPassword"] &&
+                      errorMessage["confirmPassword"]
+                    }
+                    value={confirmPassword}
+                    onChange={(e) => handleConfirmPassword(e.target.value)}
+                    onBlur={handleBlur}
+                    error={error["confirmPassword"]}
                   />
                 </Grid>
               </Grid>

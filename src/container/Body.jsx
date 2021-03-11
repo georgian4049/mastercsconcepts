@@ -5,6 +5,7 @@ import Theory from "./theory";
 import { possibleRoutes } from "../utils/applicationConfig";
 import { PLATFORM } from "../state/actions/types";
 import { getContents } from "../state/actions/content";
+import UnderConstruction from "../components/common/UnderConstruction";
 
 const Body = ({ match }) => {
   const dispatch = useDispatch();
@@ -26,7 +27,11 @@ const Body = ({ match }) => {
     /*eslint-disable-next-line*/
   }, [materialCategory, courseArea, courseSubArea]);
 
-  return <div>{materialCategory === "theory" ? <Theory /> : ""}</div>;
+  return (
+    <div>
+      {materialCategory === "theory" ? <Theory /> : <UnderConstruction />}
+    </div>
+  );
 };
 
 export default Body;
