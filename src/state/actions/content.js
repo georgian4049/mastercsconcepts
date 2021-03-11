@@ -12,10 +12,9 @@ export function postContents(body) {
   return async function (dispatch) {
     try {
       const { data } = await postContent(body);
-      console.log(data);
       dispatch({
         type: MESSAGE.SUCCESS,
-        payload: data.message,
+        payload: data.data,
       });
     } catch (error) {
       console.log(error);
