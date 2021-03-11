@@ -9,6 +9,7 @@ import { postContents } from "../../state/actions/content";
 import Dialog from "./Dialog";
 import { useHistory } from "react-router";
 import Message from "../../utils/message";
+import "./editor.css";
 
 const useStyles = makeStyles((theme) => ({
   edit: {
