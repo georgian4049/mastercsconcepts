@@ -1,29 +1,20 @@
-// import { useState } from "react";
-// import { useSelector } from "react-redux";
-// import { useHistory, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   makeStyles,
   AppBar,
   Toolbar,
-  // List,
-  // ListItem,
-  // ListItemIcon,
-  // ListItemText,
-  Typography,
-  // Divider,
+  Chip,
   CssBaseline,
-  // Tooltip,
 } from "@material-ui/core";
 import logo from "../assets/logo.png";
 import AppbarLink from "./AppBarLinks";
-// import GetAppIcon from "@material-ui/icons/GetApp";
-// import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
-// import BookmarkIcon from "@material-ui/icons/Bookmark";
-// import BuildIcon from "@material-ui/icons/Build";
-// import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-// import GroupAddIcon from "@material-ui/icons/GroupAdd";
-
-const drawerWidth = 210;
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,84 +35,15 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     display: "flex",
   },
-  search: {
-    position: "relative",
-    float: "right",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: "rgba(255,0,0, 1)",
-    // "&:hover": {
-    //   backgroundColor: fade("rgba(255,0,0)", 0.9),
-    // },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "#ffffff",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    color: "rgba(255,255,255, 1)",
-    fontWeight: "bold",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "25ch",
-      },
-    },
-  },
-  drawer: {
-    width: drawerWidth,
-
-    flexShrink: 0,
-    whiteSpace: "nowrap",
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    top: "65px",
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    top: "65px",
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: "hidden",
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(7) + 1,
-    },
-  },
-  list: {
-    overflow: "hidden",
-    backgroundColor: "rgb(255,255,255)",
-    paddingTop: "0px",
+  appBarLink: {
+    margin: "auto",
   },
   typography: {
     padding: theme.spacing(2),
     fontWeight: "bold",
     color: theme.palette.secondary.main,
   },
+
   link: {
     textDecoration: "none",
     color: "#000000",
@@ -139,127 +61,84 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-// const sidebarTopList = [
-//   {
-//     link: "theory",
-//     key: "Theory",
-//     icon: <LocalLibraryIcon />,
-//     index: 0,
-//   },
-//   {
-//     link: "practical",
-//     key: "Practical",
-//     icon: <BuildIcon />,
-//     index: 1,
-//   },
-//   {
-//     link: "blogs",
-//     key: "Blogs",
-//     icon: <LibraryBooksIcon />,
-//     index: 2,
-//   },
-//   {
-//     link: "contributors",
-//     key: "Contributors",
-//     icon: <GroupAddIcon />,
-//     index: 4,
-//   },
-//   {
-//     link: "downloads",
-//     key: "Downloads",
-//     icon: <GetAppIcon />,
-//     index: 4,
-//   },
-//   {
-//     link: "subscribe",
-//     key: "Subscribe",
-//     icon: <BookmarkIcon />,
-//     index: 4,
-//   },
-// ];
+const profile = [
+  { key: "1", link: "profile", name: "Your Profile" },
+  { key: "2", link: "settings", name: "Settings" },
+  { key: "3", link: "logout", name: "Logout" },
+];
 
 export default function SearchAppBar(props) {
   const classes = useStyles();
-  // const { courseArea, courseSubArea } = useSelector((state) => state.platform);
-  // const [open, setOpen] = useState(true);
-  // let history = useHistory();
-  // const handleDrawer = () => {
-  //   setOpen(!open);
-  // };
+  const { isAuthenticated, name, username } = useSelector(
+    (state) => state.authentication
+  );
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
-  // const drawer = (
-  //   <div>
-  //     <Tooltip title={courseSubArea["displayName"]}>
-  //       <Typography className={classes.typography} align="center" noWrap>
-  //         {courseSubArea["displayName"]}
-  //       </Typography>
-  //     </Tooltip>
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  //     <Divider />
-  //     <List className={classes.list}>
-  //       {sidebarTopList.map((item) => (
-  //         <Link
-  //           to={`/${courseArea}/${courseSubArea.name}/${item.link}`}
-  //           className={classes.link}
-  //           key={item.key}
-  //         >
-  //           <ListItem
-  //             button
-  //             key={item.key}
-  //             className={
-  //               history.location.pathname ===
-  //               `/${courseArea}/${courseSubArea.name}/${item.link}`
-  //                 ? classes.isSelected
-  //                 : ""
-  //             }
-  //           >
-  //             <ListItemIcon
-  //               className={
-  //                 history.location.pathname ===
-  //                 `/${courseArea}/${courseSubArea.name}/${item.link}`
-  //                   ? classes.isSelectedListItem
-  //                   : ""
-  //               }
-  //             >
-  //               {item.icon}
-  //             </ListItemIcon>
-  //             <ListItemText primary={item.key} />
-  //           </ListItem>
-  //         </Link>
-  //       ))}
-  //     </List>
-  //     {/* <div className={classes.chevron}>
-  //       <IconButton onClick={handleDrawer}>
-  //         {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-  //       </IconButton>
-  //     </div> */}
-  //   </div>
-  // );
-
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <img src={logo} alt="mastercsconcepts" style={{ height: "20px" }} />
-          <Typography>Dev Mode</Typography>
+          <Chip label="Dev Mode" color="secondary" />
           <div className={classes.rightContent}>
-            <div>
+            <div className={classes.appBarLink}>
               <AppbarLink />
             </div>
-            {/* <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
+            {isAuthenticated && (
+              <div>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle color="secondary" />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  style={{ marginTop: "30px" }}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  {profile.map((item) => (
+                    <Link
+                      to={`/${item.link}`}
+                      className={classes.link}
+                      style={{ textDecoration: "none" }}
+                      key={item.key}
+                    >
+                      <MenuItem
+                        button
+                        key={item["key"]}
+                        // onClick={() => history.replace(`${item["link"]}`)}
+                      >
+                        {item["name"]}
+                      </MenuItem>
+                    </Link>
+                  ))}
+                </Menu>
               </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div> */}
+            )}
           </div>
         </Toolbar>
       </AppBar>

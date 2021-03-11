@@ -15,8 +15,8 @@ const actions = [
 
 const useStyles = makeStyles((theme) => ({
   speedDial: {
-    position: "absolute",
-    top: theme.spacing(0),
+    position: "fixed",
+    top: theme.spacing(10),
     right: theme.spacing(2),
   },
 }));

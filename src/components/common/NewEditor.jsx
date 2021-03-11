@@ -12,9 +12,9 @@ import Message from "../../utils/message";
 
 const useStyles = makeStyles((theme) => ({
   edit: {
-    position: "absolute",
-    top: theme.spacing(0),
-    right: theme.spacing(10),
+    position: "fixed",
+    top: theme.spacing(10),
+    right: theme.spacing(2),
   },
 }));
 
@@ -90,13 +90,15 @@ const NewEditor = ({ data, existing, readOnly }) => {
       <div style={{ width: "80%", margin: "auto" }}>
         <InputBase
           autoFocus
-          multiline
           fullWidth
           onChange={(e) => setState({ ...state, title: e.target.value })}
           value={state.title}
           placeholder="Enter title here..."
           inputProps={{ "aria-label": "naked" }}
-          style={{ width: "70ch", fontWeight: "bold", fontSize: "25px" }}
+          style={{
+            fontWeight: "bold",
+            fontSize: "25px",
+          }}
         />
       </div>
 

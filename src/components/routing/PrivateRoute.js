@@ -21,7 +21,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     if (token) {
       dispatch(refresh({ token }));
     } else {
-      history.replace("/login");
+      // history.replace("/login");
     }
   };
 

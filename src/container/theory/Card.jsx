@@ -42,7 +42,8 @@ export default function Cards({ data }) {
   const {
     // eslint-disable-next-line
     title,
-    publishedOn,
+    datePublished,
+    authorUsername,
     // imgUrl,
     // description,
     _id,
@@ -59,21 +60,15 @@ export default function Cards({ data }) {
       >
         <CardContent>
           <div className={classes.header}>
-            <Typography className={classes.title}>{title}</Typography>
-            <div className={classes.chip}>
-              <img
-                style={{ width: "100px", height: "30px" }}
-                // src={require(`../../assets/topic/matplotlib.svg`)}
-                // src={imgUrl}
-                alt={title}
-              />
-              {/* <Avatar alt="Remy Sharp" src={matplotlib} /> */}
-            </div>
+            <Typography className={classes.title} noWrap>
+              {title}
+            </Typography>
           </div>
           <br />
+          <Typography variant="body2">{`Author :- ${authorUsername}`}</Typography>
           <Typography variant="body2">{"description"}</Typography>
           <Typography variant="body2">
-            {`Published on :- ${publishedOn}`}
+            {`Published on :- ${datePublished.split("T")[0]}`}
           </Typography>
           {/* <Typography variant="body2">{`Assigned To :- ${assignee}`}</Typography> */}
         </CardContent>

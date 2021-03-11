@@ -46,10 +46,11 @@ export function refresh(body) {
     } catch (error) {
       console.log(error);
       if (error.response?.status === 400) {
-        dispatch({
-          type: MESSAGE.NORMAL,
-          payload: "Please Login to access full content",
-        });
+        console.log("Token is absent ");
+        // dispatch({
+        //   type: MESSAGE.NORMAL,
+        //   payload: "Please Login to access full content",
+        // });
       } else {
         dispatch({
           type: MESSAGE.ERROR,

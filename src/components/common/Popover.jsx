@@ -27,10 +27,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(255,255,255)",
     paddingTop: "0px",
   },
-  logout: {
-    marginLeft: "auto",
-    color: "#ffffff",
-  },
   link: {
     textDecoration: "none",
     color: "#000000",

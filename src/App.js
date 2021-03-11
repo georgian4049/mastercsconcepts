@@ -29,6 +29,9 @@ const theme = createMuiTheme({
     fontFamily: "Open Sans",
     fontWeightBold: "800",
     fontWeightMedium: "600",
+    fontWeightLight: "400",
+    fontWeightRegular: "500",
+
     h1: {
       fontSize: "6.857rem",
       lineHeight: "8rem",
