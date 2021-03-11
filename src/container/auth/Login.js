@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
@@ -13,9 +13,9 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import { Container, Divider } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { login } from "../state/actions/authentication";
+import { login } from "../../state/actions/authentication";
 import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
@@ -24,6 +24,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { refresh } from "../../state/actions/authentication";
 
 function Copyright() {
   return (
@@ -72,6 +73,18 @@ export default function SignIn() {
   const { isAuthenticated } = useSelector((state) => ({
     isAuthenticated: state.authentication.isAuthenticated,
   }));
+
+  useEffect(() => {
+    intialCall();
+  }, []);
+  const intialCall = () => {
+    const token = localStorage.getItem("token") || null;
+    if (token) {
+      dispatch(refresh({ token }));
+    } else {
+      // history.replace("/login");
+    }
+  };
   const [showPassword, setShowPassword] = useState(false);
 
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -97,7 +110,6 @@ export default function SignIn() {
     history.replace("/home");
   } else {
     console.log("Couldn't login");
-    //  history.replace("/pending-requests");
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -128,18 +140,6 @@ export default function SignIn() {
               min: 5,
             })}
           />
-          {/* <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={handleChange}
-            autoComplete="current-password"
-          /> */}
           <FormControl
             className={clsx(classes.margin, classes.textField)}
             variant="outlined"
@@ -174,34 +174,56 @@ export default function SignIn() {
               labelWidth={70}
             />
           </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+
+          <Grid container>
+            <Grid item xs>
+              <FormControlLabel
+                control={<Checkbox value="remember" color="secondary" />}
+                label="Remember me"
+              />
+            </Grid>
+            <Grid item style={{ marginTop: "10px" }}>
+              <Link href="/forgot-password" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+          </Grid>
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
             onClick={onSubmit}
           >
             Sign In
           </Button>
-          <Grid container>
+
+          {/* <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
-          </Grid>
+          </Grid> */}
         </form>
       </div>
+      <Divider />
+      <br />
+      <Button
+        fullWidth
+        variant="contained"
+        color="primary"
+        className={classes.login}
+        onClick={() => history.replace("/register")}
+      >
+        Register
+      </Button>
       <Box mt={8}>
         <Copyright />
       </Box>

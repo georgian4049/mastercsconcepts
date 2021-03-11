@@ -9,6 +9,8 @@ import WrongPage from "./WrongPage";
 import HomePage from "../container/home";
 import DisplayNew from "../components/common/DisplayNew";
 import Logout from "./Logout";
+import Register from "../container/auth/Register";
+import Login from "../container/auth/Login";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +40,7 @@ export default function Layout() {
       <Route exact path="/" render={() => <Redirect to="/login" />} />
       <Route path="/" component={AppBar} />
       <Route path="/" component={Sidebar} />
+
       <div className={classes.root}>
         <main className={classes.content}>
           <div className={classes.toolbar} />

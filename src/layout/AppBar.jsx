@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   makeStyles,
   AppBar,
   Toolbar,
   Chip,
   CssBaseline,
+  Tooltip,
 } from "@material-ui/core";
 import logo from "../assets/logo.png";
 import AppbarLink from "./AppBarLinks";
@@ -15,6 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,6 +71,7 @@ const profile = [
 
 export default function SearchAppBar(props) {
   const classes = useStyles();
+  const history = useHistory();
   const { isAuthenticated, name, username } = useSelector(
     (state) => state.authentication
   );
@@ -93,7 +96,7 @@ export default function SearchAppBar(props) {
             <div className={classes.appBarLink}>
               <AppbarLink />
             </div>
-            {isAuthenticated && (
+            {isAuthenticated ? (
               <div>
                 <IconButton
                   aria-label="account of current user"
@@ -138,6 +141,17 @@ export default function SearchAppBar(props) {
                   ))}
                 </Menu>
               </div>
+            ) : (
+              <Tooltip title="Login to access all features">
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="span"
+                  onClick={() => history.replace("/login")}
+                >
+                  <LockOpenIcon />
+                </IconButton>
+              </Tooltip>
             )}
           </div>
         </Toolbar>

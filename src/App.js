@@ -6,9 +6,10 @@ import {
   createMuiTheme,
 } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
-import Login from "./pages/Login";
+import Login from "./container/auth/Login";
 import Layout from "./layout/Layout";
 import Notification from "./components/common/Notification";
+import Register from "./container/auth/Register";
 
 const theme = createMuiTheme({
   props: {
@@ -30,7 +31,7 @@ const theme = createMuiTheme({
     fontWeightBold: "800",
     fontWeightMedium: "600",
     fontWeightLight: "400",
-    fontWeightRegular: "500",
+    fontWeightRegular: "600",
 
     h1: {
       fontSize: "6.857rem",
@@ -93,6 +94,7 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             <PrivateRoute path="/" component={Layout} />
           </Switch>
           <Notification />
