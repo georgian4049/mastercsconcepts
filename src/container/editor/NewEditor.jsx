@@ -55,9 +55,10 @@ const NewEditor = ({ data, existing, readOnly }) => {
     courseSubArea: "",
     materialCategory: "",
     authorUsername: "",
+    description: "",
     name: "",
     title: "",
-    tags: "",
+    tags: [],
     datePublished: new Date(),
     view: 0,
     like: 0,
@@ -115,8 +116,9 @@ const NewEditor = ({ data, existing, readOnly }) => {
     }
   };
 
-  const handleSubmitButton = (shouldSubmit) => {
+  const handleSubmitButton = (shouldSubmit, obj) => {
     if (shouldSubmit) {
+      setState({ ...state, ...obj });
       handleSave();
     }
     setButtonState({ ...buttonState, submit: false });
@@ -240,6 +242,8 @@ const NewEditor = ({ data, existing, readOnly }) => {
         <OnSubmitForm
           shouldOpen={buttonState["submit"]}
           handleSubmitButton={handleSubmitButton}
+          descriptions={state.description}
+          tag={state.tags}
         />
       )}
     </div>

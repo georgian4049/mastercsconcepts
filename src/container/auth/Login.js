@@ -125,7 +125,6 @@ export default function SignIn() {
           <TextField
             variant="outlined"
             margin="none"
-            required
             fullWidth
             id="email"
             label="Email Address"

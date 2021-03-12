@@ -11,9 +11,9 @@ import EditIcon from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 275,
-    height: 150,
+    maxWidth: 400,
     minWidth: 275,
+    height: 150,
     margin: theme.spacing(1),
     position: "relative",
     backgroundColor: "#F26522",
@@ -52,7 +52,14 @@ export default function Cards({ handleChange, name, val }) {
                   disabled={!isAuthenticated}
                   onClick={() => handleChange(name, !val)}
                 >
-                  <EditIcon style={{ height: 90, width: 90, color: "#fff" }} />
+                  <EditIcon
+                    style={{
+                      height: 80,
+                      width: 130,
+                      margin: "auto",
+                      color: "#fff",
+                    }}
+                  />
                 </IconButton>
               </Tooltip>
             </CardActions>

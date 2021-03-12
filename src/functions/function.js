@@ -40,3 +40,44 @@ export function datetimeConverter(val) {
     date.getMonth() + 1
   }/${date.getDate()} @ ${date.getHours()}:${date.getMinutes()}`;
 }
+
+export function dateWord(val) {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  let date = new Date(val);
+
+  return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+}
+
+export function dateTimeFormat(date) {
+  const dateTimeFormat = new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  });
+  return dateTimeFormat.format(new Date(date));
+}
+
+export function monthDifferenceWithCurrentDate(date1) {
+  const day1 = new Date(dateTimeFormat(date1));
+  const day2 = new Date(dateTimeFormat(new Date()));
+  return Math.ceil(
+    Math.abs(day1.getTime() - day2.getTime()) / (1000 * 3600 * 24 * 30)
+  );
+}
