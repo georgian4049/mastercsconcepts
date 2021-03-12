@@ -3,7 +3,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Paper from "@material-ui/core/Paper";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import Popover from "../components/common/Popover";
+import TopicSelector from "../components/common/TopicSelector";
 import { courseList } from "../utils/mock";
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +54,7 @@ export default function CustomizedDividers() {
           onChange={handleAlignment}
           style={{ color: "black" }}
         >
-          <Popover
+          <TopicSelector
             title="Core Computer Science"
             list={courseList["core"]}
             name="core"
@@ -65,7 +65,7 @@ export default function CustomizedDividers() {
             orientation="vertical"
             className={classes.divider}
           />
-          <Popover
+          <TopicSelector
             title="Advanced Areas"
             name="adv"
             list={courseList["adv"]}
