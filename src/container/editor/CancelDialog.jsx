@@ -11,7 +11,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide({
+export default function CancelDialog({
   shouldOpen,
   leftButtonText,
   rightButtonText,
@@ -19,10 +19,7 @@ export default function AlertDialogSlide({
   messageBody1,
   messageBody2,
 }) {
-  const [open, setOpen] = React.useState(shouldOpen);
-
   const handleClose = (buttonType) => {
-    setOpen(false);
     handleButtonClicked("none");
   };
   const handleDialog = (buttonType) => {

@@ -6,7 +6,7 @@ import { EDITOR_JS_TOOLS } from "../../utils/platformConfig";
 // import { postContents } from "../../state/actions/content";
 import BackButton from "./BackButton";
 import EditIcon from "@material-ui/icons/Edit";
-import NewEditor from "./NewEditor";
+import NewEditor from "../../container/editor/NewEditor";
 
 const useStyles = makeStyles((theme) => ({
   //   root: {

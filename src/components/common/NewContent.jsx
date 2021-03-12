@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { Button, makeStyles, TextField, InputBase } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import NewEditor from "./NewEditor";
+import NewEditor from "../../container/editor/NewEditor";
 
 const useStyles = makeStyles((theme) => ({
   header: {

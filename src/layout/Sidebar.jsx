@@ -54,8 +54,8 @@ const sidebarTopList = [
     index: 3,
   },
   {
-    link: "research-papers",
-    key: "Research Papers",
+    link: "scientific-papers",
+    key: "Scientific Papers",
     icon: <MenuBookIcon />,
     index: 4,
   },

@@ -6,7 +6,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import { EDITOR_JS_TOOLS } from "../../utils/platformConfig";
 import SpeedDial from "./SpeedDial";
 import { postContents } from "../../state/actions/content";
-import Dialog from "./Dialog";
+import OnSubmitForm from "./OnSubmitForm";
+import CancelDialog from "./CancelDialog";
 import { useHistory } from "react-router";
 import Message from "../../utils/message";
 import "./editor.css";
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     top: theme.spacing(10),
     right: theme.spacing(2),
+    zIndex: 2,
   },
 }));
 
@@ -31,6 +33,13 @@ const NewEditor = ({ data, existing, readOnly }) => {
     (state) => state.authentication
   );
   const [edit, setEdit] = useState(false);
+
+  const [buttonState, setButtonState] = useState({
+    cancel: false,
+    submit: false,
+    save: false,
+  });
+
   const [state, setState] = useState({
     courseArea: "",
     courseSubArea: "",
@@ -49,8 +58,8 @@ const NewEditor = ({ data, existing, readOnly }) => {
     if (existing) {
       setState(data);
     }
+    /*eslint-disable-next-line*/
   }, [existing]);
-  console.log(state);
 
   const dispatch = useDispatch();
 
@@ -69,10 +78,11 @@ const NewEditor = ({ data, existing, readOnly }) => {
   }
   const handleChange = (buttonClicked) => {
     if (buttonClicked === "Cancel") {
-      setState({ ...state, cancel: true });
+      // setState({ ...state, cancel: true });
+      setButtonState({ ...buttonState, cancel: true });
     } else if (buttonClicked === "Publish") {
-      handleSave();
-      //
+      setButtonState({ ...buttonState, submit: true });
+      // handleSave();
     }
     setEdit(true);
   };
@@ -81,8 +91,15 @@ const NewEditor = ({ data, existing, readOnly }) => {
     if (buttonType === "left") {
       history.goBack();
     } else {
-      setState({ ...state, cancel: false });
+      setButtonState({ ...buttonState, cancel: false });
     }
+  };
+
+  const handleSubmitButton = (shouldSubmit) => {
+    if (shouldSubmit) {
+      handleSave();
+    }
+    setButtonState({ ...buttonState, submit: false });
   };
 
   //readOnly
@@ -136,15 +153,22 @@ const NewEditor = ({ data, existing, readOnly }) => {
         />
       )}
       {(!existing || edit) && <SpeedDial handleChange={handleChange} />}
-
-      <Dialog
-        shouldOpen={state.cancel}
-        handleButtonClicked={handleCancel}
-        messageBody1={Message.en.editor.cancel.messageBody1}
-        messageBody2={Message.en.editor.cancel.messageBody2}
-        leftButtonText="Yes"
-        rightButtonText="No"
-      />
+      {buttonState["cancel"] && (
+        <CancelDialog
+          shouldOpen={buttonState["cancel"]}
+          handleButtonClicked={handleCancel}
+          messageBody1={Message.en.editor.cancel.messageBody1}
+          messageBody2={Message.en.editor.cancel.messageBody2}
+          leftButtonText="Yes"
+          rightButtonText="No"
+        />
+      )}
+      {buttonState["submit"] && (
+        <OnSubmitForm
+          shouldOpen={buttonState["submit"]}
+          handleSubmitButton={handleSubmitButton}
+        />
+      )}
     </div>
   );
 };

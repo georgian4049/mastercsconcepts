@@ -29,7 +29,11 @@ const Body = ({ match }) => {
 
   return (
     <div>
-      {materialCategory === "theory" ? <Theory /> : <UnderConstruction />}
+      {materialCategory === "theory" || materialCategory === "blogs" ? (
+        <Theory />
+      ) : (
+        <UnderConstruction />
+      )}
     </div>
   );
 };

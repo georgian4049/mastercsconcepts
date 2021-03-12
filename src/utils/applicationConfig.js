@@ -3,5 +3,5 @@ export const possibleRoutes = [
   "practical",
   "blogs",
   "contributors",
-  "research-papers",
+  "scientific-papers",
 ];

@@ -14,14 +14,14 @@ export function postContents(body) {
       const { data } = await postContent(body);
       dispatch({
         type: MESSAGE.SUCCESS,
-        payload: data.data,
+        payload: data.message,
       });
     } catch (error) {
       console.log(error);
       if (error.response?.status === 400) {
         dispatch({
           type: MESSAGE.ERROR,
-          payload: "Couldn't Post due to Conflict",
+          payload: "You have already posted some content with same Title",
         });
       } else {
         dispatch({
