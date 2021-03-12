@@ -8,6 +8,10 @@ export async function postContent(body) {
   }
 }
 
+export async function deleteContent(id) {
+  return await serverInstance.delete(`api/content/delete/${id}`);
+}
+
 export async function getContent(courseArea, courseSubArea, materialCategory) {
   return await serverInstance.get(
     `api/content?courseArea=${courseArea}&courseSubArea=${courseSubArea}&materialCategory=${materialCategory}`

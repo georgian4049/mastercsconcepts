@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { MULTIPLE_VALUES } from "../../state/actions/types";
 import { courseList } from "../../utils/mock";
 import { refresh } from "../../state/actions/authentication";
+import { getContents } from "../../state/actions/content";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => ({
@@ -42,6 +43,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           materialCategory: currentUrl[3],
         },
       });
+      dispatch(
+        getContents(
+          currentUrl[1],
+          courseList[currentUrl[1]][index]["name"],
+          currentUrl[3]
+        )
+      );
     } else {
       // history.replace("/wrong-page");
     }

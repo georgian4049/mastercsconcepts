@@ -43,11 +43,6 @@ export function getContents(courseArea, courseSubArea, materialCategory) {
       );
       dispatch({
         type: GET_CONTENT,
-        // payload: {
-        //   [courseArea]: {
-        //     [courseSubArea]: { [materialCategory]: data.data },
-        //   },
-        // },
         payload: {
           courseArea: courseArea,
           courseSubArea: courseSubArea,

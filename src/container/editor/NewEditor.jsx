@@ -3,19 +3,28 @@ import { useSelector, useDispatch } from "react-redux";
 import EditorJs from "react-editor-js";
 import { InputBase, IconButton, Tooltip, makeStyles } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { EDITOR_JS_TOOLS } from "../../utils/platformConfig";
 import SpeedDial from "./SpeedDial";
 import { postContents } from "../../state/actions/content";
 import OnSubmitForm from "./OnSubmitForm";
-import CancelDialog from "./CancelDialog";
+import Dialog from "./Dialog";
 import { useHistory } from "react-router";
 import Message from "../../utils/message";
+import { MESSAGE } from "../../state/actions/types";
+import { deleteContent } from "../../api/content";
 import "./editor.css";
 
 const useStyles = makeStyles((theme) => ({
   edit: {
     position: "fixed",
     top: theme.spacing(10),
+    right: theme.spacing(2),
+    zIndex: 2,
+  },
+  delete: {
+    position: "fixed",
+    top: theme.spacing(18),
     right: theme.spacing(2),
     zIndex: 2,
   },
@@ -29,7 +38,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
     (state) => state.platform
   );
 
-  const { username, isAuthenticated } = useSelector(
+  const { username, isAuthenticated, name } = useSelector(
     (state) => state.authentication
   );
   const [edit, setEdit] = useState(false);
@@ -38,6 +47,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
     cancel: false,
     submit: false,
     save: false,
+    delete: false,
   });
 
   const [state, setState] = useState({
@@ -45,6 +55,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
     courseSubArea: "",
     materialCategory: "",
     authorUsername: "",
+    name: "",
     title: "",
     tags: "",
     datePublished: new Date(),
@@ -69,6 +80,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
       postContents({
         ...state,
         authorUsername: username,
+        authorName: name,
         courseArea: courseArea,
         courseSubArea: courseSubArea["name"],
         materialCategory: materialCategory,
@@ -87,6 +99,14 @@ const NewEditor = ({ data, existing, readOnly }) => {
     setEdit(true);
   };
 
+  const handleDelete = (buttonType) => {
+    if (buttonType === "right") {
+      deleteContents();
+    } else {
+      setButtonState({ ...buttonState, delete: false });
+    }
+  };
+
   const handleCancel = (buttonType) => {
     if (buttonType === "left") {
       history.goBack();
@@ -102,7 +122,39 @@ const NewEditor = ({ data, existing, readOnly }) => {
     setButtonState({ ...buttonState, submit: false });
   };
 
-  //readOnly
+  async function deleteContents() {
+    try {
+      await deleteContent(state["_id"]);
+      dispatch({
+        type: MESSAGE.SUCCESS,
+        payload: "Deleted Successfully",
+      });
+      setButtonState({ ...buttonState, delete: false });
+      history.replace(
+        `/${courseArea}/${courseSubArea["name"]}/${materialCategory}`
+      );
+    } catch (error) {
+      console.log(error);
+      if (error.response?.status === 400) {
+        history.goBack();
+        dispatch({
+          type: MESSAGE.SOMETHING_WENT_WRONG,
+          payload: "Something went wrong while deleting",
+        });
+      } else if (error.response?.status === 401) {
+        dispatch({
+          type: MESSAGE.WRONG_LOGIN_CREDENTIALS,
+          payload: "Username Taken",
+        });
+      } else {
+        dispatch({
+          type: MESSAGE.ERROR,
+          payload: "Server Error! Please try again later",
+        });
+      }
+    }
+  }
+
   return (
     <div>
       <div style={{ width: "80%", margin: "auto" }}>
@@ -126,11 +178,22 @@ const NewEditor = ({ data, existing, readOnly }) => {
             <div style={{ display: "flex" }}>
               <Tooltip title="Edit Content">
                 <IconButton
-                  aria-label="delete"
+                  aria-label="Edit"
                   className={classes.edit}
                   onClick={() => setEdit(!edit)}
                 >
-                  <EditIcon fontSize="large" />
+                  <EditIcon fontSize="large" color="primary" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Delete Content">
+                <IconButton
+                  aria-label="delete"
+                  className={classes.delete}
+                  onClick={() =>
+                    setButtonState({ ...buttonState, delete: true })
+                  }
+                >
+                  <DeleteForeverIcon fontSize="large" color="error" />
                 </IconButton>
               </Tooltip>
             </div>
@@ -154,13 +217,23 @@ const NewEditor = ({ data, existing, readOnly }) => {
       )}
       {(!existing || edit) && <SpeedDial handleChange={handleChange} />}
       {buttonState["cancel"] && (
-        <CancelDialog
+        <Dialog
           shouldOpen={buttonState["cancel"]}
           handleButtonClicked={handleCancel}
           messageBody1={Message.en.editor.cancel.messageBody1}
           messageBody2={Message.en.editor.cancel.messageBody2}
           leftButtonText="Yes"
           rightButtonText="No"
+        />
+      )}
+      {buttonState["delete"] && (
+        <Dialog
+          shouldOpen={buttonState["delete"]}
+          handleButtonClicked={handleDelete}
+          messageBody1={Message.en.editor.cancel.messageBody1}
+          messageBody2={Message.en.editor.cancel.messageBody2}
+          leftButtonText="Cancel"
+          rightButtonText="Delete"
         />
       )}
       {buttonState["submit"] && (

@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -19,7 +19,6 @@ import UpdateIcon from "@material-ui/icons/Update";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import BuildIcon from "@material-ui/icons/Build";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
@@ -185,7 +184,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MiniDrawer() {
   const classes = useStyles();
   let history = useHistory();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const { courseArea, courseSubArea } = useSelector((state) => state.platform);
   const handleDrawerOpen = () => {
     setOpen(!open);

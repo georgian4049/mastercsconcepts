@@ -45,7 +45,7 @@ export default function Cards({ data }) {
     // eslint-disable-next-line
     title,
     datePublished,
-    authorUsername,
+    authorName,
     // imgUrl,
     // description,
     _id,
@@ -67,7 +67,7 @@ export default function Cards({ data }) {
             </Typography>
           </div>
           <br />
-          <Typography variant="body2">{`Author :- ${authorUsername}`}</Typography>
+          <Typography variant="body2">{`Author :- ${authorName}`}</Typography>
           <Typography variant="body2">{"description"}</Typography>
           <Typography variant="body2">
             {`Published on :- ${datePublished.split("T")[0]}`}
