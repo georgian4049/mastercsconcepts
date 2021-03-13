@@ -12,6 +12,7 @@ const NoContent = () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
+      style={{ marginLeft: "-35px" }}
     >
       <Typography align="center">
         No Content Here. Please contribute, Thanks! :)

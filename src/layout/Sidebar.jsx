@@ -33,17 +33,18 @@ const sidebarTopList = [
     index: 0,
   },
   {
-    link: "practical",
-    key: "Practical",
-    icon: <BuildIcon />,
-    index: 1,
-  },
-  {
     link: "blogs",
     key: "Blogs",
     icon: <LibraryBooksIcon />,
+    index: 1,
+  },
+  {
+    link: "practical",
+    key: "Practical",
+    icon: <BuildIcon />,
     index: 2,
   },
+
   {
     link: "contributors",
     key: "Contributors",

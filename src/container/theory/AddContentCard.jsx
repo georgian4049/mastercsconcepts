@@ -1,6 +1,13 @@
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { makeStyles, fade, Tooltip, Fab, Grid } from "@material-ui/core";
+import {
+  makeStyles,
+  fade,
+  Tooltip,
+  Fab,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import SearchIcon from "@material-ui/icons/Search";
@@ -13,17 +20,19 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "#000000",
   },
-  fab: {
+  fabTop: {
     position: "fixed",
     top: theme.spacing(10),
     right: theme.spacing(2),
     zIndex: 4,
   },
-  // search: {
-  //   position: "fixed",
-  //   top: theme.spacing(10),
-  //   right: theme.spacing(10),
-  // },
+  fabCenter: {
+    position: "fixed",
+    top: "50vh",
+    right: "50%",
+    margin: "auto",
+    zIndex: 4,
+  },
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -66,28 +75,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function Cards({ handleSearch }) {
+export default function Cards({ handleSearch, contentsExist }) {
   const classes = useStyles();
   const history = useHistory();
   const { isAuthenticated } = useSelector((state) => state.authentication);
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={1} lg={11}>
-          <Link
-            to={`${history.location.pathname}/new-content`}
-            className={classes.link}
-          >
-            <Fab
-              color="secondary"
-              aria-label="Add Content"
-              className={classes.fab}
-              disabled={!isAuthenticated}
-            >
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Grid>
         <Grid item xs={12} sm={12} md={11} lg={11}>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -105,18 +99,24 @@ export default function Cards({ handleSearch }) {
             />
           </div>
         </Grid>
+        <Grid item xs={12} sm={12} md={1} lg={11}>
+          <Link
+            to={`${history.location.pathname}/new-content`}
+            className={classes.link}
+          >
+            <Tooltip title="Add Content">
+              <Fab
+                color="secondary"
+                aria-label="Add Content"
+                className={contentsExist ? classes.fabTop : classes.fabCenter}
+                disabled={!isAuthenticated}
+              >
+                <AddIcon />
+              </Fab>
+            </Tooltip>
+          </Link>
+        </Grid>
       </Grid>
-
-      {/* <Fab color="secondary" aria-label="Search" className={classes.search}>
-        <Search />
-      </Fab> */}
-      {/* <IconButton
-        color="secondary"
-        aria-label="Search"
-        className={classes.search}
-      >
-        <Search size="large" />
-      </IconButton> */}
     </div>
   );
 }

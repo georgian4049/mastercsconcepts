@@ -51,7 +51,10 @@ function CardIndex() {
   return (
     <>
       <div style={{ margin: "5px", height: "80px" }}>
-        <AddContentCard handleSearch={handleSearch} />
+        <AddContentCard
+          handleSearch={handleSearch}
+          contentsExist={filteredDatas.length}
+        />
       </div>
       <div style={{ margin: "10px" }}>
         <Grid container spacing={1}>
