@@ -155,14 +155,19 @@ export default function Cards({ data }) {
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>{`Description :- ${description}`}</Typography>
-          <Typography paragraph>Tags:</Typography>
-          {tags &&
-            tags.map((tag) => (
-              <Chip label={tag} color="secondary" className={classes.chip} />
-            ))}
-        </CardContent>
+        <Link
+          to={`${history.location.pathname}/topicId/${_id}`}
+          className={classes.link}
+        >
+          <CardContent>
+            <Typography paragraph>{`Description :- ${description}`}</Typography>
+            <Typography paragraph>Tags:</Typography>
+            {tags &&
+              tags.map((tag) => (
+                <Chip label={tag} color="secondary" className={classes.chip} />
+              ))}
+          </CardContent>
+        </Link>
       </Collapse>
     </Card>
   );
