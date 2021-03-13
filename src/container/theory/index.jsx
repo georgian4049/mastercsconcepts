@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import Card from "./Card";
 import AddContentCard from "./AddContentCard";
+import NoContent from "../noContent/NoContent";
 
 function CardIndex() {
   const { courseArea, courseSubArea, materialCategory } = useSelector(
@@ -52,14 +53,19 @@ function CardIndex() {
       <div style={{ margin: "5px", height: "80px" }}>
         <AddContentCard handleSearch={handleSearch} />
       </div>
-      <Grid container spacing={1}>
-        {filteredDatas &&
-          filteredDatas.map((i) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={i["_id"]}>
-              <Card data={i} />
-            </Grid>
-          ))}
-      </Grid>
+      <div style={{ margin: "10px" }}>
+        <Grid container spacing={1}>
+          {filteredDatas.length ? (
+            filteredDatas.map((i) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={i["_id"]}>
+                <Card data={i} />
+              </Grid>
+            ))
+          ) : (
+            <NoContent />
+          )}
+        </Grid>
+      </div>
     </>
   );
 }
