@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import clsx from "clsx";
 import {
@@ -12,21 +13,25 @@ import {
   CardHeader,
   Collapse,
   Avatar,
+  Chip,
+  Tooltip,
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import LinkIcon from "@material-ui/icons/Link";
 import no_img from "../../assets/gen/no_image.png";
 import userImgUrl from "../../assets/gen/pp1.jpg";
 import { dateWord } from "../../functions/function";
+import { MESSAGE } from "../../state/actions/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 400,
     minWidth: 275,
-    maxHeight: 150,
+    // height: 150,
     margin: theme.spacing(1),
     border: `1px solid  green`,
     borderRadius: "10px",
@@ -43,10 +48,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
   chip: {
-    marginLeft: "auto",
-    "&>*": {
-      color: "#fff",
-    },
+    margin: theme.spacing(0.5),
   },
   link: {
     textDecoration: "none",
@@ -73,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Cards({ data }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const {
     // eslint-disable-next-line
     title,
@@ -81,6 +84,7 @@ export default function Cards({ data }) {
     // imgUrl,
     description,
     _id,
+    tags,
   } = data;
 
   const history = useHistory();
@@ -89,48 +93,56 @@ export default function Cards({ data }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const copyToClipboard = (str) => {
+    const el = document.createElement("textarea");
+    el.value = str;
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    dispatch({ type: MESSAGE.NORMAL, payload: "Link Copied Successfully" });
+  };
 
   // const handleCardClick = () => {};
   return (
     <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar
-            aria-label="recipe"
-            className={classes.avatar}
-            src={authorName === "Ayush Shekhar" ? userImgUrl : ""}
-          >
-            {/* {authorName[0] + authorName.split(" ")[1][0]} */}
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title={title}
-        subheader={dateWord(datePublished.split("T")[0])}
-      />
       <Link
         to={`${history.location.pathname}/topicId/${_id}`}
         className={classes.link}
       >
-        {/* <CardMedia className={classes.media} image={no_img} title="No Image" /> */}
+        <CardHeader
+          avatar={
+            <Avatar
+              aria-label="recipe"
+              className={classes.avatar}
+              src={authorName === "Ayush Shekhar" ? userImgUrl : ""}
+            ></Avatar>
+          }
+          title={title}
+          subheader={dateWord(datePublished.split("T")[0])}
+        />
         <CardContent>
           <Typography variant="body2">{`Author :- ${authorName}`}</Typography>
-          <Typography
-            variant="body2"
-            noWrap
-          >{`Description :- ${description}`}</Typography>
+          <Typography noWrap>{`Description :- ${description}`}</Typography>
         </CardContent>
       </Link>
-      {/* <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+      <CardActions disableSpacing>
+        {/* <IconButton aria-label="add to favorites">
           <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        </IconButton> */}
+        <Tooltip title="Copy Link to share the content">
+          <IconButton
+            aria-label="share"
+            onClick={() =>
+              copyToClipboard(`${window.location.href}/topicId/${_id}`)
+            }
+          >
+            <LinkIcon />
+          </IconButton>
+        </Tooltip>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -141,13 +153,17 @@ export default function Cards({ data }) {
         >
           <ExpandMoreIcon />
         </IconButton>
-      </CardActions> */}
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Description:</Typography>
-          {description}
+          <Typography paragraph>{`Description :- ${description}`}</Typography>
+          <Typography paragraph>Tags:</Typography>
+          {tags &&
+            tags.map((tag) => (
+              <Chip label={tag} color="secondary" className={classes.chip} />
+            ))}
         </CardContent>
-      </Collapse> */}
+      </Collapse>
     </Card>
   );
 }

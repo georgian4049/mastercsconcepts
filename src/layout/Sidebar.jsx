@@ -15,10 +15,8 @@ import {
   Typography,
   Divider,
 } from "@material-ui/core";
-import UpdateIcon from "@material-ui/icons/Update";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import BuildIcon from "@material-ui/icons/Build";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
@@ -57,20 +55,6 @@ const sidebarTopList = [
     key: "Scientific Papers",
     icon: <MenuBookIcon />,
     index: 4,
-  },
-];
-const sidebarBottomList = [
-  {
-    link: "update-profile",
-    key: "Update Profile",
-    icon: <UpdateIcon />,
-    index: 0,
-  },
-  {
-    link: "login",
-    key: "logout",
-    icon: <ExitToAppIcon />,
-    index: 0,
   },
 ];
 

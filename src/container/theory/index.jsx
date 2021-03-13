@@ -10,34 +10,51 @@ function CardIndex() {
   );
   const content = useSelector((state) => state.content);
   const [data, setData] = useState([]);
+  const [filteredDatas, setFilteredDatas] = useState([]);
+
   useEffect(() => {
     if (
       content &&
       content[courseArea]?.[courseSubArea["name"]]?.[materialCategory]
     ) {
       setData(content[courseArea][courseSubArea["name"]][materialCategory]);
+      setFilteredDatas(
+        content[courseArea][courseSubArea["name"]][materialCategory]
+      );
     }
   }, [content, courseArea, courseSubArea, materialCategory]);
 
-  const [state, setState] = useState({
-    addContent: false,
-  });
-  const handleChange = (name, val) => {
-    setState({ ...state, [name]: val });
+  const handleSearch = (searchKey) => {
+    try {
+      if (searchKey !== undefined && data !== undefined) {
+        let filtered = data.filter(
+          (item) =>
+            item["authorUsername"]
+              .toLowerCase()
+              .includes(searchKey.toLowerCase()) ||
+            item["title"].toLowerCase().includes(searchKey.toLowerCase()) ||
+            item["datePublished"].includes(searchKey) ||
+            item["description"]
+              .toLowerCase()
+              .includes(searchKey.toLowerCase()) ||
+            item["authorName"].toLowerCase().includes(searchKey.toLowerCase())
+        );
+        setFilteredDatas(filtered);
+      } else {
+        setFilteredDatas(data);
+      }
+    } catch (err) {
+      setFilteredDatas(data);
+    }
   };
   return (
     <>
+      <div style={{ margin: "5px", height: "80px" }}>
+        <AddContentCard handleSearch={handleSearch} />
+      </div>
       <Grid container spacing={1}>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AddContentCard
-            handleChange={handleChange}
-            name="addContent"
-            val={state.addContent}
-          />
-        </Grid>
-
-        {data &&
-          data.map((i) => (
+        {filteredDatas &&
+          filteredDatas.map((i) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={i["_id"]}>
               <Card data={i} />
             </Grid>

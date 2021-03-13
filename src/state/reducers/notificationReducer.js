@@ -1,7 +1,7 @@
 import { SHOW_LOADER, HIDE_LOADER, MESSAGE } from "../actions/types";
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   notification: {
     message: "",
     isOpen: false,

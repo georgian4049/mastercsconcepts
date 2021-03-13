@@ -1,4 +1,10 @@
-import { LOGOUT, LOGIN_SUCCESS, MESSAGE } from "./types";
+import {
+  LOGOUT,
+  LOGIN_SUCCESS,
+  MESSAGE,
+  HIDE_LOADER,
+  SHOW_LOADER,
+} from "./types";
 import {
   getAuthentication,
   getRefreshToken,
@@ -15,6 +21,7 @@ export function logout() {
 export function login(body) {
   return async function (dispatch) {
     try {
+      dispatch({ type: SHOW_LOADER });
       const { data } = await getAuthentication(body);
       console.log(data);
       dispatch({
@@ -34,6 +41,8 @@ export function login(body) {
           payload: "Server Error! Please try again later",
         });
       }
+    } finally {
+      dispatch({ type: HIDE_LOADER });
     }
   };
 }
@@ -41,7 +50,8 @@ export function login(body) {
 export function register(body) {
   return async function (dispatch) {
     try {
-      const { data } = await registerUser(body);
+      dispatch({ type: SHOW_LOADER });
+      await registerUser(body);
       dispatch({
         type: MESSAGE.SUCCESS,
         payload: "Registered Successfully! Please Login",
@@ -64,6 +74,8 @@ export function register(body) {
           payload: "Server Error! Please try again later",
         });
       }
+    } finally {
+      dispatch({ type: HIDE_LOADER });
     }
   };
 }
@@ -71,14 +83,14 @@ export function register(body) {
 export function refresh(body) {
   return async function (dispatch) {
     try {
+      dispatch({ type: SHOW_LOADER });
       const { data } = await getRefreshToken(body);
-      console.log(data);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: data,
       });
+      dispatch({ type: HIDE_LOADER });
     } catch (error) {
-      console.log(error);
       if (error.response?.status === 400) {
         console.log("Token is absent ");
         // dispatch({
@@ -91,6 +103,8 @@ export function refresh(body) {
           payload: "Server Error! Please try again later",
         });
       }
+    } finally {
+      dispatch({ type: HIDE_LOADER });
     }
   };
 }

@@ -1,7 +1,6 @@
 import { LOGIN_SUCCESS, LOGOUT } from "../actions/types";
 
 const initialState = {
-  isLoading: true,
   user: null,
   isAuthenticated: false,
 };
@@ -22,7 +21,6 @@ export default function authenticationReducer(state = initialState, action) {
       localStorage.removeItem("token");
       return {
         ...state,
-        isLoading: false,
         isAuthenticated: false,
       };
     default:

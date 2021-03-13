@@ -10,6 +10,7 @@ import Login from "./container/auth/Login";
 import Layout from "./layout/Layout";
 import Notification from "./components/common/Notification";
 import Register from "./container/auth/Register";
+import LoadingIndicatorGlobal from "./container/loader/LoadingIndicatorGlobal";
 
 const theme = createMuiTheme({
   props: {
@@ -98,6 +99,7 @@ function App() {
             <PrivateRoute path="/" component={Layout} />
           </Switch>
           <Notification />
+          <LoadingIndicatorGlobal />
         </BrowserRouter>
       </ThemeProvider>
     </StylesProvider>

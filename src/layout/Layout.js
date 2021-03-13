@@ -11,6 +11,7 @@ import DisplayNew from "../components/common/DisplayNew";
 import Logout from "./Logout";
 import Register from "../container/auth/Register";
 import Login from "../container/auth/Login";
+import UnderConstruction from "../components/common/UnderConstruction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +47,9 @@ export default function Layout() {
           <div className={classes.toolbar} />
           <Switch>
             <Route exact path="/logout" component={Logout} />
+            <Route exact path="/update-profile" component={UnderConstruction} />
+            <Route exact path="/profile" component={UnderConstruction} />
+            <Route exact path="/settings" component={UnderConstruction} />
             <Route exact path={`/wrong-page`} component={WrongPage} />
             <Route exact path={`/home`} component={HomePage} />
             <Route

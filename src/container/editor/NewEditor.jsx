@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import EditorJs from "react-editor-js";
 import { InputBase, IconButton, Tooltip, makeStyles } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
+import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { EDITOR_JS_TOOLS } from "../../utils/platformConfig";
 import SpeedDial from "./SpeedDial";
@@ -25,6 +26,12 @@ const useStyles = makeStyles((theme) => ({
   delete: {
     position: "fixed",
     top: theme.spacing(18),
+    right: theme.spacing(2),
+    zIndex: 2,
+  },
+  like: {
+    position: "fixed",
+    top: "50vh",
     right: theme.spacing(2),
     zIndex: 2,
   },
@@ -75,11 +82,12 @@ const NewEditor = ({ data, existing, readOnly }) => {
 
   const dispatch = useDispatch();
 
-  async function handleSave() {
+  async function handleSave(descTags) {
     const savedData = await instanceRef.current.save();
     dispatch(
       postContents({
         ...state,
+        ...descTags,
         authorUsername: username,
         authorName: name,
         courseArea: courseArea,
@@ -118,8 +126,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
 
   const handleSubmitButton = (shouldSubmit, obj) => {
     if (shouldSubmit) {
-      setState({ ...state, ...obj });
-      handleSave();
+      handleSave(obj);
     }
     setButtonState({ ...buttonState, submit: false });
   };
@@ -200,6 +207,19 @@ const NewEditor = ({ data, existing, readOnly }) => {
               </Tooltip>
             </div>
           )}
+          {/* {isAuthenticated && !(username === data.authorUsername) && (
+            <div style={{ display: "flex" }}>
+              <Tooltip title="Like Content">
+                <IconButton
+                  aria-label="Like"
+                  className={classes.like}
+                  // onClick={() => setEdit(!edit)}
+                >
+                  <ThumbUpAltIcon fontSize="large" color="primary" />
+                </IconButton>
+              </Tooltip>
+            </div>
+          )} */}
           <EditorJs
             tools={EDITOR_JS_TOOLS}
             autofocus
