@@ -1,5 +1,9 @@
 export const courseList = {
   core: [
+    {
+      name: "ATC",
+      displayName: "Automata Theory and Computability",
+    },
     { name: "OS", displayName: "Operating System" },
     { name: "DS", displayName: "Data Sructures" },
     { name: "DAA", displayName: "Design and Analysis of Algorithms" },
