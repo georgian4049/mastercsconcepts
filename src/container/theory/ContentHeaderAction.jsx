@@ -67,7 +67,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function ContentHeaderAction({ handleSearch, contentsExist }) {
+export default function ContentHeaderAction({
+  handleSearch,
+  contentsExist,
+  filteredDatasExist,
+}) {
   const classes = useStyles();
   const history = useHistory();
   const { loader } = useSelector((state) => state["platform"]);
@@ -123,7 +127,9 @@ export default function ContentHeaderAction({ handleSearch, contentsExist }) {
                 <Fab
                   color="secondary"
                   aria-label="Add Content"
-                  className={contentsExist ? classes.fabTop : classes.fabCenter}
+                  className={
+                    filteredDatasExist ? classes.fabTop : classes.fabCenter
+                  }
                   disabled={!isAuthenticated}
                 >
                   <AddIcon />

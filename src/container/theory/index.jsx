@@ -54,7 +54,8 @@ function CardIndex() {
       <div style={{ margin: "5px", height: "80px" }}>
         <ContentHeaderAction
           handleSearch={handleSearch}
-          contentsExist={filteredDatas.length}
+          contentsExist={data.length}
+          filteredDatasExist={filteredDatas.length}
         />
       </div>
       <div style={{ margin: "10px" }}>
