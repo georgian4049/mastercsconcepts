@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import Card from "./Card";
-import AddContentCard from "./AddContentCard";
+import ContentHeaderAction from "./ContentHeaderAction";
 import NoContent from "../noContent/NoContent";
+import CardLoader from "../../container/loader/Card";
 
 function CardIndex() {
-  const { courseArea, courseSubArea, materialCategory } = useSelector(
-    (state) => state.platform
+  const { courseArea, courseSubArea, materialCategory, loader } = useSelector(
+    (state) => state["platform"]
   );
   const content = useSelector((state) => state.content);
   const [data, setData] = useState([]);
@@ -51,23 +52,27 @@ function CardIndex() {
   return (
     <>
       <div style={{ margin: "5px", height: "80px" }}>
-        <AddContentCard
+        <ContentHeaderAction
           handleSearch={handleSearch}
           contentsExist={filteredDatas.length}
         />
       </div>
       <div style={{ margin: "10px" }}>
-        <Grid container spacing={1}>
-          {filteredDatas.length ? (
-            filteredDatas.map((i) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={i["_id"]}>
-                <Card data={i} />
-              </Grid>
-            ))
-          ) : (
-            <NoContent />
-          )}
-        </Grid>
+        {loader["content"] ? (
+          <CardLoader />
+        ) : (
+          <Grid container spacing={1}>
+            {filteredDatas.length ? (
+              filteredDatas.map((i) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={i["_id"]}>
+                  <Card data={i} />
+                </Grid>
+              ))
+            ) : (
+              <NoContent />
+            )}
+          </Grid>
+        )}
       </div>
     </>
   );

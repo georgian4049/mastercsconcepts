@@ -9,6 +9,7 @@ const Logout = () => {
   useEffect(() => {
     dispatch({ type: LOGOUT });
     history.replace("/login");
+    /*eslint-disable-next-line*/
   }, []);
 
   return <div> Logout</div>;

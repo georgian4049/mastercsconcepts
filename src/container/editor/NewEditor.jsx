@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import EditorJs from "react-editor-js";
 import { InputBase, IconButton, Tooltip, makeStyles } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { EDITOR_JS_TOOLS } from "../../utils/platformConfig";
 import SpeedDial from "./SpeedDial";

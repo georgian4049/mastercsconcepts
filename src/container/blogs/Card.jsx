@@ -39,20 +39,6 @@ const useStyles = makeStyles((theme) => ({
       color: "#fff",
     },
   },
-  inReview: {
-    backgroundColor: "#0460a9",
-  },
-  pending: {
-    backgroundColor: "#0460a9",
-  },
-  rejected: {
-    backgroundColor: "#ff3d00",
-  },
-  approved: {
-    backgroundColor: "#4caf50",
-  },
-  reApply: { color: "#000000" },
-  notApplicable: { color: "#000000" },
 }));
 export default function Cards({ items, handleChat }) {
   const classes = useStyles();

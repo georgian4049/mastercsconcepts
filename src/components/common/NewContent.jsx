@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { Button, makeStyles, TextField, InputBase } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import NewEditor from "../../container/editor/NewEditor";
 

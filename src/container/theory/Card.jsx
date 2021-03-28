@@ -9,20 +9,14 @@ import {
   CardContent,
   Typography,
   IconButton,
-  CardMedia,
   CardHeader,
   Collapse,
   Avatar,
   Chip,
   Tooltip,
 } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import LinkIcon from "@material-ui/icons/Link";
-import no_img from "../../assets/gen/no_image.png";
 import userImgUrl from "../../assets/gen/pp1.jpg";
 import { dateWord } from "../../functions/function";
 import { MESSAGE } from "../../state/actions/types";
@@ -86,7 +80,6 @@ export default function Cards({ data }) {
     _id,
     tags,
   } = data;
-
   const history = useHistory();
   const [expanded, setExpanded] = useState(false);
 
@@ -106,7 +99,6 @@ export default function Cards({ data }) {
     dispatch({ type: MESSAGE.NORMAL, payload: "Link Copied Successfully" });
   };
 
-  // const handleCardClick = () => {};
   return (
     <Card className={classes.root}>
       <Link
@@ -130,9 +122,6 @@ export default function Cards({ data }) {
         </CardContent>
       </Link>
       <CardActions disableSpacing>
-        {/* <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton> */}
         <Tooltip title="Copy Link to share the content">
           <IconButton
             aria-label="share"

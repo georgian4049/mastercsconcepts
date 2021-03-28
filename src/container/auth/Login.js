@@ -76,6 +76,7 @@ export default function SignIn() {
 
   useEffect(() => {
     intialCall();
+    /*eslint-disable-next-line*/
   }, []);
   const intialCall = () => {
     const token = localStorage.getItem("token") || null;

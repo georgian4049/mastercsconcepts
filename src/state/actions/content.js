@@ -1,4 +1,4 @@
-import { LOGOUT, MESSAGE, GET_CONTENT } from "./types";
+import { LOGOUT, MESSAGE, GET_CONTENT, LOADER } from "./types";
 import { postContent, getContent } from "../../api/content";
 // import Message from "../../utils/message";
 
@@ -36,6 +36,7 @@ export function postContents(body) {
 export function getContents(courseArea, courseSubArea, materialCategory) {
   return async function (dispatch) {
     try {
+      dispatch({ type: LOADER["CONTENT"], payload: true });
       const { data } = await getContent(
         courseArea,
         courseSubArea,
@@ -63,6 +64,8 @@ export function getContents(courseArea, courseSubArea, materialCategory) {
           payload: "Server Error! Please try again later",
         });
       }
+    } finally {
+      dispatch({ type: LOADER["CONTENT"], payload: false });
     }
   };
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import {
@@ -12,7 +12,6 @@ import {
 import logo from "../assets/logo.png";
 import AppbarLink from "./AppBarLinks";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -72,9 +71,7 @@ const profile = [
 export default function SearchAppBar(props) {
   const classes = useStyles();
   const history = useHistory();
-  const { isAuthenticated, name, username } = useSelector(
-    (state) => state.authentication
-  );
+  const { isAuthenticated } = useSelector((state) => state.authentication);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 

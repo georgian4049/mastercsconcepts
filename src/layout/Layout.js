@@ -9,8 +9,6 @@ import WrongPage from "./WrongPage";
 import HomePage from "../container/home";
 import DisplayNew from "../components/common/DisplayNew";
 import Logout from "./Logout";
-import Register from "../container/auth/Register";
-import Login from "../container/auth/Login";
 import UnderConstruction from "../components/common/UnderConstruction";
 
 const useStyles = makeStyles((theme) => ({

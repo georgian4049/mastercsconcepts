@@ -13,7 +13,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
-import { registerUser } from "../../api/authentication";
 import { Divider } from "@material-ui/core";
 import { refresh } from "../../state/actions/authentication";
 import Regex from "../../utils/Regex";
@@ -31,6 +30,15 @@ function Copyright() {
     </Typography>
   );
 }
+const errorMessage = {
+  firstName: "Invalid First Name",
+  lastName: "Invalid Last Name",
+  email: "Invalid Email",
+  username: "Invalid Username",
+  password:
+    "Password should be more than 6 charecters and must include atleast 1 special character, 1 number, 1 small and 1 caps alphabets",
+  confirmPassword: "Values doesn't match with password",
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -85,16 +93,6 @@ export default function SignIn() {
     confirmPassword: false,
   });
 
-  const [errorMessage, setErrorMessage] = useState({
-    firstName: "Invalid First Name",
-    lastName: "Invalid Last Name",
-    email: "Invalid Email",
-    username: "Invalid Username",
-    password:
-      "Password should be more than 6 charecters and must include atleast 1 special character, 1 number, 1 small and 1 caps alphabets",
-    confirmPassword: "Values doesn't match with password",
-  });
-
   const handleChange = (event) => {
     if (!checkValidity(event.target.name, event.target.value)) {
       setError({ ...error, [event.target.name]: true });
@@ -138,7 +136,7 @@ export default function SignIn() {
     data.preventDefault();
     let errors = false;
 
-    Object.keys(error).map((x) => {
+    Object.keys(error).forEach((x) => {
       if (error[x]) {
         errors = true;
       }
@@ -155,6 +153,7 @@ export default function SignIn() {
 
   useEffect(() => {
     intialCall();
+    /*eslint-disable-next-line*/
   }, []);
   const intialCall = () => {
     const token = localStorage.getItem("token") || null;
@@ -172,7 +171,6 @@ export default function SignIn() {
 
   async function register() {
     try {
-      const { data } = await registerUser(registerForm);
       dispatch({
         type: MESSAGE.SUCCESS,
         payload: "Registered Successfully! Please Login",

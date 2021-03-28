@@ -1,11 +1,8 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { makeStyles, IconButton, Tooltip } from "@material-ui/core";
-import EditorJs from "react-editor-js";
-import { EDITOR_JS_TOOLS } from "../../utils/platformConfig";
+import { makeStyles } from "@material-ui/core";
 // import { postContents } from "../../state/actions/content";
 import BackButton from "./BackButton";
-import EditIcon from "@material-ui/icons/Edit";
 import NewEditor from "../../container/editor/NewEditor";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,11 +35,6 @@ const DisplayNew = ({ match }) => {
   const classes = useStyles();
   const { materialCategory, courseArea, courseSubArea, topicId } = match.params;
   const content = useSelector((state) => state.content);
-  const [edit, setEdit] = useState(false);
-  const { isAuthenticated, username } = useSelector(
-    (state) => state.authentication
-  );
-  const instanceRef = useRef(null);
   const [data, setData] = useState({});
 
   useEffect(() => {
