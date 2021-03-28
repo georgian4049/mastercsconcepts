@@ -40,7 +40,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         type: MULTIPLE_VALUES,
         payload: {
           courseArea: currentUrl[1],
-          courseSubArea: courseList[currentUrl[1]][index],
+          courseSubArea: courseList[currentUrl[1]][index][currentUrl[2]],
           materialCategory: currentUrl[3],
         },
       });

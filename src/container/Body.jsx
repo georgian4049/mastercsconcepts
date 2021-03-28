@@ -17,8 +17,8 @@ const Body = ({ match }) => {
       history.replace("/wrong-page");
     }
     dispatch({
-      type: PLATFORM.MATERIAL_CATEGORY,
-      payload: materialCategory,
+      type: PLATFORM.MULTIPLE_VALUES,
+      payload: { materialCategory, courseArea, courseSubArea },
     });
     if (content?.[courseArea]?.[courseSubArea]?.[materialCategory]) {
     } else {

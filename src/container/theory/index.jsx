@@ -15,14 +15,9 @@ function CardIndex() {
   const [filteredDatas, setFilteredDatas] = useState([]);
 
   useEffect(() => {
-    if (
-      content &&
-      content[courseArea]?.[courseSubArea["name"]]?.[materialCategory]
-    ) {
-      setData(content[courseArea][courseSubArea["name"]][materialCategory]);
-      setFilteredDatas(
-        content[courseArea][courseSubArea["name"]][materialCategory]
-      );
+    if (content && content[courseArea]?.[courseSubArea]?.[materialCategory]) {
+      setData(content[courseArea][courseSubArea][materialCategory]);
+      setFilteredDatas(content[courseArea][courseSubArea][materialCategory]);
     }
   }, [content, courseArea, courseSubArea, materialCategory]);
 

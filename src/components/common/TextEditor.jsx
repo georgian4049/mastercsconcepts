@@ -238,7 +238,7 @@ const TextEditor = ({ data, edit }) => {
           ...state,
           authorUsername: username,
           courseArea: courseArea,
-          courseSubArea: courseSubArea["name"],
+          courseSubArea: courseSubArea,
           materialCategory: materialCategory,
           content: convertToRaw(editorState.getCurrentContent()),
         })

@@ -1,9 +1,9 @@
 import { PLATFORM, MULTIPLE_VALUES, LOADER } from "../actions/types";
 
 const initialState = {
-  courseArea: "",
-  courseSubArea: "",
-  topicId: "",
+  courseArea: null,
+  courseSubArea: null,
+  topicId: null,
   loader: {
     content: false,
   },
@@ -26,7 +26,7 @@ export default function platformReducer(state = initialState, action) {
         ...state,
         ...action.payload,
       };
-    case MULTIPLE_VALUES:
+    case PLATFORM["MULTIPLE_VALUES"]:
       return {
         ...state,
         ...action.payload,

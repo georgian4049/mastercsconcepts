@@ -82,7 +82,7 @@ export default function CourseSelector({ title, list, name }) {
       type: PLATFORM.SET_COURSE_DETAILS,
       payload: {
         courseArea: name,
-        courseSubArea: x,
+        courseSubArea: x["name"],
       },
     });
     handleClose(e);
@@ -132,16 +132,18 @@ export default function CourseSelector({ title, list, name }) {
                   >
                     {list.map((item) => (
                       <Link
-                        to={`/${name}/${item.name}/theory`}
+                        to={`/${name}/${item["name"]}/theory`}
                         className={classes.link}
-                        key={item.key}
+                        key={item["key"]}
                       >
                         <MenuItem
                           button
-                          key={item.name}
+                          key={item["name"]}
                           onClick={(e) => handleMenuItemClick(e, item)}
                           className={
-                            item === courseSubArea ? classes.isSelected : ""
+                            item["name"] === courseSubArea
+                              ? classes.isSelected
+                              : ""
                           }
                         >
                           <div>{item.displayName}</div>

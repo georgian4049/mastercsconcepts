@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -22,6 +22,7 @@ import BuildIcon from "@material-ui/icons/Build";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
+import { courseList } from "../utils/mock";
 
 const drawerWidth = 240;
 
@@ -170,7 +171,18 @@ export default function MiniDrawer() {
   const classes = useStyles();
   let history = useHistory();
   const [open, setOpen] = useState(false);
+  const [courseSubAreaDisplayName, setCourseSubAreaDisplayName] = useState("");
   const { courseArea, courseSubArea } = useSelector((state) => state.platform);
+
+  useEffect(() => {
+    if (courseArea && courseSubArea) {
+      const courseListFilter = courseList[courseArea].filter(
+        (course) => course["name"] === courseSubArea
+      );
+      setCourseSubAreaDisplayName(courseListFilter[0]["displayName"]);
+    }
+  }, [courseArea, courseSubArea]);
+
   const handleDrawerOpen = () => {
     setOpen(!open);
   };
@@ -181,9 +193,9 @@ export default function MiniDrawer() {
   const drawer = (list, style) => (
     <div className={classes[style]}>
       {style === "listTop" ? (
-        <Tooltip title={courseSubArea["displayName"]}>
+        <Tooltip title={courseSubArea}>
           <Typography className={classes.typography} align="center" noWrap>
-            {open ? courseSubArea["displayName"] : courseSubArea["name"]}
+            {open ? courseSubAreaDisplayName : courseSubArea}
           </Typography>
         </Tooltip>
       ) : (
@@ -196,7 +208,7 @@ export default function MiniDrawer() {
           <Link
             to={
               style === "listTop"
-                ? `/${courseArea}/${courseSubArea.name}/${item.link}`
+                ? `/${courseArea}/${courseSubArea}/${item.link}`
                 : `/${item.link}`
             }
             className={classes.link}
@@ -235,10 +247,7 @@ export default function MiniDrawer() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {/* {history.location.pathname.includes(`${courseArea / courseSubArea}`)} */}
-      {history.location.pathname.includes(
-        `${courseArea}/${courseSubArea["name"]}`
-      ) ? (
+      {history.location.pathname.includes(`${courseArea}/${courseSubArea}`) ? (
         <Drawer
           variant="permanent"
           className={clsx(classes.drawer, {
@@ -264,7 +273,6 @@ export default function MiniDrawer() {
             </IconButton>
           </div>
           {drawer(sidebarTopList, "listTop")}
-          {/* {drawer(sidebarBottomList, "listBottom")} */}
         </Drawer>
       ) : (
         ""

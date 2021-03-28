@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
+    marginTop: 15,
     // width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
@@ -82,12 +83,7 @@ export default function ContentHeaderAction({
         <Grid item xs={12} sm={12} md={11} lg={11}>
           {loader["content"] ? (
             <div className={classes.search}>
-              <Skeleton
-                animation="wave"
-                height={80}
-                width="100%"
-                style={{ marginBottom: 6 }}
-              />
+              <Skeleton animation="wave" height={60} width="100%" />
             </div>
           ) : contentsExist ? (
             <div className={classes.search}>
