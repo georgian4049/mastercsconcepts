@@ -11,12 +11,12 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
-import { Divider } from "@material-ui/core";
 import { refresh } from "../../state/actions/authentication";
 import Regex from "../../utils/Regex";
 import { MESSAGE } from "../../state/actions/types";
 import CopyrightFooter from "../../components/common/CopyrightFooter";
 import DividerWithText from "../../components/common/DividerWithText";
+import { register } from "../../state/actions/authentication";
 
 const errorMessage = {
   firstName: "Invalid First Name",
@@ -139,7 +139,7 @@ export default function SignIn() {
         payload: "Please fill the form correctly",
       });
     } else {
-      register();
+      dispatch(register(registerForm));
     }
   };
 
@@ -159,34 +159,6 @@ export default function SignIn() {
     history.replace("/home");
   } else {
     console.log("Couldn't login");
-  }
-
-  async function register() {
-    try {
-      dispatch({
-        type: MESSAGE.SUCCESS,
-        payload: "Registered Successfully! Please Login",
-      });
-      history.replace("/login");
-    } catch (error) {
-      console.log(error);
-      if (error.response?.status === 400) {
-        dispatch({
-          type: MESSAGE.WRONG_LOGIN_CREDENTIALS,
-          payload: "This email address is already registered with us",
-        });
-      } else if (error.response?.status === 401) {
-        dispatch({
-          type: MESSAGE.WRONG_LOGIN_CREDENTIALS,
-          payload: "Username Taken",
-        });
-      } else {
-        dispatch({
-          type: MESSAGE.ERROR,
-          payload: "Server Error! Please try again later",
-        });
-      }
-    }
   }
 
   return (

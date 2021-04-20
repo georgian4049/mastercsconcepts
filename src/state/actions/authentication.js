@@ -51,10 +51,14 @@ export function register(body) {
   return async function (dispatch) {
     try {
       dispatch({ type: SHOW_LOADER });
-      await registerUser(body);
+      const { data } = await registerUser(body);
       dispatch({
         type: MESSAGE.SUCCESS,
-        payload: "Registered Successfully! Please Login",
+        payload: "Registered Successfully!",
+      });
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: data,
       });
     } catch (error) {
       console.log(error);
