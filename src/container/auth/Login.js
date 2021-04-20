@@ -9,11 +9,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Divider } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { login } from "../../state/actions/authentication";
 import clsx from "clsx";
@@ -25,19 +24,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { refresh } from "../../state/actions/authentication";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        mastercsconcepts
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import CopyrightFooter from "../../components/common/CopyrightFooter";
+import DividerWithText from "../../components/common/DividerWithText";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -102,9 +90,14 @@ export default function SignIn() {
     event.preventDefault();
   };
 
-  const onSubmit = (data) => {
-    data.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
     dispatch(login(loginForm));
+  };
+
+  const submitTestAcct = (e) => {
+    e.preventDefault();
+    dispatch(login({ email: "test@mastercsconcepts.com", password: "test" }));
   };
 
   if (isAuthenticated) {
@@ -198,22 +191,21 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-
-          {/* <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid> */}
+          <DividerWithText label="or" />
+          <br />
+          <Button
+            fullWidth
+            variant="contained"
+            color=""
+            className={classes.login}
+            onClick={submitTestAcct}
+          >
+            Sign in using our Test account
+          </Button>
         </form>
       </div>
-      <Divider />
+      <br />
+      <DividerWithText label="or" />
       <br />
       <Button
         fullWidth
@@ -224,9 +216,7 @@ export default function SignIn() {
       >
         Register
       </Button>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
+      <CopyrightFooter />
     </Container>
   );
 }

@@ -5,9 +5,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,19 +15,9 @@ import { Divider } from "@material-ui/core";
 import { refresh } from "../../state/actions/authentication";
 import Regex from "../../utils/Regex";
 import { MESSAGE } from "../../state/actions/types";
+import CopyrightFooter from "../../components/common/CopyrightFooter";
+import DividerWithText from "../../components/common/DividerWithText";
 
-function Copyright() {
-  return (
-    <Typography variant="h6" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        mastercsconcepts
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 const errorMessage = {
   firstName: "Invalid First Name",
   lastName: "Invalid Last Name",
@@ -135,7 +123,11 @@ export default function SignIn() {
   const onSubmit = (data) => {
     data.preventDefault();
     let errors = false;
-
+    Object.keys(registerForm).forEach((x) => {
+      if (!registerForm[x]) {
+        errors = true;
+      }
+    });
     Object.keys(error).forEach((x) => {
       if (error[x]) {
         errors = true;
@@ -328,7 +320,7 @@ export default function SignIn() {
               </Button>
             </form>
           </div>
-          <Divider />
+          <DividerWithText label="or" />
           <br />
           <Button
             fullWidth
@@ -339,9 +331,7 @@ export default function SignIn() {
           >
             Login
           </Button>
-          <Box mt={8}>
-            <Copyright />
-          </Box>
+          <CopyrightFooter />
         </Container>
       )}
     </>

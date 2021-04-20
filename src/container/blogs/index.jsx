@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
-import Card from "./Card";
+import Card from "../../components/common/ArticleDescCard";
 import Chat from "./Chat";
 import { ClearanceData } from "../../utils/mock";
 

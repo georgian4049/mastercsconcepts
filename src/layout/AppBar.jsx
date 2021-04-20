@@ -16,6 +16,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
+import Routes from "../container/route/Route";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -153,6 +154,7 @@ export default function SearchAppBar(props) {
           </div>
         </Toolbar>
       </AppBar>
+      <Routes />
     </div>
   );
 }

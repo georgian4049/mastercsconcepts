@@ -1,4 +1,4 @@
-import { PLATFORM, MULTIPLE_VALUES, LOADER } from "../actions/types";
+import { PLATFORM, LOADER } from "../actions/types";
 
 const initialState = {
   courseArea: null,

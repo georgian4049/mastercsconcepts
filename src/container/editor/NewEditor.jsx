@@ -90,7 +90,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
         authorUsername: username,
         authorName: name,
         courseArea: courseArea,
-        courseSubArea: courseSubArea["name"],
+        courseSubArea: courseSubArea,
         materialCategory: materialCategory,
         contentData: savedData,
       })
