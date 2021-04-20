@@ -1,3 +1,3 @@
-export const MASTER_CS_CONCEPT_API_URL = window._env_
-  ? window._env_.MASTER_CS_CONCEPTS_API_URL
-  : process.env.REACT_MASTER_CS_CONCEPT_API_URL;
+export const MASTER_CS_CONCEPT_API_URL =
+  "https://mastercsconcepts.herokuapp.com/";
+// export const MASTER_CS_CONCEPT_API_URL = "http://localhost:5000";
