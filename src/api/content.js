@@ -17,3 +17,13 @@ export async function getContent(courseArea, courseSubArea, materialCategory) {
     `api/content?courseArea=${courseArea}&courseSubArea=${courseSubArea}&materialCategory=${materialCategory}`
   );
 }
+export async function bookmarkContent(
+  courseArea,
+  courseSubArea,
+  materialCategory,
+  _id
+) {
+  return await serverInstance.post(
+    `api/content/bookmark/${courseArea}/${courseSubArea}/${materialCategory}/${_id}`
+  );
+}

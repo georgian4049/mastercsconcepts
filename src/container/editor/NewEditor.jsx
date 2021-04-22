@@ -93,6 +93,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
         courseSubArea: courseSubArea,
         materialCategory: materialCategory,
         contentData: savedData,
+        bookmarkedBy: [],
       })
     );
   }
@@ -138,9 +139,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
         payload: "Deleted Successfully",
       });
       setButtonState({ ...buttonState, delete: false });
-      history.replace(
-        `/${courseArea}/${courseSubArea["name"]}/${materialCategory}`
-      );
+      history.replace(`/${courseArea}/${courseSubArea}/${materialCategory}`);
     } catch (error) {
       console.log(error);
       if (error.response?.status === 400) {
