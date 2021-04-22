@@ -128,7 +128,7 @@ export default function Cards({ data }) {
     e.preventDefault();
     try {
       setBookmarkLoader(true);
-      bookmarkContent(courseArea, courseSubArea, materialCategory, _id);
+      await bookmarkContent(courseArea, courseSubArea, materialCategory, _id);
       setBookmarked(!bookmarked);
       dispatch({
         type: MESSAGE.SUCCESS,
@@ -186,8 +186,13 @@ export default function Cards({ data }) {
             isAuthenticated && (
               <Tooltip title={bookMarked ? "Unmark" : "Bookmark"}>
                 <IconButton tool aria-label="settings" onClick={handleBookMark}>
-                  {bookmarked ? <BookmarkedIcon /> : <NotBookMarkedIcon />}
-                  {bookmarkLoader && <CircularProgress />}
+                  {bookmarkLoader ? (
+                    <CircularProgress color="secondary" size={20} />
+                  ) : bookmarked ? (
+                    <BookmarkedIcon />
+                  ) : (
+                    <NotBookMarkedIcon />
+                  )}
                 </IconButton>
               </Tooltip>
             )
