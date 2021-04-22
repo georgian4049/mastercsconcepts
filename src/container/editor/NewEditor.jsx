@@ -14,6 +14,8 @@ import Message from "../../utils/message";
 import { MESSAGE } from "../../state/actions/types";
 import { deleteContent } from "../../api/content";
 import "./editor.css";
+import Bookmark from "../../components/common/Bookmark";
+import Like from "../../components/common/Like";
 
 const useStyles = makeStyles((theme) => ({
   edit: {
@@ -31,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
   like: {
     position: "fixed",
     top: "50vh",
+    right: theme.spacing(2),
+    zIndex: 2,
+  },
+  bookmark: {
+    position: "fixed",
+    top: "42vh",
     right: theme.spacing(2),
     zIndex: 2,
   },
@@ -70,6 +78,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
     like: 0,
     minRead: 0,
     contentData: {},
+    bookmarkedBy: [],
   });
 
   useEffect(() => {
@@ -168,6 +177,9 @@ const NewEditor = ({ data, existing, readOnly }) => {
         <InputBase
           autoFocus
           fullWidth
+          disabled={
+            !(isAuthenticated && username === data.authorUsername && edit)
+          }
           onChange={(e) => setState({ ...state, title: e.target.value })}
           value={state.title}
           placeholder="Enter title here..."
@@ -175,6 +187,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
           style={{
             fontWeight: "bold",
             fontSize: "25px",
+            color: "#000",
           }}
         />
       </div>
@@ -205,19 +218,30 @@ const NewEditor = ({ data, existing, readOnly }) => {
               </Tooltip>
             </div>
           )}
-          {/* {isAuthenticated && !(username === data.authorUsername) && (
+          {isAuthenticated && (
             <div style={{ display: "flex" }}>
-              <Tooltip title="Like Content">
-                <IconButton
-                  aria-label="Like"
-                  className={classes.like}
-                  // onClick={() => setEdit(!edit)}
-                >
-                  <ThumbUpAltIcon fontSize="large" color="primary" />
-                </IconButton>
-              </Tooltip>
+              <div className={classes.bookmark}>
+                <Bookmark
+                  courseArea={courseArea}
+                  courseSubArea={courseSubArea}
+                  materialCategory={materialCategory}
+                  _id={state["_id"]}
+                  bookmarkedBy={state["bookmarkedBy"]}
+                  iconSize="large"
+                />
+              </div>
+              <div className={classes.like}>
+                <Like
+                  courseArea={courseArea}
+                  courseSubArea={courseSubArea}
+                  materialCategory={materialCategory}
+                  _id={state["_id"]}
+                  bookmarkedBy={state["bookmarkedBy"]}
+                  iconSize="large"
+                />
+              </div>
             </div>
-          )} */}
+          )}
           <EditorJs
             tools={EDITOR_JS_TOOLS}
             autofocus

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import clsx from "clsx";
@@ -14,16 +14,13 @@ import {
   Avatar,
   Chip,
   Tooltip,
-  CircularProgress,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LinkIcon from "@material-ui/icons/Link";
 import userImgUrl from "../../assets/gen/pp1.jpg";
 import { dateWord } from "../../functions/function";
 import { MESSAGE } from "../../state/actions/types";
-import NotBookMarkedIcon from "@material-ui/icons/BookmarkBorder";
-import BookmarkedIcon from "@material-ui/icons/Bookmark";
-import { bookmarkContent } from "../../api/content";
+import Bookmark from "./Bookmark";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,19 +75,10 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(1),
     },
   },
-  icon: {
-    width: 30,
-    position: "absolute",
-    top: 24,
-    right: 24,
-    cursor: "pointer",
-  },
 }));
 export default function Cards({ data }) {
   const classes = useStyles();
-  const { isAuthenticated, username } = useSelector(
-    (state) => state.authentication
-  );
+  const { isAuthenticated } = useSelector((state) => state.authentication);
 
   const dispatch = useDispatch();
   const {
@@ -102,7 +90,6 @@ export default function Cards({ data }) {
     description,
     _id,
     tags,
-    bookMarked,
     courseArea,
     courseSubArea,
     materialCategory,
@@ -110,49 +97,9 @@ export default function Cards({ data }) {
   } = data;
   const history = useHistory();
   const [expanded, setExpanded] = useState(false);
-  const [bookmarkLoader, setBookmarkLoader] = useState(false);
-  const [bookmarked, setBookmarked] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  };
-
-  useEffect(() => {
-    console.log(bookmarkedBy);
-    console.log(username);
-    if (bookmarkedBy && username && bookmarkedBy.includes(username)) {
-      setBookmarked(true);
-    }
-  }, [bookmarkedBy, username]);
-  const handleBookMark = async (e) => {
-    e.preventDefault();
-    try {
-      setBookmarkLoader(true);
-      await bookmarkContent(courseArea, courseSubArea, materialCategory, _id);
-      setBookmarked(!bookmarked);
-      dispatch({
-        type: MESSAGE.SUCCESS,
-        payload: bookmarked
-          ? "Unmarked Successfully"
-          : "Bookmarked Successfully",
-      });
-    } catch (error) {
-      setBookmarkLoader(true);
-      console.log(error);
-      if (error.response?.status === 400) {
-        dispatch({
-          type: MESSAGE.ERROR,
-          payload: "Something Went Wrong! Couldn't bookmark. Please try later",
-        });
-      } else {
-        dispatch({
-          type: MESSAGE.ERROR,
-          payload: "Server Error! Please try again later",
-        });
-      }
-    } finally {
-      setBookmarkLoader(false);
-    }
   };
 
   const copyToClipboard = (str) => {
@@ -184,17 +131,14 @@ export default function Cards({ data }) {
           }
           action={
             isAuthenticated && (
-              <Tooltip title={bookMarked ? "Unmark" : "Bookmark"}>
-                <IconButton tool aria-label="settings" onClick={handleBookMark}>
-                  {bookmarkLoader ? (
-                    <CircularProgress color="secondary" size={20} />
-                  ) : bookmarked ? (
-                    <BookmarkedIcon />
-                  ) : (
-                    <NotBookMarkedIcon />
-                  )}
-                </IconButton>
-              </Tooltip>
+              <Bookmark
+                courseArea={courseArea}
+                courseSubArea={courseSubArea}
+                materialCategory={materialCategory}
+                _id={_id}
+                bookmarkedBy={bookmarkedBy}
+                iconSize="small"
+              />
             )
           }
           title={title}
