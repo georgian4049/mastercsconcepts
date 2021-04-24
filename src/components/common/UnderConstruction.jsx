@@ -12,7 +12,7 @@ const UnderConstruction = () => {
           display: "block",
           margin: "auto",
           //   marginRight: "auto",
-          marginTop: "5%",
+          marginTop: "2%",
         }}
       />
     </div>

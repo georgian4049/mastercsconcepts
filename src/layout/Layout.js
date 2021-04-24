@@ -15,15 +15,16 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     width: "100%",
+    minHeight: "100vh",
     marginLeft: "0px",
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     height: "100%",
-    minHeight: "100vh",
+    // minHeight: "100vh",
     maxWidth: "100%", //or 1180
     minWidth: " 200px",
     marginTop: theme.spacing(0),
@@ -35,7 +36,7 @@ export default function Layout() {
   const classes = useStyles();
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className={classes["root"]}>
       <Route exact path="/" render={() => <Redirect to="/login" />} />
       <Route path="/" component={AppBar} />
       <Route path="/" component={Sidebar} />
