@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NewEditor = ({ data, existing, readOnly }) => {
+const NewEditor = ({ data, existing }) => {
   const classes = useStyles();
   const instanceRef = useRef(null);
   const history = useHistory();
@@ -177,9 +177,7 @@ const NewEditor = ({ data, existing, readOnly }) => {
         <InputBase
           autoFocus
           fullWidth
-          disabled={
-            !(isAuthenticated && username === data.authorUsername && edit)
-          }
+          disabled={existing && !edit}
           onChange={(e) => setState({ ...state, title: e.target.value })}
           value={state.title}
           placeholder="Enter title here..."
