@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Route, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { MULTIPLE_VALUES } from "../../state/actions/types";
+import { PLATFORM } from "../../state/actions/types";
 import { courseList } from "../../utils/mock";
 import { refresh } from "../../state/actions/authentication";
 import { getContents } from "../../state/actions/content";
@@ -37,10 +37,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         (i) => i.name === currentUrl[2]
       );
       dispatch({
-        type: MULTIPLE_VALUES,
+        type: PLATFORM.MULTIPLE_VALUES,
         payload: {
           courseArea: currentUrl[1],
-          courseSubArea: courseList[currentUrl[1]][index][currentUrl[2]],
+          courseSubArea: courseList[currentUrl[1]][index]["name"],
           materialCategory: currentUrl[3],
         },
       });
