@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 // import { postContents } from "../../state/actions/content";
 import BackButton from "./BackButton";
-import NewEditor from "../../container/editor/NewEditor";
+import Editor from "../../container/editor/Editor";
 
 const useStyles = makeStyles((theme) => ({
   //   root: {
@@ -52,7 +52,7 @@ const DisplayNew = ({ match }) => {
       <div className={classes.articleContent}>
         {data?.contentData ? (
           <>
-            <NewEditor data={data} existing={true} />
+            <Editor data={data} existing={true} />
           </>
         ) : (
           ""

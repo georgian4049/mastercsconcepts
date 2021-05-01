@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NewEditor = ({ data, existing }) => {
+const Editor = ({ data, existing }) => {
   const classes = useStyles();
   const instanceRef = useRef(null);
   const history = useHistory();
@@ -290,4 +290,4 @@ const NewEditor = ({ data, existing }) => {
   );
 };
 
-export default NewEditor;
+export default Editor;

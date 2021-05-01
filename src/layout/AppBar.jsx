@@ -8,6 +8,8 @@ import {
   Chip,
   CssBaseline,
   Tooltip,
+  Divider,
+  Typography,
 } from "@material-ui/core";
 import logo from "../assets/logo.png";
 import AppbarLink from "./AppBarLinks";
@@ -40,11 +42,6 @@ const useStyles = makeStyles((theme) => ({
   appBarLink: {
     margin: "auto",
   },
-  typography: {
-    padding: theme.spacing(2),
-    fontWeight: "bold",
-    color: theme.palette.secondary.main,
-  },
 
   link: {
     textDecoration: "none",
@@ -72,7 +69,9 @@ const profile = [
 export default function SearchAppBar(props) {
   const classes = useStyles();
   const history = useHistory();
-  const { isAuthenticated } = useSelector((state) => state.authentication);
+  const { isAuthenticated, username } = useSelector(
+    (state) => state.authentication
+  );
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -121,6 +120,14 @@ export default function SearchAppBar(props) {
                   open={open}
                   onClose={handleClose}
                 >
+                  <MenuItem>
+                    <div>
+                      {" "}
+                      <Typography variant="subtitle2">Signed in as</Typography>
+                      <Typography variant="subtitle1">{username}</Typography>
+                    </div>
+                  </MenuItem>
+                  <Divider />
                   {profile.map((item) => (
                     <Link
                       to={`/${item.link}`}

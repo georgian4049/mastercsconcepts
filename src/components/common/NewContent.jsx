@@ -1,7 +1,6 @@
-import { useHistory } from "react-router-dom";
-import { Button, makeStyles } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import NewEditor from "../../container/editor/NewEditor";
+import { makeStyles } from "@material-ui/core";
+import BackButton from "./BackButton";
+import Editor from "../../container/editor/Editor";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -26,24 +25,15 @@ const useStyles = makeStyles((theme) => ({
 
 const NewContent = () => {
   const classes = useStyles();
-  const history = useHistory();
   return (
     <div>
       <div className={classes.header}>
-        <Button
-          color="secondary"
-          size="large"
-          className={classes.button}
-          startIcon={<ArrowBackIcon />}
-          onClick={() => history.goBack()}
-        >
-          BACK
-        </Button>
+        <BackButton />
       </div>
       <div className={classes.articleContent}>
         <br />
 
-        <NewEditor />
+        <Editor />
       </div>
     </div>
   );

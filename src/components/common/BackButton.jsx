@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
 const BackButton = () => {
   const classes = useStyles();
   const history = useHistory();
+  const goBack = () => {
+    const redirect_path = history.location.pathname.split("/", 4).join("/");
+    history.replace(redirect_path);
+  };
   return (
     <div className={classes.header}>
       <Button
@@ -28,7 +32,7 @@ const BackButton = () => {
         size="large"
         className={classes.button}
         startIcon={<ArrowBackIcon />}
-        onClick={() => history.goBack()}
+        onClick={goBack}
       >
         BACK
       </Button>
