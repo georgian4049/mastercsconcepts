@@ -176,10 +176,11 @@ export default function MiniDrawer() {
 
   useEffect(() => {
     if (courseArea && courseSubArea) {
-      const courseListFilter = courseList[courseArea].filter(
+      const courseListFilter = courseList[courseArea]?.filter(
         (course) => course["name"] === courseSubArea
       );
-      setCourseSubAreaDisplayName(courseListFilter[0]["displayName"]);
+      if (courseListFilter)
+        setCourseSubAreaDisplayName(courseListFilter[0]["displayName"]);
     }
   }, [courseArea, courseSubArea]);
 

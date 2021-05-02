@@ -1,5 +1,5 @@
-import { LOGOUT, MESSAGE, GET_CONTENT, LOADER } from "./types";
-import { postContent, getContent } from "../../api/content";
+import { LOGOUT, MESSAGE, GET_CONTENT, LOADER, CONTENT } from "./types";
+import { postContent, getContent, getAllContent } from "../../api/content";
 // import Message from "../../utils/message";
 
 export function logout() {
@@ -29,6 +29,34 @@ export function postContents(body) {
           payload: "Server Error! Please try again later",
         });
       }
+    }
+  };
+}
+
+export function getAllContents() {
+  return async function (dispatch) {
+    try {
+      // dispatch({ type: LOADER["CONTENT"], payload: true });
+      const { data } = await getAllContent();
+      dispatch({
+        type: CONTENT["GET_ALL"],
+        payload: data.data,
+      });
+    } catch (error) {
+      console.log(error);
+      if (error.response?.status === 400) {
+        dispatch({
+          type: MESSAGE.ERROR,
+          payload: "Couldn't Post due to Conflict",
+        });
+      } else {
+        dispatch({
+          type: MESSAGE.ERROR,
+          payload: "Something Went Wrong",
+        });
+      }
+    } finally {
+      dispatch({ type: LOADER["CONTENT"], payload: false });
     }
   };
 }

@@ -17,6 +17,11 @@ export async function getContent(courseArea, courseSubArea, materialCategory) {
     `api/content?courseArea=${courseArea}&courseSubArea=${courseSubArea}&materialCategory=${materialCategory}`
   );
 }
+
+export async function getAllContent() {
+  return await serverInstance.get(`api/content`);
+}
+
 export async function bookmarkContent(
   courseArea,
   courseSubArea,

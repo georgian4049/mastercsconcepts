@@ -23,7 +23,6 @@ export function login(body) {
     try {
       dispatch({ type: SHOW_LOADER });
       const { data } = await getAuthentication(body);
-      console.log(data);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: data,

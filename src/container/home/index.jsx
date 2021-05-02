@@ -1,7 +1,11 @@
-import { makeStyles, Typography } from "@material-ui/core";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { makeStyles, Typography, Grid } from "@material-ui/core";
 import Card from "../../components/common/HomeCard";
+import { getAllContents } from "../../state/actions/content";
 
 const categories = ["Suggestions", "Newly Added", "Widely Read", "Stats"];
+const materialCategories = ["theory", "blogs"];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,26 +18,45 @@ const useStyles = makeStyles((theme) => ({
 
 const Index = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const content = useSelector((state) => state.content);
+
+  useEffect(() => {
+    dispatch(getAllContents());
+    /*eslint-disable-next-line*/
+  }, []);
+
   return (
-    // <div className={classes.root}>
-    //   {categories.map((category) => (
-    //     <div>
-    //       <Typography variant="h5">{category}</Typography>
-    //       <Card data={[]} />
-    //     </div>
-    //   ))}
-    // </div>
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <Typography variant="h5">Welcome to Home Page!</Typography>
-      <Typography variant="subtitle1" color="secondary">
-        I am currently working on this page, Something interesting is going to
-        come
+    <div className={classes.root}>
+      <Typography variant="h5" style={{ textTransform: "capitalize" }}>
+        Suggested Articles
       </Typography>
-      <Typography variant="subtitle2" color="primary">
-        Howerever for now you can use links from header to route to your
-        destination.. Happy Learning!
-      </Typography>
+      {materialCategories.map((category) =>
+        content[category].length ? (
+          <div>
+            <Typography variant="h6" style={{ textTransform: "capitalize" }}>
+              {category}
+            </Typography>
+            <br />
+            <Cards data={content[category]} />
+          </div>
+        ) : (
+          ""
+        )
+      )}
     </div>
+  );
+};
+
+const Cards = ({ data }) => {
+  return (
+    <Grid container>
+      {data?.map((x) => (
+        <Grid item xs={12} sm={12} md={3} lg={3}>
+          <Card data={x} />
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

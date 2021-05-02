@@ -1,4 +1,4 @@
-import { GET_CONTENT } from "../actions/types";
+import { GET_CONTENT, CONTENT } from "../actions/types";
 
 const initialState = {};
 
@@ -51,6 +51,18 @@ export default function contentReducer(state = initialState, action) {
           [courseArea]: { [courseSubArea]: { [materialCategory]: data } },
         };
       }
+    }
+    case CONTENT["GET_ALL"]: {
+      const contents = action.payload;
+      const theory = contents?.filter(
+        (x) => x["materialCategory"] === "theory"
+      );
+      const blogs = contents?.filter((x) => x["materialCategory"] === "blogs");
+      return {
+        ...state,
+        theory: theory,
+        blogs: blogs,
+      };
     }
 
     default:

@@ -1,4 +1,5 @@
 import Regex from "../utils/Regex";
+import { courseList } from "../utils/mock";
 
 export const CamelCaseToString = (str) => {
   return str.match(/^[a-z]+|[A-Z][a-z]*/g)
@@ -81,3 +82,10 @@ export function monthDifferenceWithCurrentDate(date1) {
     Math.abs(day1.getTime() - day2.getTime()) / (1000 * 3600 * 24 * 30)
   );
 }
+
+export const getCourseSubAreaFullName = (courseSubArea, courseArea) => {
+  const course = courseList[courseArea].filter(
+    (course) => course["name"] === courseSubArea
+  );
+  return course[0]["displayName"] || "";
+};

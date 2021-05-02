@@ -10,6 +10,7 @@ import HomePage from "../container/home";
 import DisplayNew from "../components/common/DisplayNew";
 import Logout from "./Logout";
 import UnderConstruction from "../components/common/UnderConstruction";
+import Profile from "../container/profile";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +48,7 @@ export default function Layout() {
           <Switch>
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/update-profile" component={UnderConstruction} />
-            <Route exact path="/profile" component={UnderConstruction} />
+            <Route exact path="/profile" component={Profile} />
             <Route exact path="/settings" component={UnderConstruction} />
             <Route exact path={`/wrong-page`} component={WrongPage} />
             <Route exact path={`/home`} component={HomePage} />

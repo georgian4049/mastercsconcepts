@@ -1,10 +1,24 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Tooltip, IconButton, CircularProgress } from "@material-ui/core";
+import {
+  Tooltip,
+  IconButton,
+  CircularProgress,
+  makeStyles,
+} from "@material-ui/core";
 import NotBookMarkedIcon from "@material-ui/icons/BookmarkBorder";
 import BookmarkedIcon from "@material-ui/icons/Bookmark";
 import { MESSAGE, GET_CONTENT } from "../../state/actions/types";
 import { bookmarkContent } from "../../api/content";
+
+const useStyles = makeStyles({
+  bookmark: {
+    position: "absolute",
+    top: "5px",
+    right: "2px",
+    zIndex: "40",
+  },
+});
 
 const Bookmark = ({
   bookmarkedBy,
@@ -14,6 +28,7 @@ const Bookmark = ({
   _id,
   iconSize,
 }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.authentication);
   const [bookmarkLoader, setBookmarkLoader] = useState(false);
@@ -68,19 +83,17 @@ const Bookmark = ({
     }
   };
   return (
-    <div>
-      <Tooltip title={bookmarked ? "Unmark" : "Bookmark"}>
-        <IconButton tool onClick={handleBookMark}>
-          {bookmarkLoader ? (
-            <CircularProgress color="secondary" size={20} />
-          ) : bookmarked ? (
-            <BookmarkedIcon fontSize={iconSize} color="secondary" />
-          ) : (
-            <NotBookMarkedIcon fontSize={iconSize} />
-          )}
-        </IconButton>
-      </Tooltip>
-    </div>
+    <Tooltip title={bookmarked ? "Unmark" : "Bookmark"}>
+      <IconButton tool onClick={handleBookMark} className={classes.bookmark}>
+        {bookmarkLoader ? (
+          <CircularProgress color="secondary" size={20} />
+        ) : bookmarked ? (
+          <BookmarkedIcon fontSize={iconSize} color="secondary" />
+        ) : (
+          <NotBookMarkedIcon fontSize={iconSize} />
+        )}
+      </IconButton>
+    </Tooltip>
   );
 };
 

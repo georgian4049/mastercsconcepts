@@ -15,8 +15,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    intialCall();
-    /*eslint-disable-next-line*/
+    intialCall(); /*eslint-disable-next-line*/
   }, []);
   const intialCall = () => {
     const token = localStorage.getItem("token") || null;
@@ -44,6 +43,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           materialCategory: currentUrl[3],
         },
       });
+
       dispatch(
         getContents(
           currentUrl[1],

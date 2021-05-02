@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
-import Card from "../../components/common/ArticleDescCard";
+import Card from "../../components/common/HomeCard";
 import ContentHeaderAction from "./ContentHeaderAction";
 import NoContent from "../noContent/NoContent";
 import CardLoader from "../../container/loader/Card";

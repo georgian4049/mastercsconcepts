@@ -6,6 +6,10 @@ export const PLATFORM = {
   MULTIPLE_VALUES: "PLATFORM_MULTIPLE_VALUES",
 };
 
+export const CONTENT = {
+  GET_ALL: "GET_ALL_CONTENT",
+};
+
 export const MULTIPLE_VALUES = "SET_MULTIPLE_VALUES";
 export const LOGOUT = "LOGOUT";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
