@@ -32,7 +32,7 @@ const Index = () => {
         Suggested Articles
       </Typography>
       {materialCategories.map((category) =>
-        content[category].length ? (
+        content[category]?.length ? (
           <div>
             <Typography variant="h6" style={{ textTransform: "capitalize" }}>
               {category}
