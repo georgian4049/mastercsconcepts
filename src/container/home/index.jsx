@@ -61,7 +61,7 @@ const Cards = ({ data }) => {
     <Grid container>
       {data?.map((x) => (
         <Grid item xs={12} sm={12} md={3} lg={3}>
-          <Card data={x} />
+          <Card data={x} pageType="home" />
         </Grid>
       ))}
     </Grid>

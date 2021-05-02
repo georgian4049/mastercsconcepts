@@ -51,7 +51,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Cards({ data }) {
+export default function Cards({ data, pageType }) {
   const classes = useStyles();
   const { isAuthenticated } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
@@ -86,8 +86,12 @@ export default function Cards({ data }) {
   return (
     <Card className={classes.root}>
       <Link
-        to={`${courseArea}/${courseSubArea}/${materialCategory}/topicId/${_id}`}
-        target="_blank"
+        to={
+          pageType === "home"
+            ? `${courseArea}/${courseSubArea}/${materialCategory}/topicId/${_id}`
+            : `${history.location.pathname}/topicId/${_id}`
+        }
+        target={pageType === "home" && "_blank"}
         className={classes.link}
       >
         {isAuthenticated && (
@@ -100,16 +104,18 @@ export default function Cards({ data }) {
             iconSize="small"
           />
         )}
-        <Tooltip
-          title={getCourseSubAreaFullName(courseSubArea, courseArea)}
-          placement="bottom-start"
-        >
-          <Chip
-            label={courseSubArea}
-            color="secondary"
-            className={classes.chip}
-          />
-        </Tooltip>
+        {pageType === "home" && (
+          <Tooltip
+            title={getCourseSubAreaFullName(courseSubArea, courseArea)}
+            placement="bottom-start"
+          >
+            <Chip
+              label={courseSubArea}
+              color="secondary"
+              className={classes.chip}
+            />
+          </Tooltip>
+        )}
         <Tooltip title="Author's Name" placement="bottom-end">
           <Typography align="right" noWrap className={classes.authorName}>
             -{authorName}
