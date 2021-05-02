@@ -28,13 +28,21 @@ const Index = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h5" style={{ textTransform: "capitalize" }}>
+      <Typography
+        variant="h5"
+        style={{ textTransform: "capitalize" }}
+        color="secondary"
+      >
         Suggested Articles
       </Typography>
       {materialCategories.map((category) =>
         content[category]?.length ? (
           <div>
-            <Typography variant="h6" style={{ textTransform: "capitalize" }}>
+            <Typography
+              variant="subtitle1"
+              style={{ textTransform: "capitalize" }}
+              color="primary"
+            >
               {category}
             </Typography>
             <br />
