@@ -1,22 +1,38 @@
 import React from "react";
-import underconstruction from "../../assets/gen/under_construction.gif";
+import { makeStyles, Typography } from "@material-ui/core";
+import iconComingSoon from "../../assets/icons/coming_soon.svg";
 
-const UnderConstruction = () => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    backgroundColor: theme.palette.background.default,
+    flexDirection: "column",
+  },
+}));
+
+const Executive = () => {
+  const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       <img
-        src={underconstruction}
-        alt="Under Construction"
         style={{
-          objectFit: "center",
-          display: "block",
-          margin: "auto",
-          //   marginRight: "auto",
-          marginTop: "2%",
+          width: 242,
+          height: 242,
+          objectFit: "contain",
+          marginBottom: 40,
         }}
-      />
+        src={iconComingSoon}
+        className="Group"
+        alt="Coming Soon"
+      ></img>
+      <Typography variant="h4" color="textSecondary">
+        Coming Soon
+      </Typography>
     </div>
   );
 };
 
-export default UnderConstruction;
+export default Executive;
