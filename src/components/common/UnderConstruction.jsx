@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-import iconComingSoon from "../../assets/icons/coming_soon.svg";
+import iconComingSoon from "../../assets/gen/under_construction.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +29,7 @@ const Executive = () => {
         alt="Coming Soon"
       ></img>
       <Typography variant="h4" color="textSecondary">
-        Coming Soon
+        Under Construction
       </Typography>
     </div>
   );
