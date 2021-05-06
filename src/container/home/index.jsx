@@ -1,10 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles, Typography, Grid } from "@material-ui/core";
+import {
+  makeStyles,
+  Typography,
+  Grid,
+  CircularProgress,
+} from "@material-ui/core";
 import Card from "../../components/common/HomeCard";
 import { getAllContents } from "../../state/actions/content";
+import NoContent from "../../components/common/NoContent";
 
-const categories = ["Suggestions", "Newly Added", "Widely Read", "Stats"];
 const materialCategories = ["theory", "blogs"];
 
 const useStyles = makeStyles((theme) => ({
@@ -20,6 +25,7 @@ const Index = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const content = useSelector((state) => state.content);
+  const { homeContentLoader } = useSelector((state) => state.notifications);
 
   useEffect(() => {
     dispatch(getAllContents());
@@ -35,21 +41,34 @@ const Index = () => {
       >
         Suggested Articles
       </Typography>
-      {materialCategories.map((category) =>
-        content[category]?.length ? (
-          <div>
-            <Typography
-              variant="subtitle1"
-              style={{ textTransform: "capitalize" }}
-              color="primary"
-            >
-              {category}
-            </Typography>
-            <br />
-            <Cards data={content[category]} />
-          </div>
-        ) : (
-          ""
+      {homeContentLoader ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "50px",
+          }}
+        >
+          <CircularProgress color="secondary" />
+        </div>
+      ) : (
+        materialCategories.map((category) =>
+          content[category]?.length ? (
+            <div>
+              <Typography
+                variant="subtitle1"
+                style={{ textTransform: "capitalize" }}
+                color="primary"
+              >
+                {category}
+              </Typography>
+              <br />
+              <Cards data={content[category]} />
+            </div>
+          ) : (
+            ""
+          )
         )
       )}
     </div>

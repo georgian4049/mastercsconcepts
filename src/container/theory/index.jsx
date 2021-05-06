@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import Card from "../../components/common/HomeCard";
 import ContentHeaderAction from "./ContentHeaderAction";
-import NoContent from "../noContent/NoContent";
+import NoContent from "../../components/common/NoContent";
 import CardLoader from "../../container/loader/Card";
 
 function CardIndex() {
@@ -57,17 +57,19 @@ function CardIndex() {
         {loader["content"] ? (
           <CardLoader />
         ) : (
-          <Grid container spacing={1}>
+          <>
             {filteredDatas.length ? (
-              filteredDatas.map((i) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={i["_id"]}>
-                  <Card data={i} />
-                </Grid>
-              ))
+              <Grid container spacing={1}>
+                {filteredDatas.map((i) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={i["_id"]}>
+                    <Card data={i} />
+                  </Grid>
+                ))}
+              </Grid>
             ) : (
               <NoContent />
             )}
-          </Grid>
+          </>
         )}
       </div>
     </>

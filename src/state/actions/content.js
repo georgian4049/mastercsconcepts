@@ -36,7 +36,7 @@ export function postContents(body) {
 export function getAllContents() {
   return async function (dispatch) {
     try {
-      // dispatch({ type: LOADER["CONTENT"], payload: true });
+      dispatch({ type: LOADER["HOME_CONTENT"], payload: true });
       const { data } = await getAllContent();
       dispatch({
         type: CONTENT["GET_ALL"],
@@ -44,6 +44,7 @@ export function getAllContents() {
       });
     } catch (error) {
       console.log(error);
+      dispatch({ type: LOADER["HOME_CONTENT"], payload: false });
       if (error.response?.status === 400) {
         dispatch({
           type: MESSAGE.ERROR,
@@ -56,7 +57,7 @@ export function getAllContents() {
         });
       }
     } finally {
-      dispatch({ type: LOADER["CONTENT"], payload: false });
+      dispatch({ type: LOADER["HOME_CONTENT"], payload: false });
     }
   };
 }

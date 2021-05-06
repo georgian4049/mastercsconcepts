@@ -31,6 +31,7 @@ export default function CustomSelectTextField({
   handleChange,
   items,
   disabled,
+  defaultValue,
 }) {
   const classes = useStyles();
   return (
@@ -42,12 +43,13 @@ export default function CustomSelectTextField({
       margin="normal"
       required
       fullWidth
+      defaultValue={defaultValue}
       select={true}
       placeholder={placeholder}
       label={label}
       name={name}
       value={value}
-      onChange={(e) => handleChange(e.target.value, name)}
+      onChange={(e) => handleChange(name, e.target.value)}
     >
       {items
         ? items.map((item) => (

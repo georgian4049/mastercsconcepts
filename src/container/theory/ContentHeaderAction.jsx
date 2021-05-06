@@ -5,6 +5,7 @@ import AddIcon from "@material-ui/icons/Add";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Skeleton from "@material-ui/lab/Skeleton";
+import AddContentFab from "../../components/common/AddContentFab";
 
 const useStyles = makeStyles((theme) => ({
   root: { flexGrow: 1 },
@@ -16,13 +17,6 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     top: theme.spacing(10),
     right: theme.spacing(2),
-    zIndex: 4,
-  },
-  fabCenter: {
-    position: "fixed",
-    top: "50vh",
-    right: "50%",
-    margin: "auto",
     zIndex: 4,
   },
   search: {
@@ -74,9 +68,7 @@ export default function ContentHeaderAction({
   filteredDatasExist,
 }) {
   const classes = useStyles();
-  const history = useHistory();
   const { loader } = useSelector((state) => state["platform"]);
-  const { isAuthenticated } = useSelector((state) => state["authentication"]);
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
@@ -114,24 +106,12 @@ export default function ContentHeaderAction({
               height={60}
               className={classes["fabTop"]}
             />
+          ) : filteredDatasExist ? (
+            <div className={classes.fabTop}>
+              <AddContentFab />
+            </div>
           ) : (
-            <Link
-              to={`${history.location.pathname}/new-content`}
-              className={classes.link}
-            >
-              <Tooltip title="Add Content">
-                <Fab
-                  color="secondary"
-                  aria-label="Add Content"
-                  className={
-                    filteredDatasExist ? classes.fabTop : classes.fabCenter
-                  }
-                  disabled={!isAuthenticated}
-                >
-                  <AddIcon />
-                </Fab>
-              </Tooltip>
-            </Link>
+            ""
           )}
         </Grid>
       </Grid>

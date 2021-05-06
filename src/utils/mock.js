@@ -27,3 +27,8 @@ export const courseList = {
     { name: "FLASK", displayName: "Flask" },
   ],
 };
+
+export const userType = [
+  { name: "Reader", displayName: "Reader" },
+  { name: "Writer", displayName: "Writer" },
+];

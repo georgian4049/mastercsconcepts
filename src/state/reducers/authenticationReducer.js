@@ -8,14 +8,17 @@ const initialState = {
 export default function authenticationReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      localStorage.setItem("token", action.payload.access_token);
-      localStorage.setItem("username", action.payload.username);
-      localStorage.setItem("name", action.payload.name);
+      const { access_token, username, name, email } = action.payload;
+      localStorage.setItem("token", access_token);
+      localStorage.setItem("username", username);
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
       return {
         ...state,
         isAuthenticated: true,
-        username: action.payload.username,
-        name: action.payload.name,
+        username: username,
+        name: name,
+        email: email,
       };
     case LOGOUT:
       localStorage.removeItem("token");

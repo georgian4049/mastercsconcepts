@@ -17,6 +17,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   useEffect(() => {
     intialCall(); /*eslint-disable-next-line*/
   }, []);
+
   const intialCall = () => {
     const token = localStorage.getItem("token") || null;
     if (token) {

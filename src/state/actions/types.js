@@ -31,6 +31,7 @@ export const MESSAGE = {
 };
 export const LOADER = {
   CONTENT: "CONTENT_LOADER",
+  HOME_CONTENT: "HOME_CONTENT_LOADER",
 };
 
 export const GET_CONTENT = "GET_CONTENT";

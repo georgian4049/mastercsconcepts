@@ -1,7 +1,8 @@
-import { SHOW_LOADER, HIDE_LOADER, MESSAGE } from "../actions/types";
+import { SHOW_LOADER, HIDE_LOADER, MESSAGE, LOADER } from "../actions/types";
 
 const initialState = {
   isLoading: false,
+  homeContentLoader: false,
   notification: {
     message: "",
     isOpen: false,
@@ -29,6 +30,12 @@ export default function notificationReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
+      };
+
+    case LOADER["HOME_CONTENT"]:
+      return {
+        ...state,
+        homeContentLoader: action.payload,
       };
     case MESSAGE.WRONG_DATA:
       return {

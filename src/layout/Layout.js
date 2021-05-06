@@ -11,6 +11,8 @@ import DisplayNew from "../components/common/DisplayNew";
 import Logout from "./Logout";
 import UnderConstruction from "../components/common/UnderConstruction";
 import Profile from "../container/profile";
+import AboutUs from "../container/about-us";
+import Contact from "../container/contact";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +52,8 @@ export default function Layout() {
             <Route exact path="/update-profile" component={UnderConstruction} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/settings" component={UnderConstruction} />
+            <Route exact path="/about" component={AboutUs} />
+            <Route exact path="/contact" component={Contact} />
             <Route exact path={`/wrong-page`} component={WrongPage} />
             <Route exact path={`/home`} component={HomePage} />
             <Route
