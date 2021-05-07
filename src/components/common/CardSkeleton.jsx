@@ -1,5 +1,5 @@
 import Skeleton from "@material-ui/lab/Skeleton";
-import { Avatar, Box, makeStyles, Typography } from "@material-ui/core";
+import { Avatar, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {

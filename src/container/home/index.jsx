@@ -8,7 +8,8 @@ import {
 } from "@material-ui/core";
 import Card from "../../components/common/HomeCard";
 import { getAllContents } from "../../state/actions/content";
-import NoContent from "../../components/common/NoContent";
+import CardSkeleton from "../../components/common/CardSkeleton";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const materialCategories = ["theory", "blogs"];
 
@@ -39,19 +40,14 @@ const Index = () => {
         style={{ textTransform: "capitalize" }}
         color="secondary"
       >
-        Suggested Articles
+        {homeContentLoader ? (
+          <Skeleton width="20%" variant="rect" />
+        ) : (
+          "Suggested Articles"
+        )}
       </Typography>
       {homeContentLoader ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: "50px",
-          }}
-        >
-          <CircularProgress color="secondary" />
-        </div>
+        <CardSkeleton />
       ) : (
         materialCategories.map((category) =>
           content[category]?.length ? (
@@ -77,9 +73,9 @@ const Index = () => {
 
 const Cards = ({ data }) => {
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       {data?.map((x) => (
-        <Grid item xs={12} sm={12} md={3} lg={3}>
+        <Grid item xs={12} sm={12} md={4} lg={3}>
           <Card data={x} pageType="home" />
         </Grid>
       ))}

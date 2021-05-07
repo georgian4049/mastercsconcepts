@@ -9,9 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import LinkIcon from "@material-ui/icons/Link";
 import Typography from "@material-ui/core/Typography";
-import { dateWord } from "../../functions/function";
 import { MESSAGE } from "../../state/actions/types";
-import userImgUrl from "../../assets/gen/pp1.jpg";
 import Bookmark from "./Bookmark";
 import no_img from "../../assets/gen/No_img.jpg";
 import { getCourseSubAreaFullName } from "../../functions/function";
@@ -70,11 +68,13 @@ export default function Cards({ data, pageType }) {
   const {
     // eslint-disable-next-line
     title,
+    // eslint-disable-next-line
     datePublished,
     authorName,
     // imgUrl,
     description,
     _id,
+    // eslint-disable-next-line
     tags,
     courseArea,
     courseSubArea,

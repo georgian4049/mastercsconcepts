@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 import Card from "../../components/common/HomeCard";
 import ContentHeaderAction from "./ContentHeaderAction";
 import NoContent from "../../components/common/NoContent";
-import CardLoader from "../../container/loader/Card";
+import CardSkeleton from "../../components/common/CardSkeleton";
 
 function CardIndex() {
   const { courseArea, courseSubArea, materialCategory, loader } = useSelector(
@@ -55,11 +55,11 @@ function CardIndex() {
       </div>
       <div style={{ margin: "10px" }}>
         {loader["content"] ? (
-          <CardLoader />
+          <CardSkeleton />
         ) : (
           <>
             {filteredDatas.length ? (
-              <Grid container spacing={1}>
+              <Grid container spacing={2}>
                 {filteredDatas.map((i) => (
                   <Grid item xs={12} sm={6} md={4} lg={3} key={i["_id"]}>
                     <Card data={i} />
