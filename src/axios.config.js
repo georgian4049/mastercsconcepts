@@ -3,7 +3,7 @@ import { MASTER_CS_CONCEPT_API_URL } from "./config";
 
 const serverInstance = axios.create({
   baseURL: MASTER_CS_CONCEPT_API_URL,
-  timeout: 10000,
+  timeout: 100000,
 });
 
 serverInstance.interceptors.request.use(
