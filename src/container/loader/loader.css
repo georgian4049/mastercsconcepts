@@ -1,0 +1,23 @@
+.loader-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+.loader{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border-top: 2px solid #F26522;
+    animation: load infinite 1s linear;
+}
+
+@keyframes load {
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+       transform: rotate(360deg);
+ 
+    }
+}
