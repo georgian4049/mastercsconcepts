@@ -18,16 +18,14 @@ export default function SimpleBackdrop() {
   const { isLoading } = useSelector((state) => state.notifications);
 
   return (
-    <div className="loader-main">
-      {isLoading && <div className="loader"></div>}
-    </div>
-    // <div className="loader">
-    //   {isLoading && (
-    //     <Backdrop className={classes["backdrop"]} open={true}>
-    //       <img src={logo} alt="mastercsconcepts" className={classes["logo"]} />
-    //       <CircularProgress color="secondary" />
-    //     </Backdrop>
-    //   )}
-    // </div>
+    <>
+      {isLoading && (
+        <>
+          <Backdrop className={classes["backdrop"]} open={true}>
+            <div className="loader" />
+          </Backdrop>
+        </>
+      )}
+    </>
   );
 }
