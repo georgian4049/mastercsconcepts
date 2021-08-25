@@ -40,7 +40,7 @@ export default function Layout() {
 
   return (
     <div className={classes["root"]}>
-      <Route exact path="/" render={() => <Redirect to="/login" />} />
+      <Route exact path="/" render={() => <Redirect to="/home" />} />
       <Route path="/" component={AppBar} />
       <Route path="/" component={Sidebar} />
 

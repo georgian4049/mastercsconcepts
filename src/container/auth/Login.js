@@ -12,7 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container } from "@material-ui/core";
+import { Container, Hidden, Box } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { login } from "../../state/actions/authentication";
 import clsx from "clsx";
@@ -26,6 +26,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { refresh } from "../../state/actions/authentication";
 import CopyrightFooter from "../../components/common/CopyrightFooter";
 import DividerWithText from "../../components/common/DividerWithText";
+import cs from "../../assets/gen/cs.png";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -106,117 +107,159 @@ export default function SignIn() {
     console.log("Couldn't login");
   }
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            variant="outlined"
-            margin="none"
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            value={loginForm.email}
-            onChange={handleChange}
-            // autoComplete="email"
-            autoFocus
-            inputRef={register({
-              required: true,
-              max: 10,
-              min: 5,
-            })}
-          />
-          <FormControl
-            className={clsx(classes.margin, classes.textField)}
-            variant="outlined"
-          >
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              fullWidth
-              margin="none"
-              name="password"
-              type={showPassword ? "text" : "password"}
-              value={loginForm.password}
-              onChange={handleChange}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {loginForm.showPassword ? (
-                      <Visibility />
-                    ) : (
-                      <VisibilityOff />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              }
-              labelWidth={70}
-            />
-          </FormControl>
+    // <Container component="main" maxWidth="xs">
 
-          <Grid container>
-            <Grid item xs>
-              <FormControlLabel
-                control={<Checkbox value="remember" color="secondary" />}
-                label="Remember me"
+    //   <CopyrightFooter />
+    // </Container>
+    <>
+      <Box display="flex" width="100%">
+        <Hidden smDown>
+          <Box
+            width="50vw"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height="95vh"
+            // p={"50px"}
+          >
+            {/* <Typography
+              paragraph
+              align="center"
+              variant="h5"
+              justifyContent="center"
+              style={{ fontFamily: "URW Chancery L, cursive" }}
+            >
+              Mastercsconcepts is a catalog of core and advanced computer
+              science (CS) concepts. CS enthusiasts can use this platform for
+              learning CS topics in a structured manner. Users can also use this
+              platform to share their technical knowledge by writing technical
+              articles in the form of blogs, theoretical contents, research
+              papers, and more.
+            </Typography> */}
+            <img src={cs} alt="cs" />
+          </Box>
+        </Hidden>
+        <Box
+          // width="100%"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          // pl="50px"
+          // pr="50px"
+          height="100%"
+        >
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+              <TextField
+                variant="outlined"
+                margin="none"
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                value={loginForm.email}
+                onChange={handleChange}
+                // autoComplete="email"
+                autoFocus
+                inputRef={register({
+                  required: true,
+                  max: 10,
+                  min: 5,
+                })}
               />
-            </Grid>
-            <Grid item style={{ marginTop: "10px" }}>
-              <Link href="/forgot-password" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
-            onClick={onSubmit}
-          >
-            Sign In
-          </Button>
-          <DividerWithText label="or" />
-          <br />
-          <Button
-            fullWidth
-            variant="contained"
-            color=""
-            className={classes.login}
-            onClick={submitTestAcct}
-          >
-            Sign in using our Test account
-          </Button>
-        </form>
-      </div>
-      <br />
-      <DividerWithText label="or" />
-      <br />
-      <Button
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.login}
-        onClick={() => history.replace("/register")}
-      >
-        Register
-      </Button>
+              <FormControl
+                className={clsx(classes.margin, classes.textField)}
+                variant="outlined"
+                style={{ width: "100%" }}
+              >
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  fullWidth
+                  margin="none"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={loginForm.password}
+                  onChange={handleChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {loginForm.showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  labelWidth={70}
+                />
+              </FormControl>
+
+              <Grid container>
+                <Grid item xs>
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="secondary" />}
+                    label="Remember me"
+                  />
+                </Grid>
+                <Grid item style={{ marginTop: "10px" }}>
+                  <Link href="/forgot-password" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+              </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+                onClick={onSubmit}
+              >
+                Sign In
+              </Button>
+              <DividerWithText label="or" />
+              <br />
+              <Button
+                fullWidth
+                variant="contained"
+                color=""
+                className={classes.login}
+                onClick={submitTestAcct}
+              >
+                Sign in using our Test account
+              </Button>
+              <br />
+              <DividerWithText label="or" />
+              <br />
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.login}
+                onClick={() => history.replace("/register")}
+              >
+                Register
+              </Button>
+            </form>
+          </div>
+        </Box>
+      </Box>
       <CopyrightFooter />
-    </Container>
+    </>
   );
 }
