@@ -107,46 +107,25 @@ export default function SignIn() {
     console.log("Couldn't login");
   }
   return (
-    // <Container component="main" maxWidth="xs">
-
-    //   <CopyrightFooter />
-    // </Container>
     <>
       <Box display="flex" width="100%">
         <Hidden smDown>
           <Box
-            width="50vw"
+            width="100%"
             display="flex"
             justifyContent="center"
             alignItems="center"
             height="95vh"
-            // p={"50px"}
           >
-            {/* <Typography
-              paragraph
-              align="center"
-              variant="h5"
-              justifyContent="center"
-              style={{ fontFamily: "URW Chancery L, cursive" }}
-            >
-              Mastercsconcepts is a catalog of core and advanced computer
-              science (CS) concepts. CS enthusiasts can use this platform for
-              learning CS topics in a structured manner. Users can also use this
-              platform to share their technical knowledge by writing technical
-              articles in the form of blogs, theoretical contents, research
-              papers, and more.
-            </Typography> */}
             <img src={cs} alt="cs" />
           </Box>
         </Hidden>
         <Box
-          // width="100%"
           display="flex"
           justifyContent="center"
           alignItems="center"
-          // pl="50px"
-          // pr="50px"
           height="100%"
+          width="100%"
         >
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
@@ -165,7 +144,6 @@ export default function SignIn() {
                 name="email"
                 value={loginForm.email}
                 onChange={handleChange}
-                // autoComplete="email"
                 autoFocus
                 inputRef={register({
                   required: true,
@@ -210,12 +188,12 @@ export default function SignIn() {
               </FormControl>
 
               <Grid container>
-                <Grid item xs>
+                {/* <Grid item xs>
                   <FormControlLabel
                     control={<Checkbox value="remember" color="secondary" />}
                     label="Remember me"
                   />
-                </Grid>
+                </Grid> */}
                 <Grid item style={{ marginTop: "10px" }}>
                   <Link href="/forgot-password" variant="body2">
                     Forgot password?

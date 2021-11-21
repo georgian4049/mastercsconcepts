@@ -56,6 +56,7 @@ export default function CustomizedDividers() {
         >
           <TopicSelector
             title="Core Computer Science"
+            shortTitle="Core"
             list={courseList["core"]}
             name="core"
             handleChange={handleCourseType}
@@ -67,6 +68,7 @@ export default function CustomizedDividers() {
           />
           <TopicSelector
             title="Advanced Areas"
+            shortTitle="Advance"
             name="adv"
             list={courseList["adv"]}
             handleChange={handleCourseType}

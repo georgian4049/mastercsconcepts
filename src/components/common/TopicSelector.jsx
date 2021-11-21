@@ -12,6 +12,7 @@ import {
   Grow,
   ClickAwayListener,
   Button,
+  Hidden,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CourseSelector({ title, list, name }) {
+export default function CourseSelector({ title, list, name, shortTitle }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const { courseArea, courseSubArea } = useSelector((state) => state.platform);
@@ -105,7 +106,8 @@ export default function CourseSelector({ title, list, name }) {
             )
           }
         >
-          {title}
+          <Hidden smDown>{title}</Hidden>
+          <Hidden mdUp>{shortTitle}</Hidden>
         </Button>
         <Popper
           open={open}

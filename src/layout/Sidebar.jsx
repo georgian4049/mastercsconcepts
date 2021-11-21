@@ -23,6 +23,8 @@ import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import { courseList } from "../utils/mock";
+import ChevronRightSharpIcon from "@material-ui/icons/ChevronRightSharp";
+import "./styles/index.css";
 
 const drawerWidth = 240;
 
@@ -79,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
   },
   drawer: {
+    // position: "relative",
     zIndex: 1,
     width: drawerWidth,
     flexShrink: 0,
@@ -118,6 +121,31 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
+  },
+  toggleButton: {
+    position: "absolute",
+    zIndex: "100",
+    top: "100px",
+    right: "-10px",
+    height: "20px",
+    width: "20px",
+    borderRadius: "50%",
+    transition: "left 0.5s",
+    color: "#6b778c",
+    backgroundColor: "white",
+    cursor: "pointer",
+    border: "none",
+    // borderRadius: "1px solid grey",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "0px",
+    // .chevronRight {
+    //   transform: rotate(180deg);
+    // }
+    // .chevronLeft {
+    //   transform: rotate(0deg);
+    // }
   },
   content: {
     flexGrow: 1,
@@ -274,8 +302,34 @@ export default function MiniDrawer() {
             </IconButton>
           </div>
           {drawer(sidebarTopList, "listTop")}
+          <div className={classes.toggleButton}>
+            {" "}
+            <button
+              className={` ${open ? "toggle-button" : "toggle-button close"}`}
+              onClick={() => setOpen(!open)}
+            >
+              <ChevronRightSharpIcon
+                className={`${open ? "chevronLeft" : "chevronRight"}`}
+              />
+            </button>
+          </div>
         </Drawer>
       ) : (
+        // <div className="sidebar">
+        //   <div
+        //     className={` ${open ? "sidebar-content" : "sidebar-content close"}`}
+        //   >
+        //     <button
+        //       className={` ${open ? "toggle-button" : "toggle-button close"}`}
+        //       onClick={() => setOpen(!open)}
+        //     >
+        //       <ChevronRightSharpIcon
+        //         className={`${open ? "chevronLeft" : "chevronRight"}`}
+        //       />
+        //     </button>
+        //     <div className={` ${open ? "drawer" : "drawer-close"}`}></div>
+        //   </div>
+        // </div>
         ""
       )}
     </div>

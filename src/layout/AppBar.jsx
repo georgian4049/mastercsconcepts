@@ -10,8 +10,11 @@ import {
   Tooltip,
   Divider,
   Typography,
+  Hidden,
 } from "@material-ui/core";
 import logo from "../assets/logo.png";
+import small_logo from "../assets/small_logo.png";
+
 import AppbarLink from "./AppBarLinks";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -19,6 +22,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Routes from "../container/route/Route";
+import DeveloperModeIcon from "@material-ui/icons/DeveloperMode";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -87,8 +91,15 @@ export default function SearchAppBar(props) {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <img src={logo} alt="mastercsconcepts" style={{ height: "20px" }} />
-          <Chip label="Dev Mode" color="secondary" />
+          <Hidden smDown>
+            <img src={logo} alt="mastercsconcepts" style={{ height: "20px" }} />
+          </Hidden>
+          <Hidden mdUp>
+            <Typography variant="h4" color="secondary">
+              CS
+            </Typography>
+          </Hidden>
+          <DeveloperModeIcon color="secondary" fontSize="large" />
           <div className={classes.rightContent}>
             <div className={classes.appBarLink}>
               <AppbarLink />
@@ -122,7 +133,6 @@ export default function SearchAppBar(props) {
                 >
                   <MenuItem>
                     <div>
-                      {" "}
                       <Typography variant="subtitle2">Signed in as</Typography>
                       <Typography variant="subtitle1">{username}</Typography>
                     </div>
